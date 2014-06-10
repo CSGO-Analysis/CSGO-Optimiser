@@ -23,11 +23,7 @@ namespace Model
             }
         }
 
-        public string CsgoExe
-        {
-            get;
-            private set;
-        }
+        public string CsgoExe { get; private set; }
         public string Cfg { get; private set; }
 
         private void validateCsgoPath(string path)

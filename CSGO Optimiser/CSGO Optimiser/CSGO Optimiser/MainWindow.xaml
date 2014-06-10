@@ -46,7 +46,7 @@
         <DockPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Margin="20,0,0,0">
             <Label Content="Description:" DockPanel.Dock="Top"/>
             <TextBox x:Name="descriptionTextBox" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto"
-                     DockPanel.Dock="Top" Height="150"/>
+                     DockPanel.Dock="Top" Height="230"/>
             <Label Content="Log:" DockPanel.Dock="Top"/>
             <TextBox x:Name="logTextBox" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto"
                      DockPanel.Dock="Top"/>

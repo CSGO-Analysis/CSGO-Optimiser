@@ -59,7 +59,7 @@ namespace Controller
 
         public string SetLaunchOptions()
         {
-            uint maxRefreshRate = findMaxRefreshRate() + 1;
+            uint maxRefreshRate = findMaxRefreshRate();
 
             string[] dirs = Directory.GetDirectories(optimisePaths.Steam + @"\userdata\");
             foreach (string dir in dirs)
@@ -208,7 +208,22 @@ namespace Controller
                     if ((UInt32)item["RefreshRate"] > maxHZ)
                         maxHZ = (UInt32)item["RefreshRate"];
                 }
-                return maxHZ;
+                if (maxHZ >= 143)
+                {
+                    return 144;
+                }
+                else if (maxHZ >= 119)
+                {
+                    return 120;
+                }
+                else if (maxHZ >= 74)
+                {
+                    return 75;
+                }
+                else
+                {
+                    return 60;
+                }
             }
         }
 
