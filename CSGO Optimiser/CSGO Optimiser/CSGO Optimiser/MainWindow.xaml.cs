@@ -130,7 +130,7 @@ namespace CSGO_Optimiser
         {
             if (sender.Equals(nvidiaCheckBox))
             {
-                descriptionTextBox.Text = @"Nvidia CSGO Profile:
+                descriptionTextBox.Text = @"NVIDIA CSGO Profile:
 
 Imports an NVIDIA 3D profile that changes the driver settings for csgo.exe only.
 
@@ -139,9 +139,9 @@ Optimised for high performance in CSGO.";
             else if (sender.Equals(autoexecCheckBox))
             {
                 descriptionTextBox.Text = @"Autoexec.cfg:
-Adds an autoexec.cfg with the following commands:
 
-**ANY PRE-EXISTING AUTOEXEC.CFG WILL BE OVERWRITTEN**
+Adds an autoexec.cfg with the following commands:
+**NOTE THAT AUTOEXEC.CFG WILL BE OVERWRITTEN**
 
 rate 128000
 fps_max 999
@@ -154,9 +154,9 @@ mat_queue_mode 2";
             }
             else if (sender.Equals(ingameVideoCheckBox))
             {
-                descriptionTextBox.Text = @"Ingame Video Settings:
+                descriptionTextBox.Text = @"Advanced Ingame Video Settings:
 
-Turns off most of the 'Advanced video settings' in the game options for high performance
+Turns off most of the 'Advanced video settings' in the game options for high performance.
 
 (Highly recommended to also use the NVIDIA CSGO Profile to avoid settings being overruled)";
             }
@@ -174,18 +174,18 @@ Adds the following launch options to CSGO:
             }
             else if (sender.Equals(mouseAccCheckBox))
             {
-                descriptionTextBox.Text = @"Mouse Acceleration:
+                descriptionTextBox.Text = @"Disable Mouse Acceleration:
 
 The optimiser will automatically detect your setup and apply the correct 'MarkC No Acceleration' fix to windows registry for a perfect 1-to-1, no acceleration mouse input.
 
-Recommended to also have 'Ingame acceleration commands' applied as well.
+Recommended to also have 'Ingame Mouse Commands' applied as well.
 
 (Credit to MarkC for his work with acceleration fixes)";
 
             }
             else if (sender.Equals(ingameAccCheckBox))
             {
-                descriptionTextBox.Text = @"Ingame acceleration commands:
+                descriptionTextBox.Text = @"Ingame Mouse commands:
 
 Adds an IngameMouseAccelOff.cfg with the following commands:
 
