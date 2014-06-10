@@ -22,24 +22,23 @@
         </DockPanel>
         <StackPanel Grid.Row="1" Margin="0,20,0,0">
             <Label Content="Choose the settings you want to optimise: (Mouseover for further description)"/>
-            <CheckBox x:Name="nvidiaCheckBox" Content="Nvidia CSGO Profile (user must manually import \Resources\NVIDIA Profile.txt)" Margin="0,3,0,0" MouseMove="OnMouseMove"/>
-            <CheckBox x:Name="autoexecCheckBox" Content="Autoexec.cfg" Margin="0,3,0,0" MouseMove="OnMouseMove"/>
-            <CheckBox x:Name="ingameVideoCheckBox" Content="Ingame video settings" Margin="0,3,0,0" MouseMove="OnMouseMove"/>
-            <CheckBox x:Name="launchOptionsCheckBox" Content="Launch options" Margin="0,3,0,0" MouseMove="OnMouseMove"/>
-            <CheckBox x:Name="mouseAccCheckBox" Content="Mouse Acceleration and Enhanced Pointer Prec. Off (MarkC)" Margin="0,3,0,0" MouseMove="OnMouseMove"/>
-            <CheckBox x:Name="ingameAccCheckBox" Content="Disable Acceleration ingame option" Margin="0,3,0,0" MouseMove="OnMouseMove"/>
-            <CheckBox x:Name="capsLockCheckBox" Content="Disable Caps Lock for use with VoIP" Margin="0,3,0,0" MouseMove="OnMouseMove"/>
-            <CheckBox x:Name="visualThemesCheckBox" Content="Deactivate visual themes on csgo.exe" Margin="0,3,0,0" MouseMove="OnMouseMove"/>
+            <CheckBox x:Name="nvidiaCheckBox" Content="Nvidia CSGO Profile (user must manually import \Resources\NVIDIA Profile.txt)" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
+            <CheckBox x:Name="autoexecCheckBox" Content="Autoexec.cfg" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
+            <CheckBox x:Name="ingameVideoCheckBox" Content="Ingame video settings" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
+            <CheckBox x:Name="launchOptionsCheckBox" Content="Launch options" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
+            <CheckBox x:Name="mouseAccCheckBox" Content="Mouse Acceleration and Enhanced Pointer Prec. Off (MarkC)" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
+            <CheckBox x:Name="ingameAccCheckBox" Content="Disable Acceleration ingame option" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
+            <CheckBox x:Name="capsLockCheckBox" Content="Disable Caps Lock for use with VoIP" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
+            <CheckBox x:Name="visualThemesCheckBox" Content="Deactivate visual themes on csgo.exe" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
             <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
             <Button x:Name="selectAllButton" Content="Select All" Width="70" HorizontalAlignment="Left" Click="selectAllButton_Click"/>
              <Button x:Name="deselectAllButton" Content="Deselect All" Width="70" HorizontalAlignment="Left" Margin="10,0,0,0" Click="deselectAllButton_Click"/>
             </StackPanel>
-
         </StackPanel>
         <StackPanel Grid.Row="2" Margin="0,20,0,0">
             <Label Content="Optional but recommended at least once a month:"/>
-            <CheckBox Content="Clean registry (CCleaner silent run with presets so no passwords or caches will be lost)" Margin="0,3,0,0" IsEnabled="False"/>
-            <CheckBox Content="Run Spybot Search and Destroy (Best free anti malware)" Margin="0,3,0,0" IsEnabled="False"/>
+            <CheckBox Content="Clean registry (CCleaner silent run with presets so no passwords or caches will be lost)" Margin="0,3,0,0" IsEnabled="False" HorizontalAlignment="Left"/>
+            <CheckBox Content="Run Spybot Search and Destroy (Best free anti malware)" Margin="0,3,0,0" IsEnabled="False" HorizontalAlignment="Left"/>
         </StackPanel>
         <StackPanel Grid.Row="3" Margin="0,40,0,0">
             <Button x:Name="optimiseButton" Content="Optimise" Width="230" Height="35" VerticalAlignment="Center" Click="optimiseButton_Click"/>
@@ -47,7 +46,7 @@
         <DockPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Margin="20,0,0,0">
             <Label Content="Description:" DockPanel.Dock="Top"/>
             <TextBox x:Name="descriptionTextBox" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto"
-                     DockPanel.Dock="Top" MinHeight="150"/>
+                     DockPanel.Dock="Top" Height="150"/>
             <Label Content="Log:" DockPanel.Dock="Top"/>
             <TextBox x:Name="logTextBox" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto"
                      DockPanel.Dock="Top"/>
