@@ -171,7 +171,7 @@ namespace Controller
                 }
                 key.SetValue(optimisePaths.CsgoExe, "DISABLETHEMES");
 
-                return "DISABLETHEMES key succesfully added in " + key.Name + ". \n";
+                return "Visual themes succesfully disabled in " + key.Name + ". \n";
             }
             else
             {
@@ -190,7 +190,7 @@ namespace Controller
             }
             File.WriteAllLines(optimisePaths.Cfg + "autoexec.cfg", autoexec);
 
-            return "Ingame Acceleration succesfully disabled. \n";
+            return "Ingame Mouse Commands succesfully applied. \n";
         }
 
         private uint findMaxRefreshRate()

@@ -26,10 +26,10 @@
             <Label Content="Select the settings you want to optimise: (Mouseover for further description)"/>
             <CheckBox x:Name="nvidiaCheckBox" Content="Nvidia CSGO Profile (user must manually import \Resources\NVIDIA Profile.txt)" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
             <CheckBox x:Name="autoexecCheckBox" Content="Autoexec.cfg" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
-            <CheckBox x:Name="ingameVideoCheckBox" Content="Ingame video settings" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
-            <CheckBox x:Name="launchOptionsCheckBox" Content="Launch options" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
-            <CheckBox x:Name="mouseAccCheckBox" Content="Mouse Acceleration and Enhanced Pointer Prec. Off (MarkC)" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
-            <CheckBox x:Name="ingameAccCheckBox" Content="Disable Acceleration ingame option" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
+            <CheckBox x:Name="ingameVideoCheckBox" Content="Advanced Ingame Video Settings" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
+            <CheckBox x:Name="launchOptionsCheckBox" Content="Launch Options" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
+            <CheckBox x:Name="mouseAccCheckBox" Content="Disable Mouse Acceleration (Credit to MarkC)" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
+            <CheckBox x:Name="ingameAccCheckBox" Content="Ingame Mouse Commands" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
             <CheckBox x:Name="capsLockCheckBox" Content="Disable Caps Lock for use with VoIP" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
             <CheckBox x:Name="visualThemesCheckBox" Content="Deactivate visual themes on csgo.exe" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
             <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
