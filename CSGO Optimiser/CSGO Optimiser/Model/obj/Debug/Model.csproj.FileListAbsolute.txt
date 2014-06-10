@@ -1,0 +1,4 @@
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\Model\bin\Debug\Model.dll
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\Model\bin\Debug\Model.pdb
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\Model\obj\Debug\Model.dll
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\Model\obj\Debug\Model.pdb

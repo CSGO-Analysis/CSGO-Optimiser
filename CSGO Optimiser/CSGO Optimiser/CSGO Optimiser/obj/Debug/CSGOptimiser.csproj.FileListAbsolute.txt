@@ -1,0 +1,22 @@
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\bin\Debug\CSGOptimiser.exe.config
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\bin\Debug\CSGOptimiser.exe
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\bin\Debug\CSGOptimiser.pdb
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\bin\Debug\Controller.dll
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\bin\Debug\Model.dll
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\bin\Debug\Common.dll
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\bin\Debug\Controller.pdb
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\bin\Debug\Model.pdb
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\bin\Debug\Common.pdb
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGOptimiser.csprojResolveAssemblyReference.cache
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\MainWindow.baml
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\MainWindow.g.cs
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\App.g.cs
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGOptimiser_MarkupCompile.cache
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGOptimiser.g.resources
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGOptimiser.Properties.Resources.resources
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGOptimiser.csproj.GenerateResource.Cache
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGOptimiser.exe
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGOptimiser.pdb
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGOptimiser\CSGO Optimiser\bin\Debug\CSGOptimiser.exe.config
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGOptimiser\CSGO Optimiser\obj\Debug\CSGOptimiser.exe
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGOptimiser\CSGO Optimiser\obj\Debug\CSGOptimiser.pdb

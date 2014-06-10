@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSGO Optimiser", "CSGO Optimiser\CSGO Optimiser.csproj", "{0224DCBD-FFE0-4F2D-B699-F49F874A33ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controller", "Controller\Controller.csproj", "{3DB0D394-BFEC-411D-9E96-43482FB4E77F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{EAD86414-1F7D-437E-9FB5-11F5253F02CA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0224DCBD-FFE0-4F2D-B699-F49F874A33ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0224DCBD-FFE0-4F2D-B699-F49F874A33ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0224DCBD-FFE0-4F2D-B699-F49F874A33ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0224DCBD-FFE0-4F2D-B699-F49F874A33ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DB0D394-BFEC-411D-9E96-43482FB4E77F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DB0D394-BFEC-411D-9E96-43482FB4E77F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DB0D394-BFEC-411D-9E96-43482FB4E77F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DB0D394-BFEC-411D-9E96-43482FB4E77F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAD86414-1F7D-437E-9FB5-11F5253F02CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAD86414-1F7D-437E-9FB5-11F5253F02CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAD86414-1F7D-437E-9FB5-11F5253F02CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAD86414-1F7D-437E-9FB5-11F5253F02CA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

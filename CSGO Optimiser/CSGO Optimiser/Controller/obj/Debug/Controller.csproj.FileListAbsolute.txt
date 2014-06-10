@@ -1,0 +1,11 @@
+c:\users\peter\documents\visual studio 2012\Projects\CSGO Optimiser\Controller\bin\Debug\Controller.dll
+c:\users\peter\documents\visual studio 2012\Projects\CSGO Optimiser\Controller\bin\Debug\Controller.pdb
+c:\users\peter\documents\visual studio 2012\Projects\CSGO Optimiser\Controller\obj\Debug\Controller.dll
+c:\users\peter\documents\visual studio 2012\Projects\CSGO Optimiser\Controller\obj\Debug\Controller.pdb
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\Controller\bin\Debug\Controller.dll
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\Controller\bin\Debug\Controller.pdb
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\Controller\bin\Debug\Model.dll
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\Controller\bin\Debug\Model.pdb
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\Controller\obj\Debug\Controller.csprojResolveAssemblyReference.cache
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\Controller\obj\Debug\Controller.dll
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\Controller\obj\Debug\Controller.pdb

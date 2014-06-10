@@ -1,0 +1,5 @@
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\Common\bin\Debug\Common.dll
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\Common\bin\Debug\Common.pdb
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\Common\obj\Debug\Common.dll
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\Common\obj\Debug\Common.pdb

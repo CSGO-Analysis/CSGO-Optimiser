@@ -1,0 +1,32 @@
+c:\users\peter\documents\visual studio 2012\Projects\CSGO Optimiser\CSGO Optimiser\bin\Debug\CSGO Optimiser.exe.config
+c:\users\peter\documents\visual studio 2012\Projects\CSGO Optimiser\CSGO Optimiser\bin\Debug\CSGO Optimiser.exe
+c:\users\peter\documents\visual studio 2012\Projects\CSGO Optimiser\CSGO Optimiser\bin\Debug\CSGO Optimiser.pdb
+c:\users\peter\documents\visual studio 2012\Projects\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGO Optimiser.csprojResolveAssemblyReference.cache
+c:\users\peter\documents\visual studio 2012\Projects\CSGO Optimiser\CSGO Optimiser\obj\Debug\MainWindow.baml
+c:\users\peter\documents\visual studio 2012\Projects\CSGO Optimiser\CSGO Optimiser\obj\Debug\MainWindow.g.cs
+c:\users\peter\documents\visual studio 2012\Projects\CSGO Optimiser\CSGO Optimiser\obj\Debug\App.g.cs
+c:\users\peter\documents\visual studio 2012\Projects\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGO Optimiser_MarkupCompile.cache
+c:\users\peter\documents\visual studio 2012\Projects\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGO Optimiser.g.resources
+c:\users\peter\documents\visual studio 2012\Projects\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGO_Optimiser.Properties.Resources.resources
+c:\users\peter\documents\visual studio 2012\Projects\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGO Optimiser.csproj.GenerateResource.Cache
+c:\users\peter\documents\visual studio 2012\Projects\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGO Optimiser.exe
+c:\users\peter\documents\visual studio 2012\Projects\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGO Optimiser.pdb
+c:\users\peter\documents\visual studio 2012\Projects\CSGO Optimiser\CSGO Optimiser\bin\Debug\Controller.dll
+c:\users\peter\documents\visual studio 2012\Projects\CSGO Optimiser\CSGO Optimiser\bin\Debug\Controller.pdb
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\bin\Debug\CSGOptimiser.exe.config
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\bin\Debug\CSGOptimiser.exe
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\bin\Debug\CSGOptimiser.pdb
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\bin\Debug\Controller.dll
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\bin\Debug\Model.dll
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\bin\Debug\Controller.pdb
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\bin\Debug\Model.pdb
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGO Optimiser.csprojResolveAssemblyReference.cache
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\MainWindow.baml
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\MainWindow.g.cs
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\App.g.cs
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGOptimiser_MarkupCompile.cache
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGOptimiser.g.resources
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGOptimiser.Properties.Resources.resources
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGO Optimiser.csproj.GenerateResource.Cache
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGOptimiser.exe
+C:\Users\Peter\Dropbox\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGOptimiser.pdb

@@ -1,0 +1,42 @@
+Profile "Counter-strike: Global Offensive"
+    ShowOn GeForce
+    ProfileType Application
+    Executable "csgo.exe"
+    Setting ID_0x0019bb68 = 0x00000000 UserSpecified=true
+    Setting ID_0x002c7f45 = 0x0000002c
+    Setting ID_0x002ecaf2 = 0x00000000 UserSpecified=true
+    Setting ID_0x0064b541 = 0x00000001 UserSpecified=true
+    Setting ID_0x00664339 = 0x00000001
+    Setting ID_0x00667329 = 0x00000000 UserSpecified=true
+    Setting ID_0x007ba09e = 0x00000001 UserSpecified=true
+    Setting ID_0x0084cd70 = 0x00000000 UserSpecified=true
+    Setting ID_0x00ce2691 = 0x00000014 UserSpecified=true
+    Setting ID_0x00e73211 = 0x00000001 UserSpecified=true
+    Setting ID_0x101e61a9 = 0x00000001 UserSpecified=true
+    Setting ID_0x1033cec1 = 0x00000003
+    Setting ID_0x1033dcd2 = 0x00000004
+    Setting ID_0x1034cb89 = 0x00000000
+    Setting ID_0x1057eb71 = 0x00000001 UserSpecified=true
+    Setting ID_0x106d5cff = 0x00000000
+    Setting ID_0x107afc5b = 0x00000000 UserSpecified=true
+    Setting ID_0x107d639d = 0x00000000 UserSpecified=true
+    Setting ID_0x107efc5b = 0x00000002 UserSpecified=true
+    Setting ID_0x1095def8 = 0x03402005
+    Setting ID_0x10d2bb16 = 0x00000001 UserSpecified=true
+    Setting ID_0x10d773d2 = 0x0000000e UserSpecified=true
+    Setting ID_0x10ecdb82 = 0x00000001
+    Setting ID_0x10f9dc81 = 0x00000011
+    Setting ID_0x200aebfc = 0x00000000 UserSpecified=true
+    Setting ID_0x208e55e3 = 0x00000001 UserSpecified=true
+    Setting ID_0x20c1221e = 0x00000001 UserSpecified=true
+    Setting ID_0x701eb457 = 0x2241ab21 InternalSettingFlag=V0
+    SettingString ID_0x7049c7ec = "2.0"
+    SettingString ID_0x704d456e = "Some objects render at wrong depth"
+    SettingString ID_0x7051e5f5 = "2"
+    SettingString ID_0x705fafec = "2012-08-28 00:00:00"
+    Setting ID_0x708db8c5 = 0x22831f43 InternalSettingFlag=V0
+    Setting ID_0x709a1ddf = 0x4b1cd968 InternalSettingFlag=V0
+    SettingString ID_0x70b5603f = "D3D"
+    Setting ID_0x70d10d2b = 0xea58d3d0 InternalSettingFlag=V0
+    Setting ID_0x70edb381 = 0x24208b6c InternalSettingFlag=V0
+EndProfile

@@ -1,0 +1,71 @@
+CSGO Optimiser in detail:
+
+Set optimal NVIDIA settings:
+
+Geforce 3d Profile Manager: http://nvidia.custhelp.com/ci/fattach/get/138717/0/session/L2F2LzEvdGltZS8xNDAwMzc1MzM5L3NpZC8tOFViOXhVbA==/filename/Geforce+3D+Profile+Manager.exe
+Use profile manager to import the following profile:
+
+	Profile "Counter-strike: Global Offensive"
+    ShowOn GeForce
+    ProfileType Application
+    Executable "csgo.exe"
+    Setting ID_0x0019bb68 = 0x00000000 UserSpecified=true
+    Setting ID_0x002c7f45 = 0x0000002c
+    Setting ID_0x002ecaf2 = 0x00000000 UserSpecified=true
+    Setting ID_0x0064b541 = 0x00000001 UserSpecified=true
+    Setting ID_0x00664339 = 0x00000001
+    Setting ID_0x00667329 = 0x00000000 UserSpecified=true
+    Setting ID_0x007ba09e = 0x00000001 UserSpecified=true
+    Setting ID_0x0084cd70 = 0x00000000 UserSpecified=true
+    Setting ID_0x00ce2691 = 0x00000014 UserSpecified=true
+    Setting ID_0x00e73211 = 0x00000001 UserSpecified=true
+    Setting ID_0x101e61a9 = 0x00000001 UserSpecified=true
+    Setting ID_0x1033cec1 = 0x00000003
+    Setting ID_0x1033dcd2 = 0x00000004
+    Setting ID_0x1034cb89 = 0x00000000
+    Setting ID_0x1057eb71 = 0x00000001 UserSpecified=true
+    Setting ID_0x106d5cff = 0x00000000
+    Setting ID_0x107afc5b = 0x00000000 UserSpecified=true
+    Setting ID_0x107d639d = 0x00000000 UserSpecified=true
+    Setting ID_0x107efc5b = 0x00000002 UserSpecified=true
+    Setting ID_0x1095def8 = 0x03402005
+    Setting ID_0x10d2bb16 = 0x00000001 UserSpecified=true
+    Setting ID_0x10d773d2 = 0x0000000e UserSpecified=true
+    Setting ID_0x10ecdb82 = 0x00000001
+    Setting ID_0x10f9dc81 = 0x00000011
+    Setting ID_0x200aebfc = 0x00000000 UserSpecified=true
+    Setting ID_0x208e55e3 = 0x00000001 UserSpecified=true
+    Setting ID_0x20c1221e = 0x00000001 UserSpecified=true
+    Setting ID_0x701eb457 = 0x2241ab21 InternalSettingFlag=V0
+    SettingString ID_0x7049c7ec = "2.0"
+    SettingString ID_0x704d456e = "Some objects render at wrong depth"
+    SettingString ID_0x7051e5f5 = "2"
+    SettingString ID_0x705fafec = "2012-08-28 00:00:00"
+    Setting ID_0x708db8c5 = 0x22831f43 InternalSettingFlag=V0
+    Setting ID_0x709a1ddf = 0x4b1cd968 InternalSettingFlag=V0
+    SettingString ID_0x70b5603f = "D3D"
+    Setting ID_0x70d10d2b = 0xea58d3d0 InternalSettingFlag=V0
+    Setting ID_0x70edb381 = 0x24208b6c InternalSettingFlag=V0
+EndProfile
+	
+
+Locate \Steam\SteamApps\common\Counter-Strike Global Offensive\csgo\cfg
+	Replace with optimised autoexec.cfg
+	Replace video.cfg with optimised settings
+	Fix launchoptions (-console -freq 120 -novid -high) (Need to know what the max hz is on users monitor)
+
+
+
+	Registry Fixes:
+	Run EnhancedPointerPrecOff.reg (Turns off enhancedpointerprecision, mostly for people not using mousefix but still want less acceleration than "on" gives)
+	Run KillCapsLock.reg (Kills caps lock, for people using capslock as their Push-to-talk hotkey)
+	Run AccelerationFix.reg (Identify windows textsize and run the appropiate .reg file)
+
+Edit properties for \Steam\SteamApps\common\Counter-Strike Global Offensive\csgo.exe - Deactivate visual themes in Compatability.
+
+
+Optional cleaning:
+
+Not sure if this is technically possible. It would be a nice bonus to help people unclog their computer while optimising settings.
+	Silent install and run CCleaner with a preset so no passwords or important caches/browser history/bookmarks will be lost. https://www.piriform.com/ccleaner
+	Silent install and run Spybot http://www.safer-networking.org/
