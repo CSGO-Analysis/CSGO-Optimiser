@@ -37,7 +37,8 @@ namespace Controller
 
         public string SetNvidiaSettings()
         {
-            var process = Process.Start(@"Resources\Geforce 3D Profile Manager.exe");
+            string test = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            var process = Process.Start(@"\Resources\Geforce 3D Profile Manager.exe");
             process.WaitForExit();
             TimeSpan time = process.ExitTime - process.StartTime;
             return "Geforce 3D Profile Manager exited after " + time.Seconds.ToString() + " seconds. \n";
@@ -84,26 +85,70 @@ namespace Controller
         
         public string DisableMouseAcc()
         {
-            //Process.Start("EnhancedPointerPrecOff.reg");
-            System.Drawing.Size resolution = System.Windows.Forms.SystemInformation.PrimaryMonitorSize;
-            return resolution.ToString();
+            int dpi = 0;
+            var dpiKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop");
+            if (dpiKey == null)
+            {
+                throw new InvalidOperationException(@"Cannot open registry key HKCU\Control Panel\Desktop");
+            }
+            else
+            {
+                var defaultMouseKey = Registry.Users.OpenSubKey(@".DEFAULT\Control Panel\Mouse", true);
+                if (defaultMouseKey == null)
+                {
+                    throw new InvalidOperationException(@"Cannot open registry key HKCU\Control Panel\Mouse");
+                }
+                else
+                {
+                    defaultMouseKey.SetValue("MouseSpeed", "0", RegistryValueKind.String);
+                    defaultMouseKey.SetValue("MouseThreshold1", "0", RegistryValueKind.String);
+                    defaultMouseKey.SetValue("MouseThreshold2", "0", RegistryValueKind.String);
+                }
+                
+                var mouseKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Mouse", true);
+                if (mouseKey == null)
+                {
+                    throw new InvalidOperationException(@"Cannot open registry key HKCU\Control Panel\Mouse");
+                }
+                else
+                {
+                    mouseKey.SetValue("MouseSensitivity", "10", RegistryValueKind.String);
+                    mouseKey.SetValue("SmoothMouseYCurve", new byte[] { 00,00,00,00,00,00,00,00,00,00,0x38,00,00,00,00,00,
+                        00,00,0x70,00,00,00,00,00,00,00,0xA8,00,00,00,00,00,00,00,0xE0,00,00,00,00,00 }, RegistryValueKind.Binary);
+
+                    if (dpiKey.GetValue("LogPixels") == null || (dpiKey.GetValue("LogPixels").ToString() == "96"))
+                    {
+                        dpi = 100;
+                        mouseKey.SetValue("SmoothMouseXCurve", new byte[] {00,00,00,00,00,00,00,00,0x70,0x3D,0x0A,00,00,00,00,00,
+                            0xE0,0x7A,0x14,00,00,00,00,00,0x50,0xB8,0x1E,00,00,00,00,00,0xC0,0xF5,0x28,00,00,00,00,00}, RegistryValueKind.Binary);
+
+                    }
+                    else if (dpiKey.GetValue("LogPixels").ToString() == "120")
+                    {
+                        dpi = 120;
+                        mouseKey.SetValue("SmoothMouseXCurve", new byte[] {	00,00,00,00,00,00,00,00,0xC0,0xCC,0x0C,00,00,00,00,00,
+                            0x80,0x99,0x19,00,00,00,00,00,0x40,0x66,0x26,00,00,00,00,00,00,0x33,0x33,00,00,00,00,00 }, RegistryValueKind.Binary);
+                    }
+                    else if (dpiKey.GetValue("LogPixels").ToString() == "144")
+                    {
+                        dpi = 150;
+                        mouseKey.SetValue("SmoothMouseXCurve", new byte[] { 00,00,00,00,00,00,00,00,0x20,0x5C,0x0F,00,00,00,00,00,
+                            0x40,0xB8,0x1E,00,00,00,00,00,0x60,0x14,0x2E,00,00,00,00,00,0x80,0x70,0x3D,00,00,00,00,00 }, RegistryValueKind.Binary);
+                    }
+                }
+            }
+            return "Mouse Acceleration succesfully disabled (" + dpi + "%).";
         }
 
         public string DisableCapsLock()
         {
-            //var process = Process.Start(@"Resources\disable_caps_lock.reg");
-            //process.WaitForExit();
-            throw new NotImplementedException();
-
-
-            //var key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Keyboard Layout", true);
-            //if (key == null)
-            //{
-            //    throw new InvalidOperationException(@"Cannot open registry key HKLM\SYSTEM\CurrentControlSet\Control\Keyboard Layout.");
-            //}
-            //string[] hej = new string[] {"00,00,00,00,00,00,00,00,02,00,00,00,64,00,3a,00,00,00,00,00"};
-            //key.SetValue("Scancode Map", byte.Parse(hej), RegistryValueKind.Binary);
-            //return "CapsLock succesfully disabled. \n";
+            var key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Keyboard Layout", true);
+            if (key == null)
+            {
+                throw new InvalidOperationException(@"Cannot open registry key HKLM\SYSTEM\CurrentControlSet\Control\Keyboard Layout.");
+            }
+            key.SetValue("Scancode Map", new byte[] {00,00,00,00,00,00,00,00,02,00,00,00,0x64,00,0x3a,00,00,00,00,00}, RegistryValueKind.Binary);
+            return "CapsLock succesfully disabled. \n";
         }
 
         public string DisableVisualThemes()
@@ -124,5 +169,20 @@ namespace Controller
                 throw new Exception("CSGO folder was not found.");
             }
         }
+
+        public string DisableIngameAcc()
+        {
+            string ingameAcc = optimisePaths.Cfg + "IngameMouseAccelOff.cfg";
+            File.Copy(@"Resources\IngameMouseAccelOff.cfg", ingameAcc, true);
+            List<string> autoexec = File.ReadAllLines(optimisePaths.Cfg + "autoexec.cfg").ToList();
+            if (!autoexec.Contains("exec IngameMouseAccelOff.cfg"))
+            {
+                autoexec.Add("exec IngameMouseAccelOff.cfg");
+            }
+            File.WriteAllLines(optimisePaths.Cfg + "autoexec.cfg", autoexec);
+
+            return "Ingame Acceleration succesfully disabled. \n";
+        }
+
     }
 }

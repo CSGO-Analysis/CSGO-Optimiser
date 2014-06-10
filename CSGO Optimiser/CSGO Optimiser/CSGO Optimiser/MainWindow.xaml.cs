@@ -80,6 +80,11 @@ namespace CSGO_Optimiser
                         logTextBox.Text += optimiseController.DisableMouseAcc();
                         changes++;
                     }
+                    if (ingameAccCheckBox.IsChecked == true)
+                    {
+                        logTextBox.Text += optimiseController.DisableIngameAcc();
+                        changes++;
+                    }
                     if (capsLockButton.IsChecked == true)
                     {
                         logTextBox.Text += optimiseController.DisableCapsLock();
