@@ -118,8 +118,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <Content Include="Resources\autoexec.cfg" />
-    <Content Include="Resources\IngameMouseAccelOff.cfg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -147,11 +145,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\Geforce 3D Profile Manager.exe" />
-    <Content Include="Resources\NVIDIA Profile.txt" />
-    <Content Include="Resources\video.txt" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
