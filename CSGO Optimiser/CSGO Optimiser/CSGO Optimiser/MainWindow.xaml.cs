@@ -90,6 +90,10 @@ namespace CSGO_Optimiser
                         logTextBox.Text += optimiseController.DisableVisualThemes();
                         changes++;
                     }
+                    if (ingameAccCheckBox.IsChecked == true)
+                    {
+                        logTextBox.Text += optimiseController.DisableIngameAcc();
+                    }
                     logTextBox.Text += string.Format("\nOptimisation finished ({0} changes) \n", changes);
                     logTextBox.ScrollToEnd();
                 }

@@ -91,19 +91,13 @@ namespace Controller
 
         public string DisableCapsLock()
         {
-            //var process = Process.Start(@"Resources\disable_caps_lock.reg");
-            //process.WaitForExit();
-            throw new NotImplementedException();
-
-
-            //var key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Keyboard Layout", true);
-            //if (key == null)
-            //{
-            //    throw new InvalidOperationException(@"Cannot open registry key HKLM\SYSTEM\CurrentControlSet\Control\Keyboard Layout.");
-            //}
-            //string[] hej = new string[] {"00,00,00,00,00,00,00,00,02,00,00,00,64,00,3a,00,00,00,00,00"};
-            //key.SetValue("Scancode Map", byte.Parse(hej), RegistryValueKind.Binary);
-            //return "CapsLock succesfully disabled. \n";
+            var key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Keyboard Layout", true);
+            if (key == null)
+            {
+                throw new InvalidOperationException(@"Cannot open registry key HKLM\SYSTEM\CurrentControlSet\Control\Keyboard Layout.");
+            }
+            key.SetValue("Scancode Map", new byte[] {00,00,00,00,00,00,00,00,02,00,00,00,0x64,00,0x3a,00,00,00,00,00}, RegistryValueKind.Binary);
+            return "CapsLock succesfully disabled. \n";
         }
 
         public string DisableVisualThemes()
@@ -123,6 +117,20 @@ namespace Controller
             {
                 throw new Exception("CSGO folder was not found.");
             }
+        }
+
+        public string DisableIngameAcc()
+        {
+            string ingameAcc = optimisePaths.Cfg + "IngameMouseAccelOff.cfg";
+            File.Copy(@"Resources\IngameMouseAccelOff.cfg", ingameAcc, true);
+            List<string> autoexec = File.ReadAllLines(optimisePaths.Cfg + "autoexec.cfg").ToList();
+            if (!autoexec.Contains("exec IngameMouseAccelOff.cfg"))
+            {
+                autoexec.Add("exec IngameMouseAccelOff.cfg");
+            }
+            File.WriteAllLines(optimisePaths.Cfg + "autoexec.cfg", autoexec);
+
+            return "Ingame Acceleration succesfully disabled. \n";
         }
     }
 }
