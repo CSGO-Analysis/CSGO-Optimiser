@@ -37,8 +37,7 @@ namespace Controller
 
         public string SetNvidiaSettings()
         {
-            string test = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            var process = Process.Start(@"\Resources\Geforce 3D Profile Manager.exe");
+            var process = Process.Start(@"Resources\Geforce 3D Profile Manager.exe");
             process.WaitForExit();
             TimeSpan time = process.ExitTime - process.StartTime;
             return "Geforce 3D Profile Manager exited after " + time.Seconds.ToString() + " seconds. \n";
@@ -121,7 +120,6 @@ namespace Controller
                         dpi = 100;
                         mouseKey.SetValue("SmoothMouseXCurve", new byte[] {00,00,00,00,00,00,00,00,0x70,0x3D,0x0A,00,00,00,00,00,
                             0xE0,0x7A,0x14,00,00,00,00,00,0x50,0xB8,0x1E,00,00,00,00,00,0xC0,0xF5,0x28,00,00,00,00,00}, RegistryValueKind.Binary);
-
                     }
                     else if (dpiKey.GetValue("LogPixels").ToString() == "120")
                     {

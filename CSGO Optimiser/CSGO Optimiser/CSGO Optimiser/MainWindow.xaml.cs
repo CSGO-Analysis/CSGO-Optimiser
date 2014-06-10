@@ -65,7 +65,7 @@ namespace CSGO_Optimiser
                         logTextBox.Text += optimiseController.CopyAutoexec();
                         changes++;
                     }
-                    if (ingameVideoButton.IsChecked == true)
+                    if (ingameVideoCheckBox.IsChecked == true)
                     {
                         logTextBox.Text += optimiseController.CopyVideoSettings();
                         changes++;
@@ -107,6 +107,78 @@ namespace CSGO_Optimiser
             {
                 MessageBox.Show("Please locate your Steam folder");
             }
+        }
+
+        private void OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (sender.Equals(nvidiaCheckBox))
+            {
+                descriptionTextBox.Text = @"Nvidia CSGO Profile:
+Imports an NVIDIA 3D profile that changes the settings for csgo.exe only.
+Optimised for high performance in CSGO.";
+            }
+            else if (sender.Equals(autoexecCheckBox))
+            {
+                descriptionTextBox.Text = @"Autoexec.cfg:
+Adds an autoexec.cfg with the following commands:
+rate 128000
+fps_max 999
+cl_interp 0
+cl_interp_ratio 1
+cl_updaterate 128
+cl_cmdrate 128
+cl_forcepreload 1
+mat_queue_mode 2
+These are optimal settings. Might not be perfect if you have a very slow internet connection.
+**THIS WILL OVERWRITE ANY PRE-EXISTING AUTOEXEC.CFG FILES**";
+            }
+            else if (sender.Equals(ingameVideoCheckBox))
+            {
+                descriptionTextBox.Text = @"Ingame Video Settings:
+Turns off most of the 'Advanced video settings' in the game options for high performance
+(Will give best results with NVIDIA CSGO Profile activated)";
+            }
+            else if (sender.Equals(launchOptionsCheckBox))
+            {
+                descriptionTextBox.Text = @"Launch Options:
+Adds the following launch options:
+-console (Activates console ingame)
+-freq XXX (The optimiser will automatically detect your monitors hertz limits and set it accordingly)
+-novid (Removes the short video on CSGO startup)\n+exec autoexec.cfg (executes the configuration file with optimised rates)
+-high (Sets the csgo.exe process to 'high' priority for a small fps boost)";
+            }
+            else if (sender.Equals(mouseAccCheckBox))
+            {
+                descriptionTextBox.Text = @"Mouse Acceleration:
+The optimiser will automatically detect your setup and install the correct changes to windows registry for a 1-to-1, no acceleration mouse input.
+(Will give the best results with the 'Ingame acceleration commands' installed aswell.)
+(Thanks to MarkC for his acceleration fixes)";
+
+            }
+            else if (sender.Equals(ingameAccCheckBox))
+            {
+                descriptionTextBox.Text = @"Ingame acceleration commands:
+Adds an IngameMouseAccelOff.cfg with the following commands:
+m_forward 1
+m_mousespeed 1
+m_mouseaccel2 0
+m_mouseaccel1 0
+m_customaccel 0
+m_customaccel_max 0
+m_customaccel_exponent 0
+m_customaccel_scale 0
+m_rawinput 0";
+            }
+            else if (sender.Equals(capsLockButton))
+            {
+                descriptionTextBox.Text = @"Disable Caps Lock for use with VoIP:
+Disables the normal Caps Lock function (Key is remapped to F13) so you can use Caps Lock for Push-to-talk without talking in CAPS half the time.";
+            }
+            else if (sender.Equals(visualThemesCheckBox))
+            {
+                descriptionTextBox.Text = @"Deactivate visual themes on csgo.exe:
+Deactivates some Windows visual graphics/animation on csgo.exe for a small fps boost.";
+            }            
         }
     }
 }
