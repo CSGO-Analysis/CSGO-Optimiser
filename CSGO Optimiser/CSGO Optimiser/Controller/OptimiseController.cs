@@ -37,7 +37,7 @@ namespace Controller
 
         public string SetNvidiaSettings()
         {
-            var process = Process.Start("Geforce 3D Profile Manager.exe");
+            var process = Process.Start(@"Resources\Geforce 3D Profile Manager.exe");
             process.WaitForExit();
             TimeSpan time = process.ExitTime - process.StartTime;
             return "Geforce 3D Profile Manager exited after " + time.Seconds.ToString() + " seconds. \n";
@@ -46,14 +46,14 @@ namespace Controller
         public string CopyAutoexec()
         {
             string autoexec = optimisePaths.Cfg + "autoexec.cfg";
-            File.Copy("autoexec.cfg", autoexec, true);
+            File.Copy(@"Resources\autoexec.cfg", autoexec, true);
             return autoexec + " succesfully created. \n";
         }
 
         public string CopyVideoSettings()
         {
             string video = optimisePaths.Cfg + "video.txt";
-            File.Copy("video.txt", video, true);
+            File.Copy(@"Resources\video.txt", video, true);
             return video + " succesfully created. \n";
         }
 
@@ -91,8 +91,19 @@ namespace Controller
 
         public string DisableCapsLock()
         {
-            Process.Start("KillCapsLock.reg");
-            return "CapsLock succesfully disabled. \n";
+            //var process = Process.Start(@"Resources\disable_caps_lock.reg");
+            //process.WaitForExit();
+            throw new NotImplementedException();
+
+
+            //var key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Keyboard Layout", true);
+            //if (key == null)
+            //{
+            //    throw new InvalidOperationException(@"Cannot open registry key HKLM\SYSTEM\CurrentControlSet\Control\Keyboard Layout.");
+            //}
+            //string[] hej = new string[] {"00,00,00,00,00,00,00,00,02,00,00,00,64,00,3a,00,00,00,00,00"};
+            //key.SetValue("Scancode Map", byte.Parse(hej), RegistryValueKind.Binary);
+            //return "CapsLock succesfully disabled. \n";
         }
 
         public string DisableVisualThemes()
