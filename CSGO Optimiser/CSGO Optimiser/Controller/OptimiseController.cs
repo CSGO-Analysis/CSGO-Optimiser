@@ -59,6 +59,8 @@ namespace Controller
 
         public string SetLaunchOptions()
         {
+            uint maxRefreshRate = findMaxRefreshRate() + 1;
+
             string[] dirs = Directory.GetDirectories(optimisePaths.Steam + @"\userdata\");
             foreach (string dir in dirs)
             {
@@ -81,9 +83,9 @@ namespace Controller
                                 }
                             }
                             int k = i + 2;
-                            localconfig.Insert(k, "\t\t\t\t\t\t\"LaunchOptions\"\t\"-console -freq 120 -novid +exec autoexec.cfg -high\"");
+                            localconfig.Insert(k, "\t\t\t\t\t\t\"LaunchOptions\"\t\"-console -freq "+maxRefreshRate+" -novid +exec autoexec.cfg -high\"");
                             File.WriteAllLines(dir + @"\config\localconfig.vdf", localconfig);
-                            return "Launch Options succesfully added. \n";
+                            return string.Format("Launch Options succesfully added ({0} hz). \n", maxRefreshRate);
                         }
                     }
                 }
@@ -189,6 +191,25 @@ namespace Controller
             File.WriteAllLines(optimisePaths.Cfg + "autoexec.cfg", autoexec);
 
             return "Ingame Acceleration succesfully disabled. \n";
+        }
+
+        private uint findMaxRefreshRate()
+        {
+            var scope = new System.Management.ManagementScope();
+            var q = new System.Management.ObjectQuery("SELECT * FROM CIM_VideoControllerResolution");
+
+            using (var searcher = new System.Management.ManagementObjectSearcher(scope, q))
+            {
+                var results = searcher.Get();
+                UInt32 maxHZ = 0;
+
+                foreach (var item in results)
+                {
+                    if ((UInt32)item["RefreshRate"] > maxHZ)
+                        maxHZ = (UInt32)item["RefreshRate"];
+                }
+                return maxHZ;
+            }
         }
 
     }
