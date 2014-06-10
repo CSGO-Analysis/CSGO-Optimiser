@@ -22,7 +22,7 @@
         </DockPanel>
         <StackPanel Grid.Row="1" Margin="0,20,0,0">
             <Label Content="Choose the settings you want to optimise: (Mouseover for further description)"/>
-            <CheckBox x:Name="nvidiaCheckBox" Content="Nvidia CSGO Profile (user must manually import CSGOptimiser\nvidiaProfile.txt)" Margin="0,3,0,0"/>
+            <CheckBox x:Name="nvidiaCheckBox" Content="Nvidia CSGO Profile (user must manually import Resources\NvidiaProfile.txt)" Margin="0,3,0,0"/>
             <CheckBox x:Name="autoexecCheckBox" Content="Autoexec.cfg" Margin="0,3,0,0"/>
             <CheckBox x:Name="ingameVideoButton" Content="Ingame video settings" Margin="0,3,0,0"/>
             <CheckBox x:Name="launchOptionsCheckBox" Content="Launch options" Margin="0,3,0,0"/>
