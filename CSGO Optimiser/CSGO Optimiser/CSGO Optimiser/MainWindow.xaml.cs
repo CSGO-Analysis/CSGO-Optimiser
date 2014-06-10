@@ -59,7 +59,8 @@ namespace CSGO_Optimiser
                     Process[] steamProcess = Process.GetProcessesByName("Steam");
                     if (steamProcess.Length != 0)
                     {
-                        if (MessageBox.Show("Steam must be closed in order to add launch options. Shutdown Steam?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        if (MessageBox.Show("Steam must be closed in order to add launch options. Shutdown Steam?",
+                            "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                         {
                             steamProcess[0].Kill();
                             steamProcess[0].WaitForExit();
@@ -100,7 +101,7 @@ namespace CSGO_Optimiser
                     logTextBox.Text += optimiseController.DisableIngameAcc();
                     changes++;
                 }
-                if (capsLockButton.IsChecked == true)
+                if (capsLockCheckBox.IsChecked == true)
                 {
                     logTextBox.Text += optimiseController.DisableCapsLock();
                     changes++;
@@ -185,7 +186,7 @@ m_customaccel_exponent 0
 m_customaccel_scale 0
 m_rawinput 0";
             }
-            else if (sender.Equals(capsLockButton))
+            else if (sender.Equals(capsLockCheckBox))
             {
                 descriptionTextBox.Text = @"Disable Caps Lock for use with VoIP:
 Disables the normal Caps Lock function (Key is remapped to F13) so you can use Caps Lock for Push-to-talk without talking in CAPS half the time.";
@@ -205,7 +206,7 @@ Deactivates some Windows visual graphics/animation on csgo.exe for a small fps b
             launchOptionsCheckBox.IsChecked = true;
             mouseAccCheckBox.IsChecked = true;
             ingameAccCheckBox.IsChecked = true;
-            capsLockButton.IsChecked = true;
+            capsLockCheckBox.IsChecked = true;
             visualThemesCheckBox.IsChecked = true;
         }
 
@@ -217,7 +218,7 @@ Deactivates some Windows visual graphics/animation on csgo.exe for a small fps b
             launchOptionsCheckBox.IsChecked = false;
             mouseAccCheckBox.IsChecked = false;
             ingameAccCheckBox.IsChecked = false;
-            capsLockButton.IsChecked = false;
+            capsLockCheckBox.IsChecked = false;
             visualThemesCheckBox.IsChecked = false;
         }
 

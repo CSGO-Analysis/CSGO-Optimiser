@@ -28,7 +28,7 @@
             <CheckBox x:Name="launchOptionsCheckBox" Content="Launch options" Margin="0,3,0,0" MouseMove="OnMouseMove"/>
             <CheckBox x:Name="mouseAccCheckBox" Content="Mouse Acceleration and Enhanced Pointer Prec. Off (MarkC)" Margin="0,3,0,0" MouseMove="OnMouseMove"/>
             <CheckBox x:Name="ingameAccCheckBox" Content="Disable Acceleration ingame option" Margin="0,3,0,0" MouseMove="OnMouseMove"/>
-            <CheckBox x:Name="capsLockButton" Content="Disable Caps Lock for use with VoIP" Margin="0,3,0,0" MouseMove="OnMouseMove"/>
+            <CheckBox x:Name="capsLockCheckBox" Content="Disable Caps Lock for use with VoIP" Margin="0,3,0,0" MouseMove="OnMouseMove"/>
             <CheckBox x:Name="visualThemesCheckBox" Content="Deactivate visual themes on csgo.exe" Margin="0,3,0,0" MouseMove="OnMouseMove"/>
             <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
             <Button x:Name="selectAllButton" Content="Select All" Width="70" HorizontalAlignment="Left" Click="selectAllButton_Click"/>
@@ -46,9 +46,11 @@
         </StackPanel>
         <DockPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Margin="20,0,0,0">
             <Label Content="Description:" DockPanel.Dock="Top"/>
-            <TextBox x:Name="descriptionTextBox" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top" MinHeight="150"/>
+            <TextBox x:Name="descriptionTextBox" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto"
+                     DockPanel.Dock="Top" MinHeight="150"/>
             <Label Content="Log:" DockPanel.Dock="Top"/>
-            <TextBox x:Name="logTextBox" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top"/>
+            <TextBox x:Name="logTextBox" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto"
+                     DockPanel.Dock="Top"/>
         </DockPanel>
     </Grid>
 </Window>
