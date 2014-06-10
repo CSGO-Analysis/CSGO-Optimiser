@@ -47,3 +47,7 @@ C:\Users\Peter\Documents\GitHub\CSGO-Optimiser\CSGO Optimiser\CSGO Optimiser\CSG
 C:\Users\Peter\Documents\GitHub\CSGO-Optimiser\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGO_Optimiser.Properties.Resources.resources
 C:\Users\Peter\Documents\GitHub\CSGO-Optimiser\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGO Optimiser.exe
 C:\Users\Peter\Documents\GitHub\CSGO-Optimiser\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGO Optimiser.pdb
+C:\Users\Peter\Documents\GitHub\CSGO-Optimiser\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\bin\Debug\CSGO Optimiser.exe.manifest
+C:\Users\Peter\Documents\GitHub\CSGO-Optimiser\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\bin\Debug\CSGO Optimiser.application
+C:\Users\Peter\Documents\GitHub\CSGO-Optimiser\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGO Optimiser.exe.manifest
+C:\Users\Peter\Documents\GitHub\CSGO-Optimiser\CSGO Optimiser\CSGO Optimiser\CSGO Optimiser\obj\Debug\CSGO Optimiser.application

@@ -37,7 +37,8 @@ namespace Controller
 
         public string SetNvidiaSettings()
         {
-            var process = Process.Start(@"Resources\Geforce 3D Profile Manager.exe");
+            string test = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            var process = Process.Start(@"\Resources\Geforce 3D Profile Manager.exe");
             process.WaitForExit();
             TimeSpan time = process.ExitTime - process.StartTime;
             return "Geforce 3D Profile Manager exited after " + time.Seconds.ToString() + " seconds. \n";
