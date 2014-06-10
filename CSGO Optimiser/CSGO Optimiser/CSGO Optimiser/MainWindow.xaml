@@ -1,7 +1,7 @@
 ﻿<Window x:Class="CSGO_Optimiser.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="500" Width="900" ResizeMode="NoResize">
+        Title="MainWindow" Height="500" Width="900" MinHeight="500" MinWidth="900">
     <Grid Margin="20,10,5,5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -22,7 +22,7 @@
         </DockPanel>
         <StackPanel Grid.Row="1" Margin="0,20,0,0">
             <Label Content="Choose the settings you want to optimise: (Mouseover for further description)"/>
-            <CheckBox x:Name="nvidiaCheckBox" Content="Nvidia CSGO Profile (user must manually import Resources\NvidiaProfile.txt)" Margin="0,3,0,0" MouseMove="OnMouseMove"/>
+            <CheckBox x:Name="nvidiaCheckBox" Content="Nvidia CSGO Profile (user must manually import \Resources\NVIDIA Profile.txt)" Margin="0,3,0,0" MouseMove="OnMouseMove"/>
             <CheckBox x:Name="autoexecCheckBox" Content="Autoexec.cfg" Margin="0,3,0,0" MouseMove="OnMouseMove"/>
             <CheckBox x:Name="ingameVideoCheckBox" Content="Ingame video settings" Margin="0,3,0,0" MouseMove="OnMouseMove"/>
             <CheckBox x:Name="launchOptionsCheckBox" Content="Launch options" Margin="0,3,0,0" MouseMove="OnMouseMove"/>
@@ -30,7 +30,11 @@
             <CheckBox x:Name="ingameAccCheckBox" Content="Disable Acceleration ingame option" Margin="0,3,0,0" MouseMove="OnMouseMove"/>
             <CheckBox x:Name="capsLockButton" Content="Disable Caps Lock for use with VoIP" Margin="0,3,0,0" MouseMove="OnMouseMove"/>
             <CheckBox x:Name="visualThemesCheckBox" Content="Deactivate visual themes on csgo.exe" Margin="0,3,0,0" MouseMove="OnMouseMove"/>
-            
+            <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+            <Button x:Name="selectAllButton" Content="Select All" Width="70" HorizontalAlignment="Left" Click="selectAllButton_Click"/>
+             <Button x:Name="deselectAllButton" Content="Deselect All" Width="70" HorizontalAlignment="Left" Margin="10,0,0,0" Click="deselectAllButton_Click"/>
+            </StackPanel>
+
         </StackPanel>
         <StackPanel Grid.Row="2" Margin="0,20,0,0">
             <Label Content="Optional but recommended at least once a month:"/>

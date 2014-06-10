@@ -59,27 +59,36 @@ namespace Controller
 
         public string SetLaunchOptions()
         {
-            /*string[] dirs = Directory.GetDirectories(optimisePaths.Steam + @"\userdata\");
+            string[] dirs = Directory.GetDirectories(optimisePaths.Steam + @"\userdata\");
             foreach (string dir in dirs)
             {
                 if (File.Exists(dir + @"\config\localconfig.vdf"))
                 {
-                    IEnumerable<string> csgoLines = File.ReadLines(dir + @"\config\localconfig.vdf")
-                    .SkipWhile(line => !line.Equals("\t\t\t\t\t\"730\""))
-                    .TakeWhile(line => !line.Equals("\t\t\t\t\t}"));
-
-                    if (csgoLines.Contains("LaunchOptions"))
+                    List<string> localconfig = File.ReadAllLines(dir + @"\config\localconfig.vdf").ToList();
+                    for (int i = 0; i < localconfig.Count(); i++)
                     {
-                        File.AppendAllText(dir + @"\config\localconfig.vdf", "test");
-                        // edit launch options
-                    }
-                    else
-                    {
-                        // add launch options on new line
+                        if (localconfig[i] == "\t\t\t\t\t\"730\"")
+                        {
+                            for (int j = i; j < localconfig.Count(); j++)
+                            {
+                                if (localconfig[j] == "\t\t\t\t\t}")
+                                {
+                                    break;
+                                }
+                                else if (localconfig[j].Contains("LaunchOptions"))
+                                {
+                                    localconfig.Remove(localconfig[j]);
+                                }
+                            }
+                            int k = i + 2;
+                            localconfig.Insert(k, "\t\t\t\t\t\t\"LaunchOptions\"\t\"-console -freq 120 -novid +exec autoexec.cfg -high\"");
+                            File.WriteAllLines(dir + @"\config\localconfig.vdf", localconfig);
+                            return "Launch Options succesfully added. \n";
+                        }
                     }
                 }
-            }*/
-            throw new NotImplementedException();
+            }
+            return null;
         }
         
         public string DisableMouseAcc()
@@ -135,7 +144,7 @@ namespace Controller
                     }
                 }
             }
-            return "Mouse Acceleration succesfully disabled (" + dpi + "%).";
+            return "Mouse Acceleration succesfully disabled (" + dpi + "% dpi). \n";
         }
 
         public string DisableCapsLock()

@@ -50,62 +50,78 @@ namespace CSGO_Optimiser
 
         private void optimiseButton_Click(object sender, RoutedEventArgs e)
         {
-            if (optimiseController.GetSteamPath() != null)
+            int changes = 0;
+            try
             {
-                int changes = 0;
-                try
+                if (launchOptionsCheckBox.IsChecked == true)
                 {
-                    if (nvidiaCheckBox.IsChecked == true)
+                    validateSteamPath();
+                    Process[] steamProcess = Process.GetProcessesByName("Steam");
+                    if (steamProcess.Length != 0)
                     {
-                        logTextBox.Text += optimiseController.SetNvidiaSettings();
-                        changes++;
+                        if (MessageBox.Show("Steam must be closed in order to add launch options. Shutdown Steam?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        {
+                            steamProcess[0].Kill();
+                            steamProcess[0].WaitForExit();
+                            logTextBox.Text += optimiseController.SetLaunchOptions();
+                            changes++;
+                        }
+                        else
+                        {
+                            logTextBox.Text += "Launch options was not added. \n";
+                        }
                     }
-                    if (autoexecCheckBox.IsChecked == true)
-                    {
-                        logTextBox.Text += optimiseController.CopyAutoexec();
-                        changes++;
-                    }
-                    if (ingameVideoCheckBox.IsChecked == true)
-                    {
-                        logTextBox.Text += optimiseController.CopyVideoSettings();
-                        changes++;
-                    }
-                    if (launchOptionsCheckBox.IsChecked == true)
+                    else
                     {
                         logTextBox.Text += optimiseController.SetLaunchOptions();
                         changes++;
                     }
-                    if (mouseAccCheckBox.IsChecked == true)
-                    {
-                        logTextBox.Text += optimiseController.DisableMouseAcc();
-                        changes++;
-                    }
-                    if (ingameAccCheckBox.IsChecked == true)
-                    {
-                        logTextBox.Text += optimiseController.DisableIngameAcc();
-                        changes++;
-                    }
-                    if (capsLockButton.IsChecked == true)
-                    {
-                        logTextBox.Text += optimiseController.DisableCapsLock();
-                        changes++;
-                    }
-                    if (visualThemesCheckBox.IsChecked == true)
-                    {
-                        logTextBox.Text += optimiseController.DisableVisualThemes();
-                        changes++;
-                    }
-                    logTextBox.Text += string.Format("\nOptimisation finished ({0} changes) \n", changes);
-                    logTextBox.ScrollToEnd();
                 }
-                catch (Exception ex)
+                if (autoexecCheckBox.IsChecked == true)
                 {
-                    MessageBox.Show(ex.Message);
+                    validateSteamPath();
+                    logTextBox.Text += optimiseController.CopyAutoexec();
+                    changes++;
                 }
+                if (ingameVideoCheckBox.IsChecked == true)
+                {
+                    validateSteamPath();
+                    logTextBox.Text += optimiseController.CopyVideoSettings();
+                    changes++;
+                }
+                if (mouseAccCheckBox.IsChecked == true)
+                {
+                    logTextBox.Text += optimiseController.DisableMouseAcc();
+                    changes++;
+                }
+                if (ingameAccCheckBox.IsChecked == true)
+                {
+                    validateSteamPath();
+                    logTextBox.Text += optimiseController.DisableIngameAcc();
+                    changes++;
+                }
+                if (capsLockButton.IsChecked == true)
+                {
+                    logTextBox.Text += optimiseController.DisableCapsLock();
+                    changes++;
+                }
+                if (visualThemesCheckBox.IsChecked == true)
+                {
+                    validateSteamPath();
+                    logTextBox.Text += optimiseController.DisableVisualThemes();
+                    changes++;
+                }
+                if (nvidiaCheckBox.IsChecked == true)
+                {
+                    logTextBox.Text += optimiseController.SetNvidiaSettings();
+                    changes++;
+                }
+                logTextBox.Text += string.Format("Optimisation finished ({0} changes) \n", changes);
+                logTextBox.ScrollToEnd();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Please locate your Steam folder");
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -179,6 +195,38 @@ Disables the normal Caps Lock function (Key is remapped to F13) so you can use C
                 descriptionTextBox.Text = @"Deactivate visual themes on csgo.exe:
 Deactivates some Windows visual graphics/animation on csgo.exe for a small fps boost.";
             }            
+        }
+
+        private void selectAllButton_Click(object sender, RoutedEventArgs e)
+        {
+            nvidiaCheckBox.IsChecked = true;
+            autoexecCheckBox.IsChecked = true;
+            ingameVideoCheckBox.IsChecked = true;
+            launchOptionsCheckBox.IsChecked = true;
+            mouseAccCheckBox.IsChecked = true;
+            ingameAccCheckBox.IsChecked = true;
+            capsLockButton.IsChecked = true;
+            visualThemesCheckBox.IsChecked = true;
+        }
+
+        private void deselectAllButton_Click(object sender, RoutedEventArgs e)
+        {
+            nvidiaCheckBox.IsChecked = false;
+            autoexecCheckBox.IsChecked = false;
+            ingameVideoCheckBox.IsChecked = false;
+            launchOptionsCheckBox.IsChecked = false;
+            mouseAccCheckBox.IsChecked = false;
+            ingameAccCheckBox.IsChecked = false;
+            capsLockButton.IsChecked = false;
+            visualThemesCheckBox.IsChecked = false;
+        }
+
+        private void validateSteamPath()
+        {
+            if (optimiseController.GetSteamPath() == null)
+            {
+                throw new Exception("Please locate your Steam folder.");
+            }
         }
     }
 }
