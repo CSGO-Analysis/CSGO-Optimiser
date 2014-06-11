@@ -94,7 +94,7 @@ namespace CSGO_Optimiser
                     logTextBox.Text += optimiseController.CopyAutoexec();
                     changes++;
                 }
-                if (ingameVideoCheckBox.IsChecked == true)
+                if (videoSettingsCheckBox.IsChecked == true)
                 {
                     validateSteamPath();
                     logTextBox.Text += optimiseController.CopyVideoSettings();
@@ -105,7 +105,7 @@ namespace CSGO_Optimiser
                     logTextBox.Text += optimiseController.DisableMouseAcc();
                     changes++;
                 }
-                if (ingameAccCheckBox.IsChecked == true)
+                if (ingameMouseAccCheckBox.IsChecked == true)
                 {
                     validateSteamPath();
                     logTextBox.Text += optimiseController.DisableIngameAcc();
@@ -122,7 +122,7 @@ namespace CSGO_Optimiser
                     logTextBox.Text += optimiseController.DisableVisualThemes();
                     changes++;
                 }
-                if (nvidiaCheckBox.IsChecked == true)
+                if (nvidiaProfileCheckBox.IsChecked == true)
                 {
                     logTextBox.Text += optimiseController.SetNvidiaSettings();
                     changes++;
@@ -138,13 +138,11 @@ namespace CSGO_Optimiser
 
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
-            if (sender.Equals(nvidiaCheckBox))
+            if (sender.Equals(nvidiaProfileCheckBox))
             {
                 descriptionTextBox.Text = @"NVIDIA CSGO Profile:
 
-Uses nvidiaInspector to import an NVIDIA 3D profile that changes the driver settings for csgo.exe only.
-
-Optimised for high performance in CSGO.";
+Uses nvidiaInspector to import a NVIDIA 3D profile that changes the driver settings for csgo.exe only.";
             }
             else if (sender.Equals(autoexecCheckBox))
             {
@@ -162,7 +160,7 @@ cl_cmdrate 128
 cl_forcepreload 1
 mat_queue_mode 2";
             }
-            else if (sender.Equals(ingameVideoCheckBox))
+            else if (sender.Equals(videoSettingsCheckBox))
             {
                 descriptionTextBox.Text = @"Advanced Ingame Video Settings:
 
@@ -193,7 +191,7 @@ Recommended to also have 'Ingame Mouse Commands' applied as well.
 (Credit to MarkC for his work with acceleration fixes)";
 
             }
-            else if (sender.Equals(ingameAccCheckBox))
+            else if (sender.Equals(ingameMouseAccCheckBox))
             {
                 descriptionTextBox.Text = @"Ingame Mouse commands:
 
@@ -213,36 +211,42 @@ m_rawinput 0";
             {
                 descriptionTextBox.Text = @"Disable Caps Lock for use with 'Push-To-Talk' hotkeys:
 
-Disables the normal Caps Lock function (Key is remapped to F13) so you can use Caps Lock for Push-to-talk without talking in CAPS half the time.";
+Disables the normal Caps Lock function (Key is remapped to F13) so you can use Caps Lock for Push-to-talk without accidently talking in CAPS.";
             }
             else if (sender.Equals(visualThemesCheckBox))
             {
                 descriptionTextBox.Text = @"Deactivate visual themes on csgo.exe:
 
 Deactivates Windows visuals on csgo.exe for a small fps boost.";
-            }            
+            }
+            else if (sender.Equals(playersComboBox))
+            {
+                descriptionTextBox.Text = @"Select player profile:
+
+Select a player profile to copy settings from. Player profiles are stored in \Resources\Players\.";
+            }
         }
 
         private void selectAllButton_Click(object sender, RoutedEventArgs e)
         {
-            nvidiaCheckBox.IsChecked = true;
+            nvidiaProfileCheckBox.IsChecked = true;
             autoexecCheckBox.IsChecked = true;
-            ingameVideoCheckBox.IsChecked = true;
+            videoSettingsCheckBox.IsChecked = true;
             launchOptionsCheckBox.IsChecked = true;
             mouseAccCheckBox.IsChecked = true;
-            ingameAccCheckBox.IsChecked = true;
+            ingameMouseAccCheckBox.IsChecked = true;
             capsLockCheckBox.IsChecked = true;
             visualThemesCheckBox.IsChecked = true;
         }
 
         private void deselectAllButton_Click(object sender, RoutedEventArgs e)
         {
-            nvidiaCheckBox.IsChecked = false;
+            nvidiaProfileCheckBox.IsChecked = false;
             autoexecCheckBox.IsChecked = false;
-            ingameVideoCheckBox.IsChecked = false;
+            videoSettingsCheckBox.IsChecked = false;
             launchOptionsCheckBox.IsChecked = false;
             mouseAccCheckBox.IsChecked = false;
-            ingameAccCheckBox.IsChecked = false;
+            ingameMouseAccCheckBox.IsChecked = false;
             capsLockCheckBox.IsChecked = false;
             visualThemesCheckBox.IsChecked = false;
         }
@@ -253,6 +257,75 @@ Deactivates Windows visuals on csgo.exe for a small fps boost.";
             {
                 throw new Exception("Please locate your Steam folder.");
             }
+        }
+
+        private void playersComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            IPlayer player = (IPlayer) playersComboBox.SelectedItem;
+            if (player.Config != "")
+            {
+                configCheckBox.IsChecked = false;
+                configCheckBox.IsEnabled = true;
+            }
+            else
+            {
+                configCheckBox.IsChecked = false;
+                configCheckBox.IsEnabled = false;
+            }
+            if (player.Crosshair != "")
+            {
+                crosshairCheckBox.IsChecked = true;
+                crosshairCheckBox.IsEnabled = true;
+            }
+            else
+            {
+                crosshairCheckBox.IsChecked = false;
+                crosshairCheckBox.IsEnabled = false;
+            }
+            if (player.Autoexec != "")
+            {
+                autoexecCheckBox.IsChecked = true;
+                autoexecCheckBox.IsEnabled = true;
+            }
+            else
+            {
+                autoexecCheckBox.IsChecked = false;
+                autoexecCheckBox.IsEnabled = false;
+            }
+            if (player.VideoSettings != "")
+            {
+                videoSettingsCheckBox.IsChecked = true;
+                videoSettingsCheckBox.IsEnabled = true;
+            }
+            else
+            {
+                videoSettingsCheckBox.IsChecked = false;
+                videoSettingsCheckBox.IsEnabled = false;
+            }
+            if (player.LaunchOptions != "")
+            {
+                launchOptionsCheckBox.IsChecked = true;
+                launchOptionsCheckBox.IsEnabled = true;
+            }
+            else
+            {
+                launchOptionsCheckBox.IsChecked = false;
+                launchOptionsCheckBox.IsEnabled = false;
+            }
+            if (player.NvidiaProfile != "")
+            {
+                nvidiaProfileCheckBox.IsChecked = true;
+                nvidiaProfileCheckBox.IsEnabled = true;
+            }
+            else
+            {
+                nvidiaProfileCheckBox.IsChecked = false;
+                nvidiaProfileCheckBox.IsEnabled = false;
+            }
+            mouseAccCheckBox.IsChecked = player.DisabledMouseAcc;
+            ingameMouseAccCheckBox.IsChecked = player.DisabledIngameMouseAcc;
+            capsLockCheckBox.IsChecked = player.DisabledCapsLock;
+            visualThemesCheckBox.IsChecked = player.DisabledVisualThemes;
         }
     }
 }
