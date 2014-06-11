@@ -138,11 +138,19 @@ namespace CSGO_Optimiser
 
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
-            if (sender.Equals(nvidiaProfileCheckBox))
+            if (sender.Equals(playersComboBox))
             {
-                descriptionTextBox.Text = @"NVIDIA CSGO Profile:
+                descriptionTextBox.Text = @"Select player profile:
 
-Uses nvidiaInspector to import a NVIDIA 3D profile that changes the driver settings for csgo.exe only.";
+Select a player profile to copy settings from. Player profiles are stored in \Resources\Players\.";
+            }
+            else if (sender.Equals(configCheckBox))
+            {
+                descriptionTextBox.Text = @"lol hej";
+            }
+            else if (sender.Equals(crosshairCheckBox))
+            {
+                descriptionTextBox.Text = @"hæ hæ";
             }
             else if (sender.Equals(autoexecCheckBox))
             {
@@ -179,6 +187,12 @@ Adds the following launch options to CSGO:
 -novid (Removes the short video on CSGO startup)
 +exec autoexec.cfg (Executes the configuration file with optimised rates)
 -high (Sets the csgo.exe process to 'high' priority for a small fps boost)";
+            }
+            else if (sender.Equals(nvidiaProfileCheckBox))
+            {
+                descriptionTextBox.Text = @"NVIDIA CSGO Profile:
+
+Uses nvidiaInspector to import a NVIDIA 3D profile that changes the driver settings for csgo.exe only.";
             }
             else if (sender.Equals(mouseAccCheckBox))
             {
@@ -218,12 +232,6 @@ Disables the normal Caps Lock function (Key is remapped to F13) so you can use C
                 descriptionTextBox.Text = @"Deactivate visual themes on csgo.exe:
 
 Deactivates Windows visuals on csgo.exe for a small fps boost.";
-            }
-            else if (sender.Equals(playersComboBox))
-            {
-                descriptionTextBox.Text = @"Select player profile:
-
-Select a player profile to copy settings from. Player profiles are stored in \Resources\Players\.";
             }
         }
 
