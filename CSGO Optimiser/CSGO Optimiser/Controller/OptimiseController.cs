@@ -31,7 +31,7 @@ namespace Controller
             p.StartInfo.RedirectStandardError = true;
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.FileName = @"Resources\nvidiaInspector.exe";
-            p.StartInfo.Arguments = @"Resources\csgoProfileh.nip";
+            p.StartInfo.Arguments = @"Resources\csgoProfile.nip";
             p.Start();
             string stdoutx = p.StandardOutput.ReadToEnd();
             string stderrx = p.StandardError.ReadToEnd();
