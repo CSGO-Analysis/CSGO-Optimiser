@@ -34,6 +34,14 @@ namespace CSGO_Optimiser
             optimiseController = new OptimiseController();
             playerController = new PlayerController();
             playersComboBox.ItemsSource = playerController.GetPlayers();
+            foreach (IPlayer p in playerController.GetPlayers())
+            {
+                if (p.Name == "Default")
+                {
+                    playersComboBox.SelectedItem = p;
+                    break;
+                }
+            }
         }
 
         private void browseButton_Click(object sender, RoutedEventArgs e)
@@ -54,52 +62,65 @@ namespace CSGO_Optimiser
 
         private void optimiseButton_Click(object sender, RoutedEventArgs e)
         {
-            int changes = 0;
             try
             {
+                validateSteamPath();
+                int changes = 0;
+                // Player Settings:
                 if (playersComboBox.SelectedItem != null)
                 {
-                    validateSteamPath();
                     IPlayer player = (IPlayer) playersComboBox.SelectedItem;
-                    logTextBox.Text += playerController.CopyPlayerConfig(player);
-                }
-                if (launchOptionsCheckBox.IsChecked == true)
-                {
-                    validateSteamPath();
-                    Process[] steamProcess = Process.GetProcessesByName("Steam");
-                    if (steamProcess.Length != 0)
+                    if (autoexecCheckBox.IsChecked == true) // Must be first because other methods write in this file.
                     {
-                        if (MessageBox.Show("Steam must be closed in order to add launch options. Shutdown Steam?",
-                            "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        logTextBox.Text += optimiseController.CopyAutoexec(player);
+                        changes++;
+                    }
+                    if (configCheckBox.IsChecked == true)
+                    {
+                        logTextBox.Text += optimiseController.CopyPlayerConfig(player);
+                        changes++;
+                    }
+                    if (crosshairCheckBox.IsChecked == true)
+                    {
+                        logTextBox.Text += optimiseController.CopyPlayerCrosshair(player);
+                        changes++;
+                    }
+                    if (videoSettingsCheckBox.IsChecked == true)
+                    {
+                        logTextBox.Text += optimiseController.CopyVideoConfig(player);
+                        changes++;
+                    }
+                    if (launchOptionsCheckBox.IsChecked == true)
+                    {
+                        Process[] steamProcess = Process.GetProcessesByName("Steam");
+                        if (steamProcess.Length != 0)
                         {
-                            steamProcess[0].Kill();
-                            steamProcess[0].WaitForExit();
-                            logTextBox.Text += optimiseController.SetLaunchOptions();
-                            changes++;
+                            if (MessageBox.Show("Steam must be closed in order to add launch options. Shutdown Steam?",
+                                "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                            {
+                                steamProcess[0].Kill();
+                                steamProcess[0].WaitForExit();
+                                logTextBox.Text += optimiseController.SetLaunchOptions(player);
+                                changes++;
+                            }
+                            else
+                            {
+                                logTextBox.Text += "Launch options was not added. \n";
+                            }
                         }
                         else
                         {
-                            logTextBox.Text += "Launch options was not added. \n";
+                            logTextBox.Text += optimiseController.SetLaunchOptions(player);
+                            changes++;
                         }
                     }
-                    else
+                    if (nvidiaProfileCheckBox.IsChecked == true)
                     {
-                        logTextBox.Text += optimiseController.SetLaunchOptions();
+                        logTextBox.Text += optimiseController.SetNvidiaSettings(player);
                         changes++;
                     }
                 }
-                if (autoexecCheckBox.IsChecked == true)
-                {
-                    validateSteamPath();
-                    logTextBox.Text += optimiseController.CopyAutoexec();
-                    changes++;
-                }
-                if (videoSettingsCheckBox.IsChecked == true)
-                {
-                    validateSteamPath();
-                    logTextBox.Text += optimiseController.CopyVideoSettings();
-                    changes++;
-                }
+                // Global settings:
                 if (mouseAccCheckBox.IsChecked == true)
                 {
                     logTextBox.Text += optimiseController.DisableMouseAcc();
@@ -107,8 +128,7 @@ namespace CSGO_Optimiser
                 }
                 if (ingameMouseAccCheckBox.IsChecked == true)
                 {
-                    validateSteamPath();
-                    logTextBox.Text += optimiseController.DisableIngameAcc();
+                    logTextBox.Text += optimiseController.DisableIngameMouseAcc();
                     changes++;
                 }
                 if (capsLockCheckBox.IsChecked == true)
@@ -118,16 +138,10 @@ namespace CSGO_Optimiser
                 }
                 if (visualThemesCheckBox.IsChecked == true)
                 {
-                    validateSteamPath();
                     logTextBox.Text += optimiseController.DisableVisualThemes();
                     changes++;
                 }
-                if (nvidiaProfileCheckBox.IsChecked == true)
-                {
-                    logTextBox.Text += optimiseController.SetNvidiaSettings();
-                    changes++;
-                }
-                logTextBox.Text += string.Format("Optimisation finished ({0} changes) \n", changes);
+                logTextBox.Text += string.Format("Optimisation finished ({0} changes). \n", changes);
                 logTextBox.ScrollToEnd();
             }
             catch (Exception ex)
@@ -136,6 +150,74 @@ namespace CSGO_Optimiser
             }
         }
 
+        private void validateSteamPath()
+        {
+            if (optimiseController.GetSteamPath() == null)
+            {
+                throw new Exception("Please locate your Steam folder.");
+            }
+        }
+
+        private void playersComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            IPlayer player = (IPlayer) playersComboBox.SelectedItem;
+            deselectAllButton_Click(null, null);
+
+            if (player.Config != "")
+                configCheckBox.IsEnabled = true;
+            else
+                configCheckBox.IsEnabled = false;
+
+            if (player.Crosshair != "")
+                crosshairCheckBox.IsEnabled = true;
+            else
+                crosshairCheckBox.IsEnabled = false;
+
+            if (player.Autoexec != "")
+                autoexecCheckBox.IsEnabled = true;
+            else
+                autoexecCheckBox.IsEnabled = false;
+
+            if (player.VideoSettings != "")
+                videoSettingsCheckBox.IsEnabled = true;
+            else
+                videoSettingsCheckBox.IsEnabled = false;
+
+            if (player.LaunchOptions != "")
+                launchOptionsCheckBox.IsEnabled = true;
+            else
+                launchOptionsCheckBox.IsEnabled = false;
+
+            if (player.NvidiaProfile != "")
+                nvidiaProfileCheckBox.IsEnabled = true;
+            else
+                nvidiaProfileCheckBox.IsEnabled = false;
+
+            mouseAccCheckBox.IsChecked = player.DisabledMouseAcc;
+            ingameMouseAccCheckBox.IsChecked = player.DisabledIngameMouseAcc;
+            capsLockCheckBox.IsChecked = player.DisabledCapsLock;
+            visualThemesCheckBox.IsChecked = player.DisabledVisualThemes;
+        }
+
+        private void selectAllButton_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (Control c in checkBoxStackPanel.Children.OfType<CheckBox>())
+            {
+                if (c.GetType() == typeof(CheckBox) && c.IsEnabled == true)
+                    ((CheckBox)c).IsChecked = true;
+            }
+        }
+
+        private void deselectAllButton_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (Control c in checkBoxStackPanel.Children.OfType<CheckBox>())
+            {
+                if (c.GetType() == typeof(CheckBox))
+                    ((CheckBox)c).IsChecked = false;
+            }
+        }
+
+        // Should probably be moved to Resources..
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
             if (sender.Equals(playersComboBox))
@@ -233,107 +315,6 @@ Disables the normal Caps Lock function (Key is remapped to F13) so you can use C
 
 Deactivates Windows visuals on csgo.exe for a small fps boost.";
             }
-        }
-
-        private void selectAllButton_Click(object sender, RoutedEventArgs e)
-        {
-            nvidiaProfileCheckBox.IsChecked = true;
-            autoexecCheckBox.IsChecked = true;
-            videoSettingsCheckBox.IsChecked = true;
-            launchOptionsCheckBox.IsChecked = true;
-            mouseAccCheckBox.IsChecked = true;
-            ingameMouseAccCheckBox.IsChecked = true;
-            capsLockCheckBox.IsChecked = true;
-            visualThemesCheckBox.IsChecked = true;
-        }
-
-        private void deselectAllButton_Click(object sender, RoutedEventArgs e)
-        {
-            nvidiaProfileCheckBox.IsChecked = false;
-            autoexecCheckBox.IsChecked = false;
-            videoSettingsCheckBox.IsChecked = false;
-            launchOptionsCheckBox.IsChecked = false;
-            mouseAccCheckBox.IsChecked = false;
-            ingameMouseAccCheckBox.IsChecked = false;
-            capsLockCheckBox.IsChecked = false;
-            visualThemesCheckBox.IsChecked = false;
-        }
-
-        private void validateSteamPath()
-        {
-            if (optimiseController.GetSteamPath() == null)
-            {
-                throw new Exception("Please locate your Steam folder.");
-            }
-        }
-
-        private void playersComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            IPlayer player = (IPlayer) playersComboBox.SelectedItem;
-            if (player.Config != "")
-            {
-                configCheckBox.IsChecked = false;
-                configCheckBox.IsEnabled = true;
-            }
-            else
-            {
-                configCheckBox.IsChecked = false;
-                configCheckBox.IsEnabled = false;
-            }
-            if (player.Crosshair != "")
-            {
-                crosshairCheckBox.IsChecked = true;
-                crosshairCheckBox.IsEnabled = true;
-            }
-            else
-            {
-                crosshairCheckBox.IsChecked = false;
-                crosshairCheckBox.IsEnabled = false;
-            }
-            if (player.Autoexec != "")
-            {
-                autoexecCheckBox.IsChecked = true;
-                autoexecCheckBox.IsEnabled = true;
-            }
-            else
-            {
-                autoexecCheckBox.IsChecked = false;
-                autoexecCheckBox.IsEnabled = false;
-            }
-            if (player.VideoSettings != "")
-            {
-                videoSettingsCheckBox.IsChecked = true;
-                videoSettingsCheckBox.IsEnabled = true;
-            }
-            else
-            {
-                videoSettingsCheckBox.IsChecked = false;
-                videoSettingsCheckBox.IsEnabled = false;
-            }
-            if (player.LaunchOptions != "")
-            {
-                launchOptionsCheckBox.IsChecked = true;
-                launchOptionsCheckBox.IsEnabled = true;
-            }
-            else
-            {
-                launchOptionsCheckBox.IsChecked = false;
-                launchOptionsCheckBox.IsEnabled = false;
-            }
-            if (player.NvidiaProfile != "")
-            {
-                nvidiaProfileCheckBox.IsChecked = true;
-                nvidiaProfileCheckBox.IsEnabled = true;
-            }
-            else
-            {
-                nvidiaProfileCheckBox.IsChecked = false;
-                nvidiaProfileCheckBox.IsEnabled = false;
-            }
-            mouseAccCheckBox.IsChecked = player.DisabledMouseAcc;
-            ingameMouseAccCheckBox.IsChecked = player.DisabledIngameMouseAcc;
-            capsLockCheckBox.IsChecked = player.DisabledCapsLock;
-            visualThemesCheckBox.IsChecked = player.DisabledVisualThemes;
         }
     }
 }

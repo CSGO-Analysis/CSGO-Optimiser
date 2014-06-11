@@ -20,6 +20,7 @@ namespace Model
         public bool DisabledIngameMouseAcc { get; set; }
         public bool DisabledCapsLock { get; set; }
         public bool DisabledVisualThemes { get; set; }
+        public string FolderPath { get; set; }
 
         public Player(string name)
         {
@@ -28,7 +29,8 @@ namespace Model
 
 
         public Player(string name, string config, string crosshair, string autoexec, string videoSettings,
-            string launchOptions, string nvidiaProfile, bool disabledMouseAcc, bool disabledIngameMouseAcc, bool disabledCapsLock, bool disabledVisualThemes)
+            string launchOptions, string nvidiaProfile, bool disabledMouseAcc, bool disabledIngameMouseAcc, bool disabledCapsLock, bool disabledVisualThemes,
+            string folderPath)
         {
             Name = name;
             Config = config;
@@ -41,6 +43,7 @@ namespace Model
             DisabledIngameMouseAcc = disabledIngameMouseAcc;
             DisabledCapsLock = disabledCapsLock;
             DisabledVisualThemes = disabledVisualThemes;
+            FolderPath = folderPath;
         }
     }
 }

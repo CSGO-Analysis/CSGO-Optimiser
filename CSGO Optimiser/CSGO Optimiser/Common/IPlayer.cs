@@ -19,5 +19,6 @@ namespace Common
         bool DisabledIngameMouseAcc { get; set; }
         bool DisabledCapsLock { get; set; }
         bool DisabledVisualThemes { get; set; }
+        string FolderPath { get; set; }
     }
 }

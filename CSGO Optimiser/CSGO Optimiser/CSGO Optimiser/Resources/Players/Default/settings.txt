@@ -1,10 +1,8 @@
-Name = rave
-Config = rave.cfg
-Crosshair = raveCross.cfg
+Name = Default
 Autoexec = autoexec.cfg
 VideoSettings = video.txt
-LaunchOptions = -console -freq 120 -novid +exec autoexec.cfg -high
-NvidiaProfile = rave.nip
+LaunchOptions = -console -novid +exec autoexec.cfg -high
+NvidiaProfile = default.nip
 DisabledMouseAcc = True
 DisabledIngameMouseAcc = True
 DisabledCapsLock = True

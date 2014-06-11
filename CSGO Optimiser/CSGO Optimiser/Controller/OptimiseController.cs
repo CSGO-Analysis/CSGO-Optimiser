@@ -24,38 +24,65 @@ namespace Controller
             return SteamPaths.Steam;
         }
 
-        public string SetNvidiaSettings()
+        public string CopyAutoexec(IPlayer player)
         {
-            Process p = new Process();
-            p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.RedirectStandardError = true;
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.FileName = @"Resources\nvidiaInspector.exe";
-            p.StartInfo.Arguments = @"Resources\csgoProfile.nip";
-            p.Start();
-            string stdoutx = p.StandardOutput.ReadToEnd();
-            string stderrx = p.StandardError.ReadToEnd();
-            p.WaitForExit();
-            return "nvidiaInspector finished importing profile (hopefully succesfully?). \n";
-        }
-        
-        public string CopyAutoexec()
-        {
-            string autoexec = SteamPaths.Autoexec;
-            File.Copy(@"Resources\autoexec.cfg", autoexec, true);
-            return autoexec + " succesfully created. \n";
+            File.Copy(player.FolderPath + player.Autoexec, SteamPaths.Autoexec, true);
+            return player.Autoexec + " succesfully created. \n";
         }
 
-        public string CopyVideoSettings()
+        public string CopyPlayerConfig(IPlayer player)
         {
-            string video = SteamPaths.Video;
-            File.Copy(@"Resources\video.txt", video, true);
-            return video + " succesfully created. \n";
+            string destCfg = SteamPaths.CfgFolder + player.Config;
+            File.Copy(player.FolderPath + player.Config, destCfg, true);
+
+            List<string> autoexec;
+            if (File.Exists(SteamPaths.Autoexec))
+            {
+                autoexec = File.ReadAllLines(SteamPaths.Autoexec).ToList();
+                if (!autoexec.Contains("exec " + player.Config))
+                {
+                    autoexec.Add("exec " + player.Config);
+                }
+            }
+            else
+            {
+                autoexec = new List<string>() { "exec " + player.Config };
+            }
+            File.WriteAllLines(SteamPaths.Autoexec, autoexec);
+            return player.Config + " succesfully created. \n";
         }
 
-        public string SetLaunchOptions()
+        public string CopyPlayerCrosshair(IPlayer player)
         {
-            uint maxRefreshRate = findMaxRefreshRate();
+            string destCfg = SteamPaths.CfgFolder + player.Crosshair;
+            File.Copy(player.FolderPath + player.Crosshair, destCfg, true);
+
+            List<string> autoexec;
+            if (File.Exists(SteamPaths.Autoexec))
+            {
+                autoexec = File.ReadAllLines(SteamPaths.Autoexec).ToList();
+                if (!autoexec.Contains("exec " + player.Crosshair))
+                {
+                    autoexec.Add("exec " + player.Crosshair);
+                }
+            }
+            else
+            {
+                autoexec = new List<string>() { "exec " + player.Crosshair };
+            }
+            File.WriteAllLines(SteamPaths.Autoexec, autoexec);
+            return player.Crosshair + " succesfully created. \n";
+        }
+
+        public string CopyVideoConfig(IPlayer player)
+        {
+            File.Copy(player.FolderPath + player.VideoSettings, SteamPaths.Video, true);
+            return player.VideoSettings + " succesfully created. \n";
+        }
+
+        public string SetLaunchOptions(IPlayer player)
+        {
+            //uint maxRefreshRate = findMaxRefreshRate();
 
             string[] dirs = Directory.GetDirectories(SteamPaths.Steam + @"\userdata\");
             foreach (string dir in dirs)
@@ -79,15 +106,30 @@ namespace Controller
                                 }
                             }
                             int k = i + 2;
-                            localconfig.Insert(k, "\t\t\t\t\t\t\"LaunchOptions\"\t\"-console -freq "+maxRefreshRate+" -novid +exec autoexec.cfg -high\"");
+                            localconfig.Insert(k, "\t\t\t\t\t\t\"LaunchOptions\"\t\"" + player.LaunchOptions);
                             File.WriteAllLines(dir + @"\config\localconfig.vdf", localconfig);
-                            return string.Format("Launch Options succesfully added ({0} hz). \n", maxRefreshRate);
+                            return string.Format(player.LaunchOptions + " succesfully added to launch options. \n");
                         }
                     }
                 }
             }
             return null;
         }
+
+        public string SetNvidiaSettings(IPlayer player)
+        {
+            Process p = new Process();
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.RedirectStandardError = true;
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.FileName = @"Resources\nvidiaInspector.exe";
+            p.StartInfo.Arguments = player.FolderPath + player.NvidiaProfile;
+            p.Start();
+            string stdoutx = p.StandardOutput.ReadToEnd();
+            string stderrx = p.StandardError.ReadToEnd();
+            p.WaitForExit();
+            return "nvidiaInspector finished importing " + player.NvidiaProfile + ". \n";
+        }        
         
         public string DisableMouseAcc()
         {
@@ -145,6 +187,20 @@ namespace Controller
             return "Mouse Acceleration succesfully disabled (" + dpi + "% dpi). \n";
         }
 
+        public string DisableIngameMouseAcc()
+        {
+            string ingameAcc = SteamPaths.CfgFolder + "IngameMouseAccelOff.cfg";
+            File.Copy(@"Resources\IngameMouseAccelOff.cfg", ingameAcc, true);
+            List<string> autoexec = File.ReadAllLines(SteamPaths.Autoexec).ToList();
+            if (!autoexec.Contains("exec IngameMouseAccelOff.cfg"))
+            {
+                autoexec.Add("exec IngameMouseAccelOff.cfg");
+            }
+            File.WriteAllLines(SteamPaths.Autoexec, autoexec);
+
+            return "Ingame Mouse Acceleration succesfully disabled. \n";
+        }
+
         public string DisableCapsLock()
         {
             var key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Keyboard Layout", true);
@@ -167,7 +223,7 @@ namespace Controller
                 }
                 key.SetValue(SteamPaths.CsgoExe, "DISABLETHEMES");
 
-                return "Visual themes succesfully disabled in " + key.Name + ". \n";
+                return "Visual themes succesfully disabled for csgo.exe. \n";
             }
             else
             {
@@ -175,53 +231,39 @@ namespace Controller
             }
         }
 
-        public string DisableIngameAcc()
-        {
-            string ingameAcc = SteamPaths.CfgFolder + "IngameMouseAccelOff.cfg";
-            File.Copy(@"Resources\IngameMouseAccelOff.cfg", ingameAcc, true);
-            List<string> autoexec = File.ReadAllLines(SteamPaths.Autoexec).ToList();
-            if (!autoexec.Contains("exec IngameMouseAccelOff.cfg"))
-            {
-                autoexec.Add("exec IngameMouseAccelOff.cfg");
-            }
-            File.WriteAllLines(SteamPaths.Autoexec, autoexec);
+        //private uint findMaxRefreshRate()
+        //{
+        //    var scope = new System.Management.ManagementScope();
+        //    var q = new System.Management.ObjectQuery("SELECT * FROM CIM_VideoControllerResolution");
 
-            return "Ingame Mouse Commands succesfully applied. \n";
-        }
+        //    using (var searcher = new System.Management.ManagementObjectSearcher(scope, q))
+        //    {
+        //        var results = searcher.Get();
+        //        UInt32 maxHZ = 0;
 
-        private uint findMaxRefreshRate()
-        {
-            var scope = new System.Management.ManagementScope();
-            var q = new System.Management.ObjectQuery("SELECT * FROM CIM_VideoControllerResolution");
-
-            using (var searcher = new System.Management.ManagementObjectSearcher(scope, q))
-            {
-                var results = searcher.Get();
-                UInt32 maxHZ = 0;
-
-                foreach (var item in results)
-                {
-                    if ((UInt32)item["RefreshRate"] > maxHZ)
-                        maxHZ = (UInt32)item["RefreshRate"];
-                }
-                if (maxHZ >= 143)
-                {
-                    return 144;
-                }
-                else if (maxHZ >= 119)
-                {
-                    return 120;
-                }
-                else if (maxHZ >= 74)
-                {
-                    return 75;
-                }
-                else
-                {
-                    return 60;
-                }
-            }
-        }
+        //        foreach (var item in results)
+        //        {
+        //            if ((UInt32)item["RefreshRate"] > maxHZ)
+        //                maxHZ = (UInt32)item["RefreshRate"];
+        //        }
+        //        if (maxHZ >= 143)
+        //        {
+        //            return 144;
+        //        }
+        //        else if (maxHZ >= 119)
+        //        {
+        //            return 120;
+        //        }
+        //        else if (maxHZ >= 74)
+        //        {
+        //            return 75;
+        //        }
+        //        else
+        //        {
+        //            return 60;
+        //        }
+        //    }
+        //}
 
     }
 }
