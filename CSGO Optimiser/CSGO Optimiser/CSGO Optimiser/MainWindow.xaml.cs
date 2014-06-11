@@ -1,4 +1,5 @@
-﻿using Controller;
+﻿using Common;
+using Controller;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -25,11 +26,14 @@ namespace CSGO_Optimiser
     public partial class MainWindow : Window
     {
         private OptimiseController optimiseController;
+        private PlayerController playerController;
 
         public MainWindow()
         {
             InitializeComponent();
             optimiseController = new OptimiseController();
+            playerController = new PlayerController();
+            playersComboBox.ItemsSource = playerController.GetPlayers();
         }
 
         private void browseButton_Click(object sender, RoutedEventArgs e)
@@ -53,6 +57,12 @@ namespace CSGO_Optimiser
             int changes = 0;
             try
             {
+                if (playersComboBox.SelectedItem != null)
+                {
+                    validateSteamPath();
+                    IPlayer player = (IPlayer) playersComboBox.SelectedItem;
+                    logTextBox.Text += playerController.CopyPlayerConfig(player);
+                }
                 if (launchOptionsCheckBox.IsChecked == true)
                 {
                     validateSteamPath();

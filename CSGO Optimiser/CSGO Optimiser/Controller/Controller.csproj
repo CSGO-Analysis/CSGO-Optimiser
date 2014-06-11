@@ -43,9 +43,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OptimiseController.cs" />
+    <Compile Include="PlayerController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{fb6b6c9c-24ac-4450-9388-da02d25ac119}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{ead86414-1f7d-437e-9fb5-11f5253f02ca}</Project>
       <Name>Model</Name>

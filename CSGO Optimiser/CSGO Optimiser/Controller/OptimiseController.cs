@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Common;
+using Microsoft.Win32;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -13,27 +14,20 @@ namespace Controller
 {
     public class OptimiseController
     {
-        private OptimisePaths optimisePaths;
-
-        public OptimiseController()
-        {
-            optimisePaths = new OptimisePaths();
-        }
-
         public void SetSteamPath(string selectedPath)
         {
-            optimisePaths.Steam = selectedPath;
+            SteamPaths.Steam = selectedPath;
         }
 
         public string GetSteamPath()
         {
-            return optimisePaths.Steam;
+            return SteamPaths.Steam;
         }
 
-        public string GetCfgPath()
-        {
-            return optimisePaths.Cfg;
-        }
+        //public string GetCfgPath()
+        //{
+        //    return SteamPaths.CfgFolder;
+        //}
 
         public string SetNvidiaSettings()
         {
@@ -45,14 +39,14 @@ namespace Controller
         
         public string CopyAutoexec()
         {
-            string autoexec = optimisePaths.Cfg + "autoexec.cfg";
+            string autoexec = SteamPaths.Autoexec;
             File.Copy(@"Resources\autoexec.cfg", autoexec, true);
             return autoexec + " succesfully created. \n";
         }
 
         public string CopyVideoSettings()
         {
-            string video = optimisePaths.Cfg + "video.txt";
+            string video = SteamPaths.Video;
             File.Copy(@"Resources\video.txt", video, true);
             return video + " succesfully created. \n";
         }
@@ -61,7 +55,7 @@ namespace Controller
         {
             uint maxRefreshRate = findMaxRefreshRate();
 
-            string[] dirs = Directory.GetDirectories(optimisePaths.Steam + @"\userdata\");
+            string[] dirs = Directory.GetDirectories(SteamPaths.Steam + @"\userdata\");
             foreach (string dir in dirs)
             {
                 if (File.Exists(dir + @"\config\localconfig.vdf"))
@@ -162,14 +156,14 @@ namespace Controller
 
         public string DisableVisualThemes()
         {
-            if (optimisePaths.CsgoExe != null)
+            if (SteamPaths.CsgoExe != null)
             {
                 var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", true);
                 if (key == null)
                 {
                     throw new InvalidOperationException(@"Cannot open registry key HKCU\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers.");
                 }
-                key.SetValue(optimisePaths.CsgoExe, "DISABLETHEMES");
+                key.SetValue(SteamPaths.CsgoExe, "DISABLETHEMES");
 
                 return "Visual themes succesfully disabled in " + key.Name + ". \n";
             }
@@ -181,14 +175,14 @@ namespace Controller
 
         public string DisableIngameAcc()
         {
-            string ingameAcc = optimisePaths.Cfg + "IngameMouseAccelOff.cfg";
+            string ingameAcc = SteamPaths.CfgFolder + "IngameMouseAccelOff.cfg";
             File.Copy(@"Resources\IngameMouseAccelOff.cfg", ingameAcc, true);
-            List<string> autoexec = File.ReadAllLines(optimisePaths.Cfg + "autoexec.cfg").ToList();
+            List<string> autoexec = File.ReadAllLines(SteamPaths.Autoexec).ToList();
             if (!autoexec.Contains("exec IngameMouseAccelOff.cfg"))
             {
                 autoexec.Add("exec IngameMouseAccelOff.cfg");
             }
-            File.WriteAllLines(optimisePaths.Cfg + "autoexec.cfg", autoexec);
+            File.WriteAllLines(SteamPaths.Autoexec, autoexec);
 
             return "Ingame Mouse Commands succesfully applied. \n";
         }
