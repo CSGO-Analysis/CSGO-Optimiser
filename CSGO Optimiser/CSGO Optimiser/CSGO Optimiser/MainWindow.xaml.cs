@@ -142,7 +142,7 @@ namespace CSGO_Optimiser
             {
                 descriptionTextBox.Text = @"NVIDIA CSGO Profile:
 
-Imports an NVIDIA 3D profile that changes the driver settings for csgo.exe only.
+Uses nvidiaInspector to import an NVIDIA 3D profile that changes the driver settings for csgo.exe only.
 
 Optimised for high performance in CSGO.";
             }

@@ -24,7 +24,7 @@
             <Label Content="Copy settings from:" HorizontalAlignment="Left"/>
             <ComboBox x:Name="playersComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" DisplayMemberPath="Name"/>
             <Label Content="Select the settings you want to optimise: (Mouseover for further description)"/>
-            <CheckBox x:Name="nvidiaCheckBox" Content="Nvidia CSGO Profile (user must manually import \Resources\NVIDIA Profile.txt)" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
+            <CheckBox x:Name="nvidiaCheckBox" Content="Nvidia CSGO Profile" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
             <CheckBox x:Name="autoexecCheckBox" Content="Autoexec.cfg" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
             <CheckBox x:Name="ingameVideoCheckBox" Content="Advanced Ingame Video Settings" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
             <CheckBox x:Name="launchOptionsCheckBox" Content="Launch Options" Margin="0,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
@@ -59,7 +59,7 @@
             <GridSplitter Grid.Row="1"
               HorizontalAlignment="Stretch"
               VerticalAlignment="Center"
-              Height="3" 
+              Height="4" 
               Background="#FFE4E4E4" Margin="0,8,0,0"
         />
             <DockPanel Grid.Row="2">

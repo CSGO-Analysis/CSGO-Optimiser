@@ -24,17 +24,19 @@ namespace Controller
             return SteamPaths.Steam;
         }
 
-        //public string GetCfgPath()
-        //{
-        //    return SteamPaths.CfgFolder;
-        //}
-
         public string SetNvidiaSettings()
         {
-            var process = Process.Start(@"Resources\Geforce 3D Profile Manager.exe");
-            process.WaitForExit();
-            TimeSpan time = process.ExitTime - process.StartTime;
-            return "Geforce 3D Profile Manager exited after " + time.Seconds.ToString() + " seconds. \n";
+            Process p = new Process();
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.RedirectStandardError = true;
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.FileName = @"Resources\nvidiaInspector.exe";
+            p.StartInfo.Arguments = @"Resources\csgoProfileh.nip";
+            p.Start();
+            string stdoutx = p.StandardOutput.ReadToEnd();
+            string stderrx = p.StandardError.ReadToEnd();
+            p.WaitForExit();
+            return "nvidiaInspector finished importing profile (hopefully succesfully?). \n";
         }
         
         public string CopyAutoexec()
