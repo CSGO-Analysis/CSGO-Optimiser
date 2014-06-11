@@ -108,7 +108,7 @@ namespace Controller
                             int k = i + 2;
                             localconfig.Insert(k, "\t\t\t\t\t\t\"LaunchOptions\"\t\"" + player.LaunchOptions);
                             File.WriteAllLines(dir + @"\config\localconfig.vdf", localconfig);
-                            return string.Format(player.LaunchOptions + " succesfully added to launch options. \n");
+                            return string.Format("Launch options:" + player.LaunchOptions + " succesfully added. \n");
                         }
                     }
                 }
