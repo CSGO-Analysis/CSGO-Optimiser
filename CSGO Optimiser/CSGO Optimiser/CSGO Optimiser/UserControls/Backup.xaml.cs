@@ -25,10 +25,10 @@ namespace CSGO_Optimiser.UserControls
     {
         private BackupController backupController;
 
-        public Backup()
+        public Backup(BackupController bkController)
         {
             InitializeComponent();
-            backupController = new BackupController();
+            backupController = bkController;
             updateGUI();
         }
 

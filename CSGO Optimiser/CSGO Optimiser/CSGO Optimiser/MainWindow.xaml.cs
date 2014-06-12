@@ -28,12 +28,14 @@ namespace CSGO_Optimiser
     {
         private Optimisation optimisation;
         private Backup backup;
+        private BackupController backupController;
 
         public MainWindow()
         {
             InitializeComponent();
-            optimisation = new Optimisation();
-            backup = new Backup();
+            backupController = new BackupController();
+            optimisation = new Optimisation(backupController);
+            backup = new Backup(backupController);
             optimisationUserControl.Content = optimisation;
             backupUserControl.Content = backup;
         }

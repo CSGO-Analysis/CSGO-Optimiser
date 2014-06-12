@@ -25,12 +25,14 @@ namespace CSGO_Optimiser.UserControls
     {
         private OptimiseController optimiseController;
         private ProfileController profileController;
+        private BackupController backupController;
 
-        public Optimisation()
+        public Optimisation(BackupController bkController)
         {
             InitializeComponent();
             optimiseController = new OptimiseController();
             profileController = new ProfileController();
+            backupController = bkController;
             profilesComboBox.ItemsSource = profileController.GetProfiles();
             foreach (IProfile p in profileController.GetProfiles())
             {
@@ -51,6 +53,14 @@ namespace CSGO_Optimiser.UserControls
                 // Profile Settings:
                 if (profilesComboBox.SelectedItem != null)
                 {
+                    if (backupController.GetBackups().Count <= 0)
+                    {
+                        if (MessageBox.Show("You do not have any saved backups. Do you want to save your current settings as backup?",
+                                "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        {
+                            logTextBox.Text += backupController.SaveBackup();
+                        }
+                    }
                     IProfile profile = (IProfile) profilesComboBox.SelectedItem;
                     if (autoexecCheckBox.IsChecked == true) // Must be first because other methods write in this file.
                     {
