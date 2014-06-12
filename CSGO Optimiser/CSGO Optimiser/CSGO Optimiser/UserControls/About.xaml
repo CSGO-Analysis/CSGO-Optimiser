@@ -12,17 +12,18 @@
             Select your favorite player's profile and copy their settings, or create your own profile. All with lots of backup functionality.
         <LineBreak/><LineBreak/>
             Developed by:
-            <LineBreak/>
+         <LineBreak/>
             Peter "rave" Ipsen
-            <LineBreak/>
+         <LineBreak/>
             Michael "bone" Hansen
-            <LineBreak/>
-            <LineBreak/>
+         <LineBreak/><LineBreak/>
             Contact us @ peter@akim.dk
-            <LineBreak/>
-            <Hyperlink NavigateUri="https://github.com/rfirevtre/CSGO-Optimiser" RequestNavigate="Hyperlink_RequestNavigate">
+         <LineBreak/>
+         <Hyperlink NavigateUri="https://github.com/rfirevtre/CSGO-Optimiser" RequestNavigate="Hyperlink_RequestNavigate">
             https://github.com/rfirevtre/CSGO-Optimiser
-            </Hyperlink>
+         </Hyperlink>
+         <LineBreak/><LineBreak/>
+            CSGO Optimiser v. 0.1
         </TextBlock>
     </Grid>
 </UserControl>

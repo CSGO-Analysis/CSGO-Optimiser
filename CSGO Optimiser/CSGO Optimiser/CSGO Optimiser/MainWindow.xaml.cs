@@ -41,6 +41,7 @@ namespace CSGO_Optimiser
             optimisationUserControl.Content = optimisation;
             backupUserControl.Content = backup;
             aboutUserControl.Content = about;
+            this.Title = "CSGO Optimiser";
         }
 
         private void mainTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
