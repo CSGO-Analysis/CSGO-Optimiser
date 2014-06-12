@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Player : IPlayer
+    public class Profile : IProfile
     {
         public string Name { get; set; }
         public string Config { get; set; }
@@ -22,13 +22,7 @@ namespace Model
         public bool DisabledVisualThemes { get; set; }
         public string FolderPath { get; set; }
 
-        public Player(string name)
-        {
-            Name = name;
-        }
-
-
-        public Player(string name, string config, string crosshair, string autoexec, string videoSettings,
+        public Profile(string name, string config, string crosshair, string autoexec, string videoSettings,
             string launchOptions, string nvidiaProfile, bool disabledMouseAcc, bool disabledIngameMouseAcc, bool disabledCapsLock, bool disabledVisualThemes,
             string folderPath)
         {
@@ -44,6 +38,10 @@ namespace Model
             DisabledCapsLock = disabledCapsLock;
             DisabledVisualThemes = disabledVisualThemes;
             FolderPath = folderPath;
+        }
+
+        public Profile()
+        {
         }
     }
 }

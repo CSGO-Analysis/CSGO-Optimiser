@@ -14,73 +14,63 @@ namespace Controller
 {
     public class OptimiseController
     {
-        public void SetSteamPath(string selectedPath)
+        public string CopyAutoexec(IProfile profile)
         {
-            SteamPaths.Steam = selectedPath;
+            File.Copy(profile.FolderPath + profile.Autoexec, SteamPaths.Autoexec, true);
+            return profile.Autoexec + " succesfully created. \n";
         }
 
-        public string GetSteamPath()
+        public string CopyProfileConfig(IProfile profile)
         {
-            return SteamPaths.Steam;
-        }
-
-        public string CopyAutoexec(IPlayer player)
-        {
-            File.Copy(player.FolderPath + player.Autoexec, SteamPaths.Autoexec, true);
-            return player.Autoexec + " succesfully created. \n";
-        }
-
-        public string CopyPlayerConfig(IPlayer player)
-        {
-            string destCfg = SteamPaths.CfgFolder + player.Config;
-            File.Copy(player.FolderPath + player.Config, destCfg, true);
+            string destCfg = SteamPaths.CfgFolder + profile.Config;
+            File.Copy(profile.FolderPath + profile.Config, destCfg, true);
 
             List<string> autoexec;
             if (File.Exists(SteamPaths.Autoexec))
             {
                 autoexec = File.ReadAllLines(SteamPaths.Autoexec).ToList();
-                if (!autoexec.Contains("exec " + player.Config))
+                if (!autoexec.Contains("exec " + profile.Config))
                 {
-                    autoexec.Add("exec " + player.Config);
+                    autoexec.Add("exec " + profile.Config);
                 }
             }
             else
             {
-                autoexec = new List<string>() { "exec " + player.Config };
+                autoexec = new List<string>() { "exec " + profile.Config };
             }
             File.WriteAllLines(SteamPaths.Autoexec, autoexec);
-            return player.Config + " succesfully created. \n";
+            return profile.Config + " succesfully created. \n";
         }
 
-        public string CopyPlayerCrosshair(IPlayer player)
+        public string CopyProfileCrosshair(IProfile profile)
         {
-            string destCfg = SteamPaths.CfgFolder + player.Crosshair;
-            File.Copy(player.FolderPath + player.Crosshair, destCfg, true);
+            string destCfg = SteamPaths.CfgFolder + profile.Crosshair;
+            File.Copy(profile.FolderPath + profile.Crosshair, destCfg, true);
 
             List<string> autoexec;
             if (File.Exists(SteamPaths.Autoexec))
             {
                 autoexec = File.ReadAllLines(SteamPaths.Autoexec).ToList();
-                if (!autoexec.Contains("exec " + player.Crosshair))
+                if (!autoexec.Contains("exec " + profile.Crosshair))
                 {
-                    autoexec.Add("exec " + player.Crosshair);
+                    autoexec.Add("exec " + profile.Crosshair);
                 }
             }
             else
             {
-                autoexec = new List<string>() { "exec " + player.Crosshair };
+                autoexec = new List<string>() { "exec " + profile.Crosshair };
             }
             File.WriteAllLines(SteamPaths.Autoexec, autoexec);
-            return player.Crosshair + " succesfully created. \n";
+            return profile.Crosshair + " succesfully created. \n";
         }
 
-        public string CopyVideoConfig(IPlayer player)
+        public string CopyVideoConfig(IProfile profile)
         {
-            File.Copy(player.FolderPath + player.VideoSettings, SteamPaths.Video, true);
-            return player.VideoSettings + " succesfully created. \n";
+            File.Copy(profile.FolderPath + profile.VideoSettings, SteamPaths.Video, true);
+            return profile.VideoSettings + " succesfully created. \n";
         }
 
-        public string SetLaunchOptions(IPlayer player)
+        public string SetLaunchOptions(IProfile profile)
         {
             //uint maxRefreshRate = findMaxRefreshRate();
 
@@ -106,9 +96,9 @@ namespace Controller
                                 }
                             }
                             int k = i + 2;
-                            localconfig.Insert(k, "\t\t\t\t\t\t\"LaunchOptions\"\t\"" + player.LaunchOptions);
+                            localconfig.Insert(k, "\t\t\t\t\t\t\"LaunchOptions\"\t\"" + profile.LaunchOptions);
                             File.WriteAllLines(dir + @"\config\localconfig.vdf", localconfig);
-                            return string.Format("Launch options:" + player.LaunchOptions + " succesfully added. \n");
+                            return string.Format("Launch options:" + profile.LaunchOptions + " succesfully added. \n");
                         }
                     }
                 }
@@ -116,19 +106,19 @@ namespace Controller
             return null;
         }
 
-        public string SetNvidiaSettings(IPlayer player)
+        public string SetNvidiaSettings(IProfile profile)
         {
             Process p = new Process();
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardError = true;
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.FileName = @"Resources\nvidiaInspector.exe";
-            p.StartInfo.Arguments = player.FolderPath + player.NvidiaProfile;
+            p.StartInfo.Arguments = profile.FolderPath + profile.NvidiaProfile;
             p.Start();
             string stdoutx = p.StandardOutput.ReadToEnd();
             string stderrx = p.StandardError.ReadToEnd();
             p.WaitForExit();
-            return "nvidiaInspector finished importing " + player.NvidiaProfile + ". \n";
+            return "nvidiaInspector finished importing " + profile.NvidiaProfile + ". \n";
         }        
         
         public string DisableMouseAcc()
@@ -208,7 +198,7 @@ namespace Controller
             {
                 throw new InvalidOperationException(@"Cannot open registry key HKLM\SYSTEM\CurrentControlSet\Control\Keyboard Layout.");
             }
-            key.SetValue("Scancode Map", new byte[] {00,00,00,00,00,00,00,00,02,00,00,00,0x64,00,0x3a,00,00,00,00,00}, RegistryValueKind.Binary);
+            key.SetValue("Scancode Map", new byte[] {00,00,00,00,00,00,00,00,0x02,00,00,00,0x64,00,0x3a,00,00,00,00,00}, RegistryValueKind.Binary);
             return "CapsLock succesfully disabled. \n";
         }
 

@@ -1,0 +1,12 @@
+Name = pasha
+Config = config.cfg
+Crosshair = pashacross.cfg
+Autoexec = autoexec.cfg
+VideoSettings = video.txt
+LaunchOptions = -console -novid +exec autoexec.cfg -high
+
+NvidiaProfile = default.nip
+DisabledMouseAcc = True
+DisabledIngameMouseAcc = True
+DisabledCapsLock = False
+DisabledVisualThemes = True

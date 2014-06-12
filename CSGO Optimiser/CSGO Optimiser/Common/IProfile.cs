@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common
 {
-    public interface IPlayer
+    public interface IProfile
     {
         string Name { get; set; }
         string Config { get; set; }

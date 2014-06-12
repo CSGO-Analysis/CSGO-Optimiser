@@ -1,7 +1,9 @@
 ﻿using Common;
+using Microsoft.Win32;
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,26 +11,26 @@ using System.Threading.Tasks;
 
 namespace Controller
 {
-    public class PlayerController
+    public class ProfileController
     {
-        private List<IPlayer> players;
+        private List<IProfile> profiles;
 
-        public List<IPlayer> GetPlayers()
+        public List<IProfile> GetProfiles()
         {
-            if (players == null)
+            if (profiles == null)
             {
-                players = new List<IPlayer>();
-                createPlayers();
+                profiles = new List<IProfile>();
+                createProfiles();
             }
-            return players;
+            return profiles;
         }
 
-        private void createPlayers()
+        private void createProfiles()
         {
-            string[] playerDirs = Directory.GetDirectories(@"Resources\Players\");
-            foreach (string playerDir in playerDirs)
+            string[] profileDirs = Directory.GetDirectories(@"Resources\Profiles\");
+            foreach (string profileDir in profileDirs)
             {
-                string settingsPath = playerDir + "\\settings.txt";
+                string settingsPath = profileDir + "\\settings.txt";
                 if (File.Exists(settingsPath))
                 {
                     string name = "", config = "", crosshair = "", autoexec = "", videoSettings = "", launchOptions = "", nvidiaProfile = "";
@@ -86,9 +88,9 @@ namespace Controller
                             bool.TryParse(visualThemesString, out disabledVisualThemes);
                         }
                     }
-                    Player player = new Player(name, config, crosshair, autoexec, videoSettings, launchOptions, nvidiaProfile,
-                        disabledMouseAcc, disabledIngameMouseAcc, disabledCapsLock, disabledVisualThemes, playerDir + "\\");
-                    players.Add(player);
+                    Profile profile = new Profile(name, config, crosshair, autoexec, videoSettings, launchOptions, nvidiaProfile,
+                        disabledMouseAcc, disabledIngameMouseAcc, disabledCapsLock, disabledVisualThemes, profileDir + "\\");
+                    profiles.Add(profile);
                 }
             }
         }

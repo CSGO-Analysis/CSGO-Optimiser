@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="CSGO_Optimiser.UserControls.Optimisation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="900">
+        <Grid Margin="10,10,1,1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+        <UserControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" x:Name="steamBrowse"/>
+        <StackPanel x:Name="checkBoxStackPanel" Grid.Row="1">
+            <Label Content="Select profile profile:" HorizontalAlignment="Left"/>
+            <ComboBox x:Name="profilesComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" DisplayMemberPath="Name" MouseMove="OnMouseMove" SelectionChanged="profilesComboBox_SelectionChanged" Margin="10,3,0,0"/>
+            <Label Content="Check the settings you want to copy: (Mouseover for further description)" Margin="0,5,0,0"/>
+            <CheckBox x:Name="configCheckBox" Content="Config (not recommended)" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left" IsEnabled="False"/>
+            <CheckBox x:Name="crosshairCheckBox" Content="Crosshair Settings" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left" IsEnabled="False"/>
+            <CheckBox x:Name="autoexecCheckBox" Content="Autoexec" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left" IsEnabled="False"/>
+            <CheckBox x:Name="videoSettingsCheckBox" Content="Advanced Ingame Video Settings" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left" IsEnabled="False"/>
+            <CheckBox x:Name="launchOptionsCheckBox" Content="Launch Options" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left" IsEnabled="False"/>
+            <CheckBox x:Name="nvidiaProfileCheckBox" Content="Nvidia CSGO Profile" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left" IsEnabled="False"/>
+            <Label Content="Global optimisation fixes:" Margin="0,5,0,0"/>
+            <CheckBox x:Name="mouseAccCheckBox" Content="Disable Mouse Acceleration" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
+            <CheckBox x:Name="ingameMouseAccCheckBox" Content="Disable Ingame Mouse Acceleration" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
+            <CheckBox x:Name="capsLockCheckBox" Content="Disable Caps Lock for use with VoIP" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
+            <CheckBox x:Name="visualThemesCheckBox" Content="Deactivate visual themes on csgo.exe" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
+            <Label Content="Optional but recommended at least once a month:" Margin="0,5,0,0"/>
+            <CheckBox Content="Clean registry (CCleaner silent run with presets)" Margin="10,3,0,0" IsEnabled="False" HorizontalAlignment="Left"/>
+            <CheckBox Content="Run Spybot Search and Destroy" Margin="10,3,0,0" IsEnabled="False" HorizontalAlignment="Left"/>
+            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                <Button x:Name="selectAllButton" Content="Select All" Width="80" Click="selectAllButton_Click" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+                <Button x:Name="deselectAllButton" Content="Deselect All" Width="80" Click="deselectAllButton_Click" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+            </StackPanel>
+            <Button x:Name="optimiseButton" Content="Optimise" Width="230" Height="35" Click="optimiseButton_Click" Margin="0,20,0,0"/>
+        </StackPanel>
+        <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Margin="20,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="260"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <DockPanel Grid.Row="0">
+                    <Label Content="Description:" DockPanel.Dock="Top"/>
+                    <TextBox x:Name="descriptionTextBox" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top"/>
+                </DockPanel>
+                <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="4" Background="#FFE4E4E4" Margin="0,8,0,0"/>
+                <DockPanel Grid.Row="2">
+                    <Label Content="Log:" DockPanel.Dock="Top"/>
+                    <TextBox x:Name="logTextBox" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top"/>
+                </DockPanel>
+            </Grid>
+        </Grid>
+</UserControl>
