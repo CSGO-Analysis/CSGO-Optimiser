@@ -61,7 +61,7 @@
                         VerticalAlignment="Top" Margin="10,0,0,0" Click="deleteButton_Click" ToolTip="Delete the selected backup"/>
             </StackPanel>
         </Grid>
-        <GridSplitter Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="4" Background="#FFE4E4E4" Margin="0,8,0,0"/>
+        <GridSplitter Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="4" Background="#FFB4B4B4" Margin="0,8,0,0"/>
         <DockPanel Grid.Row="3" Grid.Column="1" Margin="0,5,0,0">
             <Label Content="Log:" DockPanel.Dock="Top"/>
             <TextBox x:Name="logTextBox" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top"/>
