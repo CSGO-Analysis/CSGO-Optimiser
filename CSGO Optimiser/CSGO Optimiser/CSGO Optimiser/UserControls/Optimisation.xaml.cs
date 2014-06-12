@@ -46,7 +46,7 @@ namespace CSGO_Optimiser.UserControls
         {
             try
             {
-                validateSteamPath();
+                SteamController.ValidateSteamPath();
                 int changes = 0;
                 // Profile Settings:
                 if (profilesComboBox.SelectedItem != null)
@@ -129,14 +129,6 @@ namespace CSGO_Optimiser.UserControls
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void validateSteamPath()
-        {
-            if (SteamController.GetSteamPath() == null)
-            {
-                throw new Exception("Please locate your Steam folder.");
             }
         }
 

@@ -22,7 +22,7 @@ namespace Model
 
         public string[] ToStringArray()
         {
-            return new string[] { "Id = " + Id, "Timestamp = " + Timestamp, "Localconfigs = " };
+            return new string[] { "Id = " + Id, "Timestamp = " + Timestamp };
         }
     }
 }

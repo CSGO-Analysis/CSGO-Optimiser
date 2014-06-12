@@ -35,7 +35,7 @@ namespace CSGO_Optimiser.UserControls
         {
             try
             {
-                backupController.SaveBackup();
+                logTextBox.Text += backupController.SaveBackup();
                 updateGUI();
             }
             catch (Exception ex)
@@ -52,12 +52,19 @@ namespace CSGO_Optimiser.UserControls
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to delete the selected backup(s)?",
+            if (backupsListView.SelectedItem != null && MessageBox.Show("Are you sure you want to delete the selected backup(s)?",
                 "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 foreach (IBackup selectedBackup in backupsListView.SelectedItems)
                 {
-                    backupController.DeleteBackup(selectedBackup);
+                    try
+                    {
+                        logTextBox.Text += backupController.DeleteBackup(selectedBackup);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
                 updateGUI();
             }
@@ -75,6 +82,23 @@ namespace CSGO_Optimiser.UserControls
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void restoreButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (backupsListView.SelectedItem != null && MessageBox.Show("Are you sure you want to restore your settings to the selected backup?",
+                "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    IBackup selectedBackup = (IBackup)backupsListView.SelectedItem;
+                    logTextBox.Text += backupController.RestoreBackup(selectedBackup);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
     }

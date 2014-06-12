@@ -24,13 +24,10 @@ namespace Controller
             return backups;
         }
 
-        public void SaveBackup()
+        public string SaveBackup()
         {
             string errors = "";
-            if (SteamController.GetSteamPath() == null)
-            {
-                throw new Exception("Please locate your steam folder.");
-            }
+            SteamController.ValidateSteamPath();
             Backup backup = new Backup(Guid.NewGuid(), DateTime.Now);
 
             if (!Directory.Exists("Backups"))
@@ -77,12 +74,20 @@ namespace Controller
 
             File.WriteAllLines(folder + "\\backup.txt", backup.ToStringArray());
             backups.Add(backup);
+            return errors + "Backup ("+backup.Id+") succesfully saved. \n";
         }
 
-        public void DeleteBackup(IBackup backup)
+        public string DeleteBackup(IBackup backup)
         {
             Directory.Delete("Backups\\" + backup.Id, true);
             backups.Remove(backup);
+            return "Backup (" + backup.Id + ") succesfully deleted. \n";
+        }
+
+        public string RestoreBackup(IBackup backup)
+        {
+            SteamController.ValidateSteamPath();
+            throw new NotImplementedException();
         }
 
         private void createBackups()
@@ -112,10 +117,6 @@ namespace Controller
                             DateTime timestamp;
                             DateTime.TryParse(line.Split('=').Last(), out timestamp);
                             backup.Timestamp = timestamp;
-                        }
-                        if (line.Contains("LaunchOptions = "))
-                        {
-                            backup.LaunchOptions = line.Split('=').Last();
                         }
                     }
                     backups.Add(backup);

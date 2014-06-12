@@ -10,6 +10,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -22,7 +23,7 @@
             </StackPanel>
             <Label x:Name="pathLabel" Content="" DockPanel.Dock="Bottom" Foreground="#FF1600FF"/>
         </DockPanel>
-        <StackPanel Grid.Row="1" Grid.Column="0" Margin="10,10,0,0">
+        <StackPanel Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Margin="10,10,0,0">
             <TextBlock TextWrapping="Wrap" Width="300" Margin="0,0,10,0">
                 This is where all backups of your previous settings are stored.
                 It is highly recommended to have a backup of your original settings as to easily revert any changes made.
@@ -35,20 +36,31 @@
             </TextBlock>
             <Button x:Name="saveButton" Content="Save backup" Width="100" HorizontalAlignment="Center" Height="30" DockPanel.Dock="Top" Margin="0,30,0,0" Click="saveButton_Click"/>
         </StackPanel>
-        <DockPanel Grid.Row="1" Grid.Column="1">
-            <Label Content="Saved backups:" HorizontalAlignment="Left" VerticalAlignment="Top" DockPanel.Dock="Top"/>
-            <ListView x:Name="backupsListView" DockPanel.Dock="Top">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" Width="250"/>
-                        <GridViewColumn Header="Timestamp" DisplayMemberBinding="{Binding Timestamp, StringFormat=\{0:dd-MM-yyyy HH:mm\}}" Width="200"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <DockPanel Grid.Row="0">
+                <Label Content="Saved backups:" HorizontalAlignment="Left" VerticalAlignment="Top" DockPanel.Dock="Top"/>
+                <ListView x:Name="backupsListView" DockPanel.Dock="Top">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" Width="250"/>
+                            <GridViewColumn Header="Timestamp" DisplayMemberBinding="{Binding Timestamp, StringFormat=\{0:dd-MM-yyyy HH:mm\}}" Width="200"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </DockPanel>
+            <StackPanel Grid.Row="1" Margin="0,5,0,0" Orientation="Horizontal">
+                <Button x:Name="restoreButton" Content="Restore backup" Width="100" HorizontalAlignment="Left" DockPanel.Dock="Top" VerticalAlignment="Top" Click="restoreButton_Click"/>
+                <Button x:Name="deleteButton" Content="Delete backup" Width="100" HorizontalAlignment="Left" DockPanel.Dock="Top" VerticalAlignment="Top" Margin="10,0,0,0" Click="deleteButton_Click"/>
+            </StackPanel>
+        </Grid>
+        <GridSplitter Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="4" Background="#FFE4E4E4" Margin="0,8,0,0"/>
+        <DockPanel Grid.Row="3" Grid.Column="1" Margin="0,5,0,0">
+            <Label Content="Log:" DockPanel.Dock="Top"/>
+            <TextBox x:Name="logTextBox" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top"/>
         </DockPanel>
-        <StackPanel Grid.Row="2" Grid.Column="1" Margin="0,5,0,0" Orientation="Horizontal">
-            <Button x:Name="restoreButton" Content="Restore backup" Width="100" HorizontalAlignment="Left" DockPanel.Dock="Top" VerticalAlignment="Top"/>
-            <Button x:Name="deleteButton" Content="Delete backup" Width="100" HorizontalAlignment="Left" DockPanel.Dock="Top" VerticalAlignment="Top" Margin="10,0,0,0" Click="deleteButton_Click"/>
-        </StackPanel>
     </Grid>
 </UserControl>

@@ -217,7 +217,7 @@ namespace Controller
             }
             else
             {
-                throw new Exception("CSGO folder was not found.");
+                throw new Exception("CSGO folder was not found. Disable Visual Themes unsuccessful.");
             }
         }
 

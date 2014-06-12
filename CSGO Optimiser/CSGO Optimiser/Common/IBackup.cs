@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace Common
 {
-    public interface IBackup
+    public interface IBackup : IProfile
     {
         Guid Id { get; set; }
         DateTime Timestamp { get; set; }
-        //string CapsLockReg { get; set; }
-        //string DefaultMouseReg { get; set; }
-        //string MouseKeyReg { get; set; }
-        //string VisualThemes { get; set; }
+        List<string> Localconfigs { get; set; }
     }
 }

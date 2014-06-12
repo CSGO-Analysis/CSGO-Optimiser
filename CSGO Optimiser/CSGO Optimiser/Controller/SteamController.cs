@@ -18,5 +18,13 @@ namespace Controller
         {
             return SteamPaths.Steam;
         }
+
+        public static void ValidateSteamPath()
+        {
+            if (SteamPaths.Steam == null)
+            {
+                throw new Exception("Please locate your Steam folder.");
+            }
+        }
     }
 }
