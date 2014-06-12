@@ -1,11 +1,11 @@
-Name = neo
+Name = taz
 Config = config.cfg
-Crosshair = neocross.cfg
+Crosshair = tazcross.cfg
 Autoexec = autoexec.cfg
 VideoSettings = video.txt
-LaunchOptions = -console -novid -processheap +exec autoexec.cfg
+LaunchOptions = -console +exec autoexec.cfg -high -noforcemparms -noforcemaccel -noforcemspd -processheap
 
-NvidiaProfile = neo.nip
+NvidiaProfile = default.nip
 DisabledMouseAcc = True
 DisabledIngameMouseAcc = True
 DisabledCapsLock = False

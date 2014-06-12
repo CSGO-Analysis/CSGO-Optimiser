@@ -1,9 +1,9 @@
-Name = pasha
+Name = byali
 Config = config.cfg
-Crosshair = pashacross.cfg
+Crosshair = byalicross.cfg
 Autoexec = autoexec.cfg
 VideoSettings = video.txt
-LaunchOptions = -console -novid +exec autoexec.cfg -high -noforcemparms -noforcemaccel
+LaunchOptions = -console -novid +exec autoexec.cfg -high -processheap -noforcemaccel -noforcemparms -noforcemspd
 
 NvidiaProfile = default.nip
 DisabledMouseAcc = True

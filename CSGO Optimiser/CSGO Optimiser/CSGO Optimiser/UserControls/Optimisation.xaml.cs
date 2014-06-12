@@ -34,7 +34,7 @@ namespace CSGO_Optimiser.UserControls
             profilesComboBox.ItemsSource = profileController.GetProfiles();
             foreach (IProfile p in profileController.GetProfiles())
             {
-                if (p.Name == "Default")
+                if (p.Name == "Recommended")
                 {
                     profilesComboBox.SelectedItem = p;
                     break;
@@ -204,9 +204,9 @@ namespace CSGO_Optimiser.UserControls
         {
             if (sender.Equals(profilesComboBox))
             {
-                descriptionTextBox.Text = @"Select profile profile:
+                descriptionTextBox.Text = @"Select player profile:
 
-Select a profile profile to copy settings from. Profile profiles are stored in \Resources\Profiles\.";
+Select a player profile to copy settings from. Player profiles are stored in \Resources\Profiles\.";
             }
             else if (sender.Equals(configCheckBox))
             {

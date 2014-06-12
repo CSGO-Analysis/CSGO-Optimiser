@@ -1,11 +1,11 @@
-Name = neo
+Name = Xizt
 Config = config.cfg
-Crosshair = neocross.cfg
+Crosshair = xiztcross.cfg
 Autoexec = autoexec.cfg
 VideoSettings = video.txt
-LaunchOptions = -console -novid -processheap +exec autoexec.cfg
+LaunchOptions = -console +exec autoexec.cfg -novid -noforcemparms -noforcemaccel -processheap
 
-NvidiaProfile = neo.nip
+NvidiaProfile = default.nip
 DisabledMouseAcc = True
 DisabledIngameMouseAcc = True
 DisabledCapsLock = False

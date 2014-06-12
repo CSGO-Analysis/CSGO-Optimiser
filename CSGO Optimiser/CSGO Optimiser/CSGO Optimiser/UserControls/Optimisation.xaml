@@ -23,7 +23,7 @@
             <Label x:Name="pathLabel" Content="" DockPanel.Dock="Bottom" Foreground="#FF1600FF"/>
         </DockPanel>
         <StackPanel x:Name="checkBoxStackPanel" Grid.Row="1">
-            <Label Content="Select profile profile:" HorizontalAlignment="Left"/>
+            <Label Content="Select player profile:" HorizontalAlignment="Left"/>
             <ComboBox x:Name="profilesComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" DisplayMemberPath="Name" MouseMove="OnMouseMove" SelectionChanged="profilesComboBox_SelectionChanged" Margin="10,3,0,0"/>
             <Label Content="Check the settings you want to copy: (Mouseover for further description)" Margin="0,5,0,0"/>
             <CheckBox x:Name="configCheckBox" Content="Config (not recommended)" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left" IsEnabled="False"/>
