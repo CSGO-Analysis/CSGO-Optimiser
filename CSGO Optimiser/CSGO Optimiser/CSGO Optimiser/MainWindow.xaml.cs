@@ -28,6 +28,7 @@ namespace CSGO_Optimiser
     {
         private Optimisation optimisation;
         private Backup backup;
+        private About about;
         private BackupController backupController;
 
         public MainWindow()
@@ -36,8 +37,10 @@ namespace CSGO_Optimiser
             backupController = new BackupController();
             optimisation = new Optimisation(backupController);
             backup = new Backup(backupController);
+            about = new About();
             optimisationUserControl.Content = optimisation;
             backupUserControl.Content = backup;
+            aboutUserControl.Content = about;
         }
 
         private void mainTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)

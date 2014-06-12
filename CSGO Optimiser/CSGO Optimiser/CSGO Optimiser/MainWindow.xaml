@@ -20,7 +20,7 @@
                 <TabItem.Header>
                     <Label Content="About" />
                 </TabItem.Header>
-                <UserControl x:Name="About"/>
+                <UserControl x:Name="aboutUserControl"/>
             </TabItem>
         </TabControl>
 

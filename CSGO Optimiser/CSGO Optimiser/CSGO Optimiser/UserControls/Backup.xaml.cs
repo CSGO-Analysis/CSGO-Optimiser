@@ -37,6 +37,7 @@ namespace CSGO_Optimiser.UserControls
             try
             {
                 logTextBox.Text += backupController.SaveBackup();
+                logTextBox.ScrollToEnd();
                 updateGUI();
             }
             catch (Exception ex)
@@ -61,6 +62,7 @@ namespace CSGO_Optimiser.UserControls
                     try
                     {
                         logTextBox.Text += backupController.DeleteBackup(selectedBackup);
+                        logTextBox.ScrollToEnd();
                     }
                     catch (Exception ex)
                     {
@@ -101,6 +103,7 @@ namespace CSGO_Optimiser.UserControls
                     }
                     IBackup selectedBackup = (IBackup)backupsListView.SelectedItem;
                     logTextBox.Text += backupController.RestoreBackup(selectedBackup);
+                    logTextBox.ScrollToEnd();
                 }
                 catch (Exception ex)
                 {
