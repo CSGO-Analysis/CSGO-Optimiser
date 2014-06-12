@@ -19,12 +19,13 @@
         <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
                 <Label Content="Please locate your \Steam\ folder:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Button x:Name="browseButton" Content="Browse" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Margin="15,2,0,0" Click="browseButton_Click"/>
+                <Button x:Name="browseButton" Content="Browse" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80"
+                        Margin="15,2,0,0" Click="browseButton_Click" ToolTip="Locate your Steam folder"/>
             </StackPanel>
             <Label x:Name="pathLabel" Content="" DockPanel.Dock="Bottom" Foreground="#FF1600FF"/>
         </DockPanel>
-        <StackPanel Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Margin="10,10,0,0">
-            <TextBlock TextWrapping="Wrap" Width="300" Margin="0,0,10,0">
+        <StackPanel Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Margin="10,10,20,0">
+            <TextBlock TextWrapping="Wrap" Width="300">
                 This is where all backups of your previous settings are stored.
                 It is highly recommended to have a backup of your original settings as to easily revert any changes made.
                 <LineBreak/><LineBreak/>
@@ -34,7 +35,8 @@
                 This will restore your config, autoexec, launch options and affected registry keys.
                 In order to restore your nvidia settings simply go to the Nvidia Control Panel and click Restore Defaults in 3D Settings for csgo.exe.
             </TextBlock>
-            <Button x:Name="saveButton" Content="Save backup" Width="100" HorizontalAlignment="Center" Height="30" DockPanel.Dock="Top" Margin="0,30,0,0" Click="saveButton_Click"/>
+            <Button x:Name="saveButton" Content="Save settings as backup" HorizontalAlignment="Center" Height="35" DockPanel.Dock="Top" Margin="0,30,0,0"
+                    Click="saveButton_Click" Width="230" ToolTip="Save your current settings as a backup"/>
         </StackPanel>
         <Grid Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
@@ -53,8 +55,10 @@
                 </ListView>
             </DockPanel>
             <StackPanel Grid.Row="1" Margin="0,5,0,0" Orientation="Horizontal">
-                <Button x:Name="restoreButton" Content="Restore backup" Width="100" HorizontalAlignment="Left" DockPanel.Dock="Top" VerticalAlignment="Top" Click="restoreButton_Click"/>
-                <Button x:Name="deleteButton" Content="Delete backup" Width="100" HorizontalAlignment="Left" DockPanel.Dock="Top" VerticalAlignment="Top" Margin="10,0,0,0" Click="deleteButton_Click"/>
+                <Button x:Name="restoreButton" Content="Restore backup" Width="100" HorizontalAlignment="Left" DockPanel.Dock="Top"
+                        VerticalAlignment="Top" Click="restoreButton_Click" ToolTip="Restore settings from the selected backup"/>
+                <Button x:Name="deleteButton" Content="Delete backup" Width="100" HorizontalAlignment="Left" DockPanel.Dock="Top"
+                        VerticalAlignment="Top" Margin="10,0,0,0" Click="deleteButton_Click" ToolTip="Delete the selected backup"/>
             </StackPanel>
         </Grid>
         <GridSplitter Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="4" Background="#FFE4E4E4" Margin="0,8,0,0"/>
