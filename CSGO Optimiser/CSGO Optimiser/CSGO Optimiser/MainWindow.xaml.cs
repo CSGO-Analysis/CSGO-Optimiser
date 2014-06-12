@@ -26,13 +26,25 @@ namespace CSGO_Optimiser
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static SteamBrowse steamBrowse;
+        private Optimisation optimisation;
+        private Backup backup;
+
         public MainWindow()
         {
             InitializeComponent();
-            steamBrowse = new SteamBrowse();
-            optimisation.Content = new Optimisation(steamBrowse);
-            backup.Content = new Backup(steamBrowse);
+            optimisation = new Optimisation();
+            backup = new Backup();
+            optimisationUserControl.Content = optimisation;
+            backupUserControl.Content = backup;
+        }
+
+        private void mainTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SteamController.GetSteamPath() != null)
+            {
+                optimisation.pathLabel.Content = SteamController.GetSteamPath();
+                backup.pathLabel.Content = SteamController.GetSteamPath();
+            }
         }
     }
 }

@@ -26,12 +26,11 @@ namespace CSGO_Optimiser.UserControls
         private OptimiseController optimiseController;
         private ProfileController profileController;
 
-        public Optimisation(SteamBrowse sBrowse)
+        public Optimisation()
         {
             InitializeComponent();
             optimiseController = new OptimiseController();
             profileController = new ProfileController();
-            steamBrowse.Content = sBrowse;
             profilesComboBox.ItemsSource = profileController.GetProfiles();
             foreach (IProfile p in profileController.GetProfiles())
             {
@@ -297,6 +296,21 @@ Disables the normal Caps Lock function (Key is remapped to F13) so you can use C
                 descriptionTextBox.Text = @"Deactivate visual themes on csgo.exe:
 
 Deactivates Windows visuals on csgo.exe for a small fps boost.";
+            }
+        }
+
+        private void browseButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var dialog = new System.Windows.Forms.FolderBrowserDialog();
+                dialog.ShowDialog();
+                SteamController.SetSteamPath(dialog.SelectedPath);
+                pathLabel.Content = SteamController.GetSteamPath();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

@@ -3,18 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="620" Width="900" MinHeight="620" MinWidth="900">
     <Grid>
-        <TabControl Margin="5">
+        <TabControl x:Name="mainTabControl" Margin="5" SelectionChanged="mainTabControl_SelectionChanged">
             <TabItem>
                 <TabItem.Header>
                     <Label Content="Optimisation" />
                 </TabItem.Header>
-                <UserControl x:Name="optimisation"/>
+                <UserControl x:Name="optimisationUserControl"/>
             </TabItem>
             <TabItem>
                 <TabItem.Header>
                     <Label Content="Backup" />
                 </TabItem.Header>
-                <UserControl x:Name="backup"/>
+                <UserControl x:Name="backupUserControl"/>
             </TabItem>
             <TabItem>
                 <TabItem.Header>

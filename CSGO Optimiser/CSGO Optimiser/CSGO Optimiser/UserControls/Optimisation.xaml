@@ -15,7 +15,13 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-        <UserControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" x:Name="steamBrowse"/>
+        <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                <Label Content="Please locate your \Steam\ folder:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Button x:Name="browseButton" Content="Browse" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Margin="15,2,0,0" Click="browseButton_Click"/>
+            </StackPanel>
+            <Label x:Name="pathLabel" Content="" DockPanel.Dock="Bottom" Foreground="#FF1600FF"/>
+        </DockPanel>
         <StackPanel x:Name="checkBoxStackPanel" Grid.Row="1">
             <Label Content="Select profile profile:" HorizontalAlignment="Left"/>
             <ComboBox x:Name="profilesComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" DisplayMemberPath="Name" MouseMove="OnMouseMove" SelectionChanged="profilesComboBox_SelectionChanged" Margin="10,3,0,0"/>

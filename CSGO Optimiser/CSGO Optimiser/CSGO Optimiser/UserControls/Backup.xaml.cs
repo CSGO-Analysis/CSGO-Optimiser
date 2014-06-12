@@ -24,11 +24,10 @@ namespace CSGO_Optimiser.UserControls
     {
         private BackupController backupController;
 
-        public Backup(SteamBrowse sBrowse)
+        public Backup()
         {
             InitializeComponent();
             backupController = new BackupController();
-            steamBrowse.Content = sBrowse;
             updateGUI();
         }
 
@@ -59,6 +58,21 @@ namespace CSGO_Optimiser.UserControls
                 backupController.DeleteBackup(selectedBackup);
             }
             updateGUI();
+        }
+
+        private void browseButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var dialog = new System.Windows.Forms.FolderBrowserDialog();
+                dialog.ShowDialog();
+                SteamController.SetSteamPath(dialog.SelectedPath);
+                pathLabel.Content = SteamController.GetSteamPath();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

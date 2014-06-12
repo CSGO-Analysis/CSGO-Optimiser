@@ -76,9 +76,6 @@
     <Compile Include="UserControls\Optimisation.xaml.cs">
       <DependentUpon>Optimisation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\SteamBrowse.xaml.cs">
-      <DependentUpon>SteamBrowse.xaml</DependentUpon>
-    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -96,10 +93,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Optimisation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\SteamBrowse.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
