@@ -2,6 +2,7 @@
 using Controller;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -87,11 +88,17 @@ namespace CSGO_Optimiser.UserControls
 
         private void restoreButton_Click(object sender, RoutedEventArgs e)
         {
-            if (backupsListView.SelectedItem != null && MessageBox.Show("Are you sure you want to restore your settings to the selected backup?",
-                "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (backupsListView.SelectedItem != null && MessageBox.Show("Are you sure you want to restore your settings to the selected backup?" +
+                "\nThis action will close Steam if opened.", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 try
                 {
+                    Process[] steamProcess = Process.GetProcessesByName("Steam");
+                    if (steamProcess.Length != 0)
+                    {
+                        steamProcess[0].Kill();
+                        steamProcess[0].WaitForExit();
+                    }
                     IBackup selectedBackup = (IBackup)backupsListView.SelectedItem;
                     logTextBox.Text += backupController.RestoreBackup(selectedBackup);
                 }

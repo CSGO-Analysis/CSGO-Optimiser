@@ -87,7 +87,52 @@ namespace Controller
         public string RestoreBackup(IBackup backup)
         {
             SteamController.ValidateSteamPath();
-            throw new NotImplementedException();
+            string errors = "";
+            string path = "Backups\\" + backup.Id + "\\";
+
+            List<string> regFiles = new List<string>() { "Backup_DefaultMouseKey.reg", "Backup_CapsLock.reg",
+                "Backup_MouseKey.reg", "Backup_VisualThemes.reg" };
+
+            foreach (string regFile in regFiles)
+            {
+                if (File.Exists(path + regFile))
+                {
+                    Process p = Process.Start("regedit.exe", "/S" + path + regFile);
+                    p.WaitForExit();
+                }
+                else
+                {
+                    errors += regFile + " was not found. \n";
+                }
+            }
+
+            string[] cfgs = new string[] { "config.cfg", "autoexec.cfg", "video.txt" };
+            foreach (string cfg in cfgs)
+            {
+                if (File.Exists(path + cfg))
+                {
+                    File.Copy(path + cfg, SteamPaths.CfgFolder + cfg, true);
+                }
+                else
+                {
+                    errors += cfg + " was not found \n";
+                }
+            }
+
+            foreach (string localconfig in backup.Localconfigs)
+            {
+                if (File.Exists(path + localconfig))
+                {
+                    string accountNumber = localconfig.Split('_').First();
+                    File.Copy(path + localconfig, SteamPaths.Steam + "\\userdata\\" + accountNumber + "\\config\\localconfig.vdf", true);
+                }
+                else
+                {
+                    errors += localconfig + " was not found \n";
+                }
+            }
+
+            return errors + "Backup (" + backup.Id + ") succesfully restored. \n";
         }
 
         private void createBackups()
@@ -117,6 +162,14 @@ namespace Controller
                             DateTime timestamp;
                             DateTime.TryParse(line.Split('=').Last(), out timestamp);
                             backup.Timestamp = timestamp;
+                        }
+                    }
+                    if (File.Exists(backupDir + "\\localconfigs.txt"))
+                    {
+                        string[] localconfigs = File.ReadAllLines(backupDir + "\\localconfigs.txt");
+                        foreach (string localconfig in localconfigs)
+                        {
+                            backup.Localconfigs.Add(localconfig);
                         }
                     }
                     backups.Add(backup);
