@@ -5,16 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="900">
-        <Grid Margin="10,10,1,1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
+    <Grid Margin="10,10,1,1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
                 <Label Content="Please locate your \Steam\ folder:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -23,7 +22,7 @@
             </StackPanel>
             <Label x:Name="pathLabel" Content="" DockPanel.Dock="Bottom" Foreground="#FF1600FF"/>
         </DockPanel>
-        <StackPanel x:Name="checkBoxStackPanel" Grid.Row="1">
+        <StackPanel x:Name="checkBoxStackPanel" Grid.Row="1" Grid.Column="0">
             <Label Content="Select player profile:" HorizontalAlignment="Left"/>
             <ComboBox x:Name="profilesComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" DisplayMemberPath="Name"
                       MouseMove="OnMouseMove" SelectionChanged="profilesComboBox_SelectionChanged" Margin="10,3,0,0"/>
@@ -51,21 +50,21 @@
             <Button x:Name="optimiseButton" Content="Optimise" Width="230" Height="35" Click="optimiseButton_Click" Margin="0,20,0,0"
                     ToolTip="Apply the checked features"/>
         </StackPanel>
-        <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Margin="20,0,0,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="260"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <DockPanel Grid.Row="0">
-                    <Label Content="Description:" DockPanel.Dock="Top"/>
-                    <TextBox x:Name="descriptionTextBox" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top"/>
-                </DockPanel>
-                <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="4" Background="#FFE4E4E4" Margin="0,8,0,0"/>
-                <DockPanel Grid.Row="2">
-                    <Label Content="Log:" DockPanel.Dock="Top"/>
-                    <TextBox x:Name="logTextBox" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top"/>
-                </DockPanel>
-            </Grid>
+        <Grid Grid.Column="1" Grid.Row="1" Margin="20,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" MinHeight="100"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*" MinHeight="100"/>
+            </Grid.RowDefinitions>
+            <DockPanel Grid.Row="0">
+                <Label Content="Description:" DockPanel.Dock="Top"/>
+                <TextBox x:Name="descriptionTextBox" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top"/>
+            </DockPanel>
+            <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="4" Background="#FFE4E4E4" Margin="0,8,0,0"/>
+            <DockPanel Grid.Row="2">
+                <Label Content="Log:" DockPanel.Dock="Top"/>
+                <TextBox x:Name="logTextBox" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top"/>
+            </DockPanel>
         </Grid>
+    </Grid>
 </UserControl>
