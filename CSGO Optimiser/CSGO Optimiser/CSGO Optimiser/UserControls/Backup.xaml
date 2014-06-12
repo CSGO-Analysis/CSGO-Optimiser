@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="900">
+             d:DesignHeight="550" d:DesignWidth="900">
     <Grid Margin="10,10,1,1">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -12,7 +12,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
@@ -23,7 +23,17 @@
             <Label x:Name="pathLabel" Content="" DockPanel.Dock="Bottom" Foreground="#FF1600FF"/>
         </DockPanel>
         <StackPanel Grid.Row="1" Grid.Column="0" Margin="10,10,0,0">
-            <Button x:Name="saveButton" Content="Save backup" Width="100" HorizontalAlignment="Left" Height="30" DockPanel.Dock="Top" Margin="0,30,0,0" Click="saveButton_Click"/>
+            <TextBlock TextWrapping="Wrap" Width="300" Margin="0,0,10,0">
+                This is where all backups of your previous settings are stored.
+                It is highly recommended to have a backup of your original settings as to easily revert any changes made.
+                <LineBreak/><LineBreak/>
+                To save a backup of your current settings, simply click the Save button and the settings will be saved in the Backups folder.
+                <LineBreak/><LineBreak/>
+                To restore a backup simply select the backup in the grid, and click the restore button.
+                This will restore your config, autoexec, launch options and affected registry keys.
+                In order to restore your nvidia settings simply go to the Nvidia Control Panel and click Restore Defaults in 3D Settings for csgo.exe.
+            </TextBlock>
+            <Button x:Name="saveButton" Content="Save backup" Width="100" HorizontalAlignment="Center" Height="30" DockPanel.Dock="Top" Margin="0,30,0,0" Click="saveButton_Click"/>
         </StackPanel>
         <DockPanel Grid.Row="1" Grid.Column="1">
             <Label Content="Saved backups:" HorizontalAlignment="Left" VerticalAlignment="Top" DockPanel.Dock="Top"/>
@@ -31,7 +41,7 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" Width="250"/>
-                        <GridViewColumn Header="Timestamp" DisplayMemberBinding="{Binding Timestamp, StringFormat=\{0:dd-MM-yyyy hh:mm\}}" Width="200"/>
+                        <GridViewColumn Header="Timestamp" DisplayMemberBinding="{Binding Timestamp, StringFormat=\{0:dd-MM-yyyy HH:mm\}}" Width="200"/>
                     </GridView>
                 </ListView.View>
             </ListView>

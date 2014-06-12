@@ -52,12 +52,15 @@ namespace CSGO_Optimiser.UserControls
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
-            foreach (IBackup selectedBackup in backupsListView.SelectedItems)
+            if (MessageBox.Show("Are you sure you want to delete the selected backup(s)?",
+                "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                //IBackup selectedBackup = (IBackup)backupsListView.SelectedItem;
-                backupController.DeleteBackup(selectedBackup);
+                foreach (IBackup selectedBackup in backupsListView.SelectedItems)
+                {
+                    backupController.DeleteBackup(selectedBackup);
+                }
+                updateGUI();
             }
-            updateGUI();
         }
 
         private void browseButton_Click(object sender, RoutedEventArgs e)

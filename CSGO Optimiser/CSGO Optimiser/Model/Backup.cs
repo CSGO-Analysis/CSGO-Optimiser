@@ -11,23 +11,18 @@ namespace Model
     {
         public Guid Id { get; set; }
         public DateTime Timestamp { get; set; }
+        public List<string> Localconfigs { get; set; }
 
-        public Backup(Guid id, DateTime timestamp, string config, string crosshair, string autoexec, string videoSettings, string launchOptions)
+        public Backup(Guid id, DateTime timestamp)
         {
             Id = id;
             Timestamp = timestamp;
-            // fix base:
-            Config = config;
-            Crosshair = crosshair;
-            Autoexec = autoexec;
-            VideoSettings = videoSettings;
-            LaunchOptions = launchOptions;
+            Localconfigs = new List<string>();
         }
 
-        public string[] TxtFile()
+        public string[] ToStringArray()
         {
-            return new string[] { "Id = " + Id, "Timestamp = " + Timestamp, "Config = " + Config, "Crosshair = " + Crosshair,
-                "Autoexec = " + Autoexec, "VideoSettings = " + VideoSettings, "LaunchOptions = " + LaunchOptions };
+            return new string[] { "Id = " + Id, "Timestamp = " + Timestamp, "Localconfigs = " };
         }
     }
 }

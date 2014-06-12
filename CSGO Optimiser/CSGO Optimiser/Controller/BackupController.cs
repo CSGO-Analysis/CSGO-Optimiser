@@ -26,11 +26,12 @@ namespace Controller
 
         public void SaveBackup()
         {
+            string errors = "";
             if (SteamController.GetSteamPath() == null)
             {
                 throw new Exception("Please locate your steam folder.");
             }
-            Backup backup = new Backup(Guid.NewGuid(), DateTime.Now, "config", "crosshair", "autoexec", "videosettings", "launchoptions");
+            Backup backup = new Backup(Guid.NewGuid(), DateTime.Now);
 
             if (!Directory.Exists("Backups"))
             {
@@ -45,11 +46,36 @@ namespace Controller
             exportKey("HKEY_CURRENT_USER\\Control Panel\\Mouse", folder + "\\Backup_MouseKey.reg");
             exportKey("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\Layers",
                 folder + "\\Backup_VisualThemes.reg");
+            
+            string[] cfgs = new string[] { SteamPaths.CfgFolder + "\\config.cfg",
+                SteamPaths.CfgFolder + "\\video.txt", SteamPaths.Autoexec };
 
-            File.Copy(SteamPaths.CfgFolder + "config.cfg", folder + "\\config.cfg");
-            // copy config etc..
+            foreach (string cfg in cfgs)
+            {
+                if (File.Exists(cfg))
+                {
+                    File.Copy(cfg, folder + "\\" + cfg.Split('\\').Last());
+                }
+                else
+                {
+                    errors += cfg + " was not found. \n";
+                }
+            }
 
-            File.WriteAllLines(folder + "\\backup.txt", backup.TxtFile());
+            string[] dirs = Directory.GetDirectories(SteamPaths.Steam + @"\userdata\");
+            foreach (string dir in dirs)
+            {
+                if (File.Exists(dir + @"\config\localconfig.vdf"))
+                {
+                    string[] pathSplit = dir.Split('\\');
+                    string accountNumber = pathSplit[pathSplit.Count() - 1];
+                    File.Copy(dir + @"\config\localconfig.vdf", folder + "\\" + accountNumber + "_localconfig.vdf");
+                    backup.Localconfigs.Add(accountNumber + "_localconfig.vdf");
+                }
+            }
+            File.WriteAllLines(folder + "\\localconfigs.txt", backup.Localconfigs);
+
+            File.WriteAllLines(folder + "\\backup.txt", backup.ToStringArray());
             backups.Add(backup);
         }
 
@@ -72,46 +98,26 @@ namespace Controller
                 if (File.Exists(backupPath))
                 {
                     string[] backupTxt = File.ReadAllLines(backupPath);
-                    Guid id = Guid.NewGuid();
-                    DateTime timestamp = DateTime.Parse("18-06-1990 13:37");
-                    string config = "", crosshair = "", autoexec = "", videoSettings = "", launchOptions = "";
+                    Backup backup = new Backup(Guid.NewGuid(), DateTime.Parse("18-06-1990 13:37"));
                     foreach (string line in backupTxt)
                     {
                         if (line.Contains("Id = "))
                         {
-                            string idString = line.Split('=').Last().Replace(" ", "");
-                            Guid.TryParse(idString, out id);
+                            Guid id;
+                            Guid.TryParse(line.Split('=').Last().Replace(" ", ""), out id);
+                            backup.Id = id;
                         }
                         if (line.Contains("Timestamp = "))
                         {
+                            DateTime timestamp;
                             DateTime.TryParse(line.Split('=').Last(), out timestamp);
-                        }
-                        if (line.Contains("Config = "))
-                        {
-                            config = line.Split('=').Last().Replace(" ", "");
-                        }
-                        if (line.Contains("Crosshair = "))
-                        {
-                            crosshair = line.Split('=').Last().Replace(" ", "");
-                        }
-                        if (line.Contains("Autoexec = "))
-                        {
-                            autoexec = line.Split('=').Last().Replace(" ", "");
-                        }
-                        if (line.Contains("VideoSettings = "))
-                        {
-                            videoSettings = line.Split('=').Last().Replace(" ", "");
+                            backup.Timestamp = timestamp;
                         }
                         if (line.Contains("LaunchOptions = "))
                         {
-                            launchOptions = line.Split('=').Last();
+                            backup.LaunchOptions = line.Split('=').Last();
                         }
-                        //if (line.Contains("NvidiaProfile = "))
-                        //{
-                        //    backup.NvidiaProfile = line.Split('=').Last().Replace(" ", "");
-                        //}
                     }
-                    Backup backup = new Backup(id, timestamp, config, crosshair, autoexec, videoSettings, launchOptions);
                     backups.Add(backup);
                 }
             }
