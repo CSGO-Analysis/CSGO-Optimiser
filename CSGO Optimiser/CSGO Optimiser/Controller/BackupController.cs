@@ -26,7 +26,16 @@ namespace Controller
 
         public void SaveBackup()
         {
+            if (SteamController.GetSteamPath() == null)
+            {
+                throw new Exception("Please locate your steam folder.");
+            }
             Backup backup = new Backup(Guid.NewGuid(), DateTime.Now, "config", "crosshair", "autoexec", "videosettings", "launchoptions");
+
+            if (!Directory.Exists("Backups"))
+            {
+                Directory.CreateDirectory("Backups");
+            }
 
             string folder = "Backups\\" + backup.Id;
             Directory.CreateDirectory(folder);
@@ -52,6 +61,10 @@ namespace Controller
 
         private void createBackups()
         {
+            if (!Directory.Exists("Backups"))
+            {
+                Directory.CreateDirectory("Backups");
+            }
             string[] backupDirs = Directory.GetDirectories("Backups\\");
             foreach (string backupDir in backupDirs)
             {
