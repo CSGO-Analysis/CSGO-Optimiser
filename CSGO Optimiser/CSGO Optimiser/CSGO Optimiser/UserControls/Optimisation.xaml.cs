@@ -49,10 +49,12 @@ namespace CSGO_Optimiser.UserControls
             try
             {
                 SteamController.ValidateSteamPath();
-                int changes = 0;
+                optimiseController.Errors = 0;
+                optimiseController.Changes = 0;
                 bool rebootWindows = false;
                 bool restartSteam = false;
                 string note = "";
+
                 // Profile Settings:
                 if (profilesComboBox.SelectedItem != null)
                 {
@@ -68,22 +70,18 @@ namespace CSGO_Optimiser.UserControls
                     if (autoexecCheckBox.IsChecked == true) // Must be first because other methods write in this file.
                     {
                         logTextBox.Text += optimiseController.CopyAutoexec(profile);
-                        changes++;
                     }
                     if (configCheckBox.IsChecked == true)
                     {
                         logTextBox.Text += optimiseController.CopyProfileConfig(profile);
-                        changes++;
                     }
                     if (crosshairCheckBox.IsChecked == true)
                     {
                         logTextBox.Text += optimiseController.CopyProfileCrosshair(profile);
-                        changes++;
                     }
                     if (videoSettingsCheckBox.IsChecked == true)
                     {
                         logTextBox.Text += optimiseController.CopyVideoConfig(profile);
-                        changes++;
                     }
                     if (launchOptionsCheckBox.IsChecked == true)
                     {
@@ -96,7 +94,6 @@ namespace CSGO_Optimiser.UserControls
                                 steamProcess[0].Kill();
                                 steamProcess[0].WaitForExit();
                                 logTextBox.Text += optimiseController.SetLaunchOptions(profile);
-                                changes++;
                                 restartSteam = true;
                             }
                             else
@@ -107,47 +104,42 @@ namespace CSGO_Optimiser.UserControls
                         else
                         {
                             logTextBox.Text += optimiseController.SetLaunchOptions(profile);
-                            changes++;
                         }
                     }
                     if (nvidiaProfileCheckBox.IsChecked == true)
                     {
                         logTextBox.Text += optimiseController.SetNvidiaSettings(profile);
-                        changes++;
                     }
                 }
                 // Global settings:
                 if (mouseAccCheckBox.IsChecked == true)
                 {
                     logTextBox.Text += optimiseController.DisableMouseAcc();
-                    changes++;
                     rebootWindows = true;
                 }
                 if (ingameMouseAccCheckBox.IsChecked == true)
                 {
                     logTextBox.Text += optimiseController.DisableIngameMouseAcc();
-                    changes++;
                 }
                 if (capsLockCheckBox.IsChecked == true)
                 {
                     logTextBox.Text += optimiseController.DisableCapsLock();
-                    changes++;
                     rebootWindows = true;
                     note += "\nPlease note: If you use a VoIP client (ex: ts3/mumble) you must rebind your Push-to-talk key. \n";
                 }
                 if (visualThemesCheckBox.IsChecked == true)
                 {
                     logTextBox.Text += optimiseController.DisableVisualThemes();
-                    changes++;
                     rebootWindows = true;
                 }
 
-                logTextBox.Text += string.Format("Optimisation finished ({0} changes). \n", changes);
+                logTextBox.Text += string.Format("Optimisation finished ({0} changes, {1} errors). \n", optimiseController.Changes, optimiseController.Errors);
                 logTextBox.ScrollToEnd();
                 
                 if (rebootWindows == true)
                 {
-                    if (MessageBox.Show("Optimisation succesfully finished (" + changes + " changes).\n" + note +
+                    if (MessageBox.Show("Optimisation succesfully finished (" + optimiseController.Changes + " changes, "
+                        + optimiseController.Errors + " errors).\n" + note +
                         "\nYou must reboot in order to apply the registry changes. Reboot now?\n", "Success",
                         MessageBoxButton.YesNoCancel, MessageBoxImage.Asterisk) == MessageBoxResult.Yes)
                     {
@@ -164,7 +156,8 @@ namespace CSGO_Optimiser.UserControls
                     {
                         Process.Start(SteamController.GetSteamPath() + "\\Steam.exe");
                     }
-                    MessageBox.Show("Optimisation succesfully finished (" + changes + " changes).\n" + note, "Success",
+                    MessageBox.Show("Optimisation succesfully finished (" + optimiseController.Changes + " changes, "
+                        + optimiseController.Errors + " errors).\n" + note, "Success",
                         MessageBoxButton.OK, MessageBoxImage.Asterisk);
                 }
             }

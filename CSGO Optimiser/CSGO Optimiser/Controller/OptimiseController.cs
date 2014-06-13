@@ -14,9 +14,13 @@ namespace Controller
 {
     public class OptimiseController
     {
+        public int Errors = 0;
+        public int Changes = 0;
+
         public string CopyAutoexec(IProfile profile)
         {
             File.Copy(profile.FolderPath + profile.Autoexec, SteamPaths.Autoexec, true);
+            Changes++;
             return profile.Autoexec + " succesfully created. \n";
         }
 
@@ -39,6 +43,7 @@ namespace Controller
                 autoexec = new List<string>() { "exec " + profile.Config };
             }
             File.WriteAllLines(SteamPaths.Autoexec, autoexec);
+            Changes++;
             return profile.Config + " succesfully created. \n";
         }
 
@@ -60,6 +65,7 @@ namespace Controller
             {
                 autoexec = new List<string>() { "exec " + profile.Crosshair };
             }
+            Changes++;
             File.WriteAllLines(SteamPaths.Autoexec, autoexec);
             return profile.Crosshair + " succesfully created. \n";
         }
@@ -67,6 +73,7 @@ namespace Controller
         public string CopyVideoConfig(IProfile profile)
         {
             File.Copy(profile.FolderPath + profile.VideoSettings, SteamPaths.Video, true);
+            Changes++;
             return profile.VideoSettings + " succesfully created. \n";
         }
 
@@ -98,11 +105,13 @@ namespace Controller
                             int k = i + 2;
                             localconfig.Insert(k, "\t\t\t\t\t\t\"LaunchOptions\"\t\"" + profile.LaunchOptions);
                             File.WriteAllLines(dir + @"\config\localconfig.vdf", localconfig);
+                            Changes++;
                             return string.Format("Launch options:" + profile.LaunchOptions + " succesfully added. \n");
                         }
                     }
                 }
             }
+            Errors++;
             return "ERROR: No launch options found. \n";
         }
 
@@ -117,6 +126,7 @@ namespace Controller
             p.Start();
             p.WaitForExit();
 
+            Changes++;
             return "nvidiaInspector finished importing " + profile.NvidiaProfile + ". \n";
         }
         
@@ -126,6 +136,7 @@ namespace Controller
             var dpiKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop");
             if (dpiKey == null)
             {
+                Errors++;
                 return "ERROR: Mouse Acceleration could not be disabled (Screen dpi not found). \n";
             }
             else
@@ -133,6 +144,7 @@ namespace Controller
                 var defaultMouseKey = Registry.Users.OpenSubKey(@".DEFAULT\Control Panel\Mouse", true);
                 if (defaultMouseKey == null)
                 {
+                    Errors++;
                     return "ERROR: Mouse Acceleration could not be disabled (USERS\\RegistryKey not found). \n";
                 }
                 else
@@ -145,6 +157,7 @@ namespace Controller
                 var mouseKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Mouse", true);
                 if (mouseKey == null)
                 {
+                    Errors++;
                     return "ERROR: Mouse Acceleration could not be disabled (CURRENTUSER\\RegistryKey not found). \n";
                 }
                 else
@@ -173,6 +186,7 @@ namespace Controller
                     }
                 }
             }
+            Changes++;
             return "Mouse Acceleration succesfully disabled (" + dpi + "% monitor size). \n";
         }
 
@@ -196,6 +210,7 @@ namespace Controller
             }
             File.WriteAllLines(SteamPaths.Autoexec, autoexec);
 
+            Changes++;
             return "Ingame Mouse Commands succesfully applied. \n";
         }
 
@@ -204,9 +219,11 @@ namespace Controller
             var key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Keyboard Layout", true);
             if (key == null)
             {
+                Errors++;
                 return "ERROR: CapsLock could not be disabled. \n";
             }
             key.SetValue("Scancode Map", new byte[] {00,00,00,00,00,00,00,00,0x02,00,00,00,0x64,00,0x3a,00,00,00,00,00}, RegistryValueKind.Binary);
+            Changes++;
             return "CapsLock succesfully disabled. \n";
         }
 
@@ -219,7 +236,7 @@ namespace Controller
                 key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", true);
             }
             key.SetValue(SteamPaths.CsgoExe, "DISABLETHEMES");
-
+            Changes++;
             return "Visual themes succesfully disabled for csgo.exe. \n";
         }
 
