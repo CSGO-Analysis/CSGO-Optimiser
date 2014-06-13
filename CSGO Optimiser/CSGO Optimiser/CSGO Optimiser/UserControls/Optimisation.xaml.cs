@@ -88,13 +88,14 @@ namespace CSGO_Optimiser.UserControls
                         Process[] steamProcess = Process.GetProcessesByName("Steam");
                         if (steamProcess.Length != 0)
                         {
-                            if (MessageBox.Show("Steam must be closed in order to add launch options. Shutdown Steam?",
+                            if (MessageBox.Show("Steam must be restarted in order to add launch options. Restart Steam?",
                                 "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                             {
                                 steamProcess[0].Kill();
                                 steamProcess[0].WaitForExit();
                                 logTextBox.Text += optimiseController.SetLaunchOptions(profile);
                                 changes++;
+                                Process.Start(SteamController.GetSteamPath() + "\\Steam.exe");
                             }
                             else
                             {
@@ -185,10 +186,10 @@ namespace CSGO_Optimiser.UserControls
             else
                 nvidiaProfileCheckBox.IsEnabled = false;
 
-            mouseAccCheckBox.IsChecked = profile.DisabledMouseAcc;
-            ingameMouseAccCheckBox.IsChecked = profile.DisabledIngameMouseAcc;
-            capsLockCheckBox.IsChecked = profile.DisabledCapsLock;
-            visualThemesCheckBox.IsChecked = profile.DisabledVisualThemes;
+            //mouseAccCheckBox.IsChecked = profile.DisabledMouseAcc;
+            //ingameMouseAccCheckBox.IsChecked = profile.DisabledIngameMouseAcc;
+            //capsLockCheckBox.IsChecked = profile.DisabledCapsLock;
+            //visualThemesCheckBox.IsChecked = profile.DisabledVisualThemes;
         }
 
         private void selectAllButton_Click(object sender, RoutedEventArgs e)
@@ -231,7 +232,7 @@ Copies the selected profile's config.cfg to your csgo folder. This will overwrit
                 descriptionTextBox.Text =
 @"Crosshair Settings:
 
-Copies the selected profile's crosshair settings to a new .cfg, executed from autoexec.cfg.";
+Copies the selected profile's crosshair settings to a new cfg, executed from autoexec.cfg.";
             }
             else if (sender.Equals(autoexecCheckBox))
             {

@@ -33,7 +33,7 @@
             <CheckBox x:Name="videoSettingsCheckBox" Content="Advanced Ingame Video Settings" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left" IsEnabled="False"/>
             <CheckBox x:Name="launchOptionsCheckBox" Content="Launch Options" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left" IsEnabled="False"/>
             <CheckBox x:Name="nvidiaProfileCheckBox" Content="NVIDIA CSGO Profile" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left" IsEnabled="False"/>
-            <Label Content="Global optimisation fixes:" Margin="0,5,0,0"/>
+            <Label Content="Global optimisation fixes: (All are recommended)" Margin="0,5,0,0"/>
             <CheckBox x:Name="mouseAccCheckBox" Content="Disable Mouse Acceleration" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
             <CheckBox x:Name="ingameMouseAccCheckBox" Content="Ingame Mouse Commands" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
             <CheckBox x:Name="capsLockCheckBox" Content="Disable Caps Lock for use with VoIP" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>

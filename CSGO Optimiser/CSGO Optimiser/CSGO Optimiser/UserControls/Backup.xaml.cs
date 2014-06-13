@@ -91,19 +91,25 @@ namespace CSGO_Optimiser.UserControls
         private void restoreButton_Click(object sender, RoutedEventArgs e)
         {
             if (backupsListView.SelectedItem != null && MessageBox.Show("Are you sure you want to restore your settings to the selected backup?" +
-                "\nThis action will close Steam if opened.", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                "\nThis action will restart Steam if opened.", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 try
                 {
                     Process[] steamProcess = Process.GetProcessesByName("Steam");
+                    bool restart = false;
                     if (steamProcess.Length != 0)
                     {
                         steamProcess[0].Kill();
                         steamProcess[0].WaitForExit();
+                        restart = true;
                     }
                     IBackup selectedBackup = (IBackup)backupsListView.SelectedItem;
                     logTextBox.Text += backupController.RestoreBackup(selectedBackup);
                     logTextBox.ScrollToEnd();
+                    if (restart == true)
+                    {
+                        Process.Start(SteamController.GetSteamPath() + "\\Steam.exe");
+                    }
                 }
                 catch (Exception ex)
                 {
