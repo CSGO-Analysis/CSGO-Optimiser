@@ -103,7 +103,7 @@ namespace Controller
                     }
                 }
             }
-            return null;
+            return "ERROR: No launch options found. \n";
         }
 
         public string SetNvidiaSettings(IProfile profile)
@@ -126,14 +126,14 @@ namespace Controller
             var dpiKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop");
             if (dpiKey == null)
             {
-                throw new InvalidOperationException(@"Cannot open registry key HKCU\Control Panel\Desktop");
+                return "ERROR: Mouse Acceleration could not be disabled (Screen dpi not found). \n";
             }
             else
             {
                 var defaultMouseKey = Registry.Users.OpenSubKey(@".DEFAULT\Control Panel\Mouse", true);
                 if (defaultMouseKey == null)
                 {
-                    throw new InvalidOperationException(@"Cannot open registry key HKCU\Control Panel\Mouse");
+                    return "ERROR: Mouse Acceleration could not be disabled (USERS\\RegistryKey not found). \n";
                 }
                 else
                 {
@@ -145,7 +145,7 @@ namespace Controller
                 var mouseKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Mouse", true);
                 if (mouseKey == null)
                 {
-                    throw new InvalidOperationException(@"Cannot open registry key HKCU\Control Panel\Mouse");
+                    return "ERROR: Mouse Acceleration could not be disabled (CURRENTUSER\\RegistryKey not found). \n";
                 }
                 else
                 {
@@ -181,7 +181,6 @@ namespace Controller
             string ingameAcc = SteamPaths.CfgFolder + "IngameMouseAccelOff.cfg";
             File.Copy(@"Resources\IngameMouseAccelOff.cfg", ingameAcc, true);
 
-
             List<string> autoexec;
             if (File.Exists(SteamPaths.Autoexec))
             {
@@ -205,7 +204,7 @@ namespace Controller
             var key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Keyboard Layout", true);
             if (key == null)
             {
-                throw new InvalidOperationException(@"Cannot open registry key HKLM\SYSTEM\CurrentControlSet\Control\Keyboard Layout.");
+                return "ERROR: CapsLock could not be disabled. \n";
             }
             key.SetValue("Scancode Map", new byte[] {00,00,00,00,00,00,00,00,0x02,00,00,00,0x64,00,0x3a,00,00,00,00,00}, RegistryValueKind.Binary);
             return "CapsLock succesfully disabled. \n";
@@ -213,21 +212,15 @@ namespace Controller
 
         public string DisableVisualThemes()
         {
-            if (SteamPaths.CsgoExe != null)
+            var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", true);
+            if (key == null)
             {
-                var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", true);
-                if (key == null)
-                {
-                    throw new InvalidOperationException(@"Cannot open registry key HKCU\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers.");
-                }
-                key.SetValue(SteamPaths.CsgoExe, "DISABLETHEMES");
+                Registry.CurrentUser.CreateSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers");
+                key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", true);
+            }
+            key.SetValue(SteamPaths.CsgoExe, "DISABLETHEMES");
 
-                return "Visual themes succesfully disabled for csgo.exe. \n";
-            }
-            else
-            {
-                throw new Exception("CSGO folder was not found. Disable Visual Themes unsuccessful.");
-            }
+            return "Visual themes succesfully disabled for csgo.exe. \n";
         }
 
         //private uint findMaxRefreshRate()

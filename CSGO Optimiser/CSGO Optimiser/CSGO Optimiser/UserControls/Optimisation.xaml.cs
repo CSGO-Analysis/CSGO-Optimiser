@@ -50,8 +50,9 @@ namespace CSGO_Optimiser.UserControls
             {
                 SteamController.ValidateSteamPath();
                 int changes = 0;
-                bool reboot = false;
+                bool rebootWindows = false;
                 bool restartSteam = false;
+                string note = "";
                 // Profile Settings:
                 if (profilesComboBox.SelectedItem != null)
                 {
@@ -100,7 +101,7 @@ namespace CSGO_Optimiser.UserControls
                             }
                             else
                             {
-                                logTextBox.Text += "Launch options was not added. \n";
+                                logTextBox.Text += "ERROR: Launch options was not added (No restart of steam). \n";
                             }
                         }
                         else
@@ -120,7 +121,7 @@ namespace CSGO_Optimiser.UserControls
                 {
                     logTextBox.Text += optimiseController.DisableMouseAcc();
                     changes++;
-                    reboot = true;
+                    rebootWindows = true;
                 }
                 if (ingameMouseAccCheckBox.IsChecked == true)
                 {
@@ -131,19 +132,23 @@ namespace CSGO_Optimiser.UserControls
                 {
                     logTextBox.Text += optimiseController.DisableCapsLock();
                     changes++;
-                    reboot = true;
+                    rebootWindows = true;
+                    note += "\nPlease note: If you use a VoIP client (ex: ts3/mumble) you must rebind your Push-to-talk key. \n";
                 }
                 if (visualThemesCheckBox.IsChecked == true)
                 {
                     logTextBox.Text += optimiseController.DisableVisualThemes();
                     changes++;
-                    reboot = true;
+                    rebootWindows = true;
                 }
+
                 logTextBox.Text += string.Format("Optimisation finished ({0} changes). \n", changes);
-                if (reboot == true)
+                logTextBox.ScrollToEnd();
+                
+                if (rebootWindows == true)
                 {
-                    logTextBox.Text += "Please reboot to apply the registry changes. \n";
-                    if (MessageBox.Show("Optimisation succesfully finished (" + changes + " changes).\nYou must reboot in order to apply the registry changes. Reboot now?", "Success",
+                    if (MessageBox.Show("Optimisation succesfully finished (" + changes + " changes).\n" + note +
+                        "\nYou must reboot in order to apply the registry changes. Reboot now?\n", "Success",
                         MessageBoxButton.YesNoCancel, MessageBoxImage.Asterisk) == MessageBoxResult.Yes)
                     {
                         Process.Start("shutdown", "/r /t 0");
@@ -153,7 +158,15 @@ namespace CSGO_Optimiser.UserControls
                         Process.Start(SteamController.GetSteamPath() + "\\Steam.exe");
                     }
                 }
-                logTextBox.ScrollToEnd();
+                else
+                {
+                    if (restartSteam == true)
+                    {
+                        Process.Start(SteamController.GetSteamPath() + "\\Steam.exe");
+                    }
+                    MessageBox.Show("Optimisation succesfully finished (" + changes + " changes).\n" + note, "Success",
+                        MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                }
             }
             catch (Exception ex)
             {
@@ -313,7 +326,9 @@ m_rawinput 0";
                 descriptionTextBox.Text =
 @"Disable Caps Lock for use with 'Push-To-Talk' hotkeys:
 
-Disables the normal Caps Lock function (Key is remapped to F13) so you can use Caps Lock for Push-to-talk without accidently talking in CAPS.";
+Disables the normal Caps Lock function (Key is remapped to F13) so you can use Caps Lock for Push-to-talk without accidently talking in CAPS.
+
+Please note you will probably have to rebind your Push-to-talk key again.";
             }
             else if (sender.Equals(visualThemesCheckBox))
             {
