@@ -124,7 +124,6 @@ namespace CSGO_Optimiser.UserControls
                 {
                     logTextBox.Text += optimiseController.DisableIngameMouseAcc();
                     changes++;
-                    reboot = true;
                 }
                 if (capsLockCheckBox.IsChecked == true)
                 {

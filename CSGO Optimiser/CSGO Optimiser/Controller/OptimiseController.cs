@@ -115,11 +115,10 @@ namespace Controller
             p.StartInfo.FileName = @"Resources\nvidiaInspector.exe";
             p.StartInfo.Arguments = profile.FolderPath + profile.NvidiaProfile;
             p.Start();
-            string stdoutx = p.StandardOutput.ReadToEnd();
-            string stderrx = p.StandardError.ReadToEnd();
             p.WaitForExit();
+
             return "nvidiaInspector finished importing " + profile.NvidiaProfile + ". \n";
-        }        
+        }
         
         public string DisableMouseAcc()
         {
@@ -181,10 +180,20 @@ namespace Controller
         {
             string ingameAcc = SteamPaths.CfgFolder + "IngameMouseAccelOff.cfg";
             File.Copy(@"Resources\IngameMouseAccelOff.cfg", ingameAcc, true);
-            List<string> autoexec = File.ReadAllLines(SteamPaths.Autoexec).ToList();
-            if (!autoexec.Contains("exec IngameMouseAccelOff.cfg"))
+
+
+            List<string> autoexec;
+            if (File.Exists(SteamPaths.Autoexec))
             {
-                autoexec.Add("exec IngameMouseAccelOff.cfg");
+                autoexec = File.ReadAllLines(SteamPaths.Autoexec).ToList();
+                if (!autoexec.Contains("exec IngameMouseAccelOff.cfg"))
+                {
+                    autoexec.Add("exec IngameMouseAccelOff.cfg");
+                }
+            }
+            else
+            {
+                autoexec = new List<string>() { "exec IngameMouseAccelOff.cfg" };
             }
             File.WriteAllLines(SteamPaths.Autoexec, autoexec);
 
