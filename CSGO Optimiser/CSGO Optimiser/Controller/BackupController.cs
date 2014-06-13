@@ -97,7 +97,7 @@ namespace Controller
             {
                 if (File.Exists(path + regFile))
                 {
-                    Process p = Process.Start("regedit.exe", "/S" + path + regFile);
+                    Process p = Process.Start("regedit.exe", " /s " + path + regFile);
                     p.WaitForExit();
                 }
                 else
