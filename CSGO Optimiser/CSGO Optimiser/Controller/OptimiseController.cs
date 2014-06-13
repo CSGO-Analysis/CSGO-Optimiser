@@ -174,7 +174,7 @@ namespace Controller
                     }
                 }
             }
-            return "Mouse Acceleration succesfully disabled (" + dpi + "% dpi). \n";
+            return "Mouse Acceleration succesfully disabled (" + dpi + "% monitor size). \n";
         }
 
         public string DisableIngameMouseAcc()
@@ -188,7 +188,7 @@ namespace Controller
             }
             File.WriteAllLines(SteamPaths.Autoexec, autoexec);
 
-            return "Ingame Mouse Acceleration succesfully disabled. \n";
+            return "Ingame Mouse Commands succesfully applied. \n";
         }
 
         public string DisableCapsLock()

@@ -285,7 +285,7 @@ Recommended to also have 'Disable Ingame Mouse Acceleration' applied as well.
             else if (sender.Equals(ingameMouseAccCheckBox))
             {
                 descriptionTextBox.Text =
-@"Disable Ingame Mouse Acceleration:
+@"Ingame Mouse Commands:
 
 Adds an IngameMouseAccelOff.cfg (executed from autoexec) with the following commands:
 m_forward 1
