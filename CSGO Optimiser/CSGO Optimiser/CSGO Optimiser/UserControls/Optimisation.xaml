@@ -32,7 +32,7 @@
             <CheckBox x:Name="autoexecCheckBox" Content="Autoexec" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left" IsEnabled="False"/>
             <CheckBox x:Name="videoSettingsCheckBox" Content="Advanced Ingame Video Settings" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left" IsEnabled="False"/>
             <CheckBox x:Name="launchOptionsCheckBox" Content="Launch Options" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left" IsEnabled="False"/>
-            <CheckBox x:Name="nvidiaProfileCheckBox" Content="Nvidia CSGO Profile" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left" IsEnabled="False"/>
+            <CheckBox x:Name="nvidiaProfileCheckBox" Content="NVIDIA CSGO Profile" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left" IsEnabled="False"/>
             <Label Content="Global optimisation fixes:" Margin="0,5,0,0"/>
             <CheckBox x:Name="mouseAccCheckBox" Content="Disable Mouse Acceleration" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
             <CheckBox x:Name="ingameMouseAccCheckBox" Content="Disable Ingame Mouse Acceleration" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>

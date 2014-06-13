@@ -132,7 +132,7 @@ namespace Controller
                 }
             }
 
-            return errors + "Backup (" + backup.Id + ") succesfully restored. \n";
+            return errors + "Backup (" + backup.Id + ") succesfully restored.\nPlease reboot to apply the registry changes.\n";
         }
 
         private void createBackups()

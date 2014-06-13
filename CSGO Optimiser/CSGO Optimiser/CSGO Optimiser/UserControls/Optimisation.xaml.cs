@@ -50,6 +50,7 @@ namespace CSGO_Optimiser.UserControls
             {
                 SteamController.ValidateSteamPath();
                 int changes = 0;
+                bool reboot = false;
                 // Profile Settings:
                 if (profilesComboBox.SelectedItem != null)
                 {
@@ -117,23 +118,31 @@ namespace CSGO_Optimiser.UserControls
                 {
                     logTextBox.Text += optimiseController.DisableMouseAcc();
                     changes++;
+                    reboot = true;
                 }
                 if (ingameMouseAccCheckBox.IsChecked == true)
                 {
                     logTextBox.Text += optimiseController.DisableIngameMouseAcc();
                     changes++;
+                    reboot = true;
                 }
                 if (capsLockCheckBox.IsChecked == true)
                 {
                     logTextBox.Text += optimiseController.DisableCapsLock();
                     changes++;
+                    reboot = true;
                 }
                 if (visualThemesCheckBox.IsChecked == true)
                 {
                     logTextBox.Text += optimiseController.DisableVisualThemes();
                     changes++;
+                    reboot = true;
                 }
                 logTextBox.Text += string.Format("Optimisation finished ({0} changes). \n", changes);
+                if (reboot == true)
+                {
+                    logTextBox.Text += "Please reboot to apply the registry changes. \n";
+                }
                 logTextBox.ScrollToEnd();
             }
             catch (Exception ex)
@@ -206,77 +215,79 @@ namespace CSGO_Optimiser.UserControls
         {
             if (sender.Equals(profilesComboBox))
             {
-                descriptionTextBox.Text = @"Select player profile:
+                descriptionTextBox.Text =
+@"Select player profile:
 
 Select a player profile to copy settings from. Player profiles are stored in \Resources\Profiles\.";
             }
             else if (sender.Equals(configCheckBox))
             {
-                descriptionTextBox.Text = @"lol hej";
+                descriptionTextBox.Text =
+@"Config (not recommended):
+
+Copies the selected profile's config.cfg to your csgo folder. This will overwrite all of your keybinds and settings.";
             }
             else if (sender.Equals(crosshairCheckBox))
             {
-                descriptionTextBox.Text = @"hæ hæ";
+                descriptionTextBox.Text =
+@"Crosshair Settings:
+
+Copies the selected profile's crosshair settings to a new .cfg, executed from autoexec.cfg.";
             }
             else if (sender.Equals(autoexecCheckBox))
             {
-                descriptionTextBox.Text = @"Autoexec.cfg:
+                descriptionTextBox.Text =
+@"Autoexec:
 
-Adds an autoexec.cfg with the following commands:
-**NOTE THAT AUTOEXEC.CFG WILL BE OVERWRITTEN**
-
-rate 128000
-fps_max 999
-cl_interp 0
-cl_interp_ratio 1
-cl_updaterate 128
-cl_cmdrate 128
-cl_forcepreload 1
-mat_queue_mode 2";
+Copies the selected profile's autoexec.cfg to your csgo folder.";
             }
             else if (sender.Equals(videoSettingsCheckBox))
             {
-                descriptionTextBox.Text = @"Advanced Ingame Video Settings:
+                descriptionTextBox.Text =
+@"Advanced Ingame Video Settings:
 
-Turns off most of the 'Advanced video settings' in the game options for high performance.
+Copies the selected profile's ingame video settings (video.txt) to your csgo folder.
 
 (Highly recommended to also use the NVIDIA CSGO Profile to avoid settings being overruled)";
             }
             else if (sender.Equals(launchOptionsCheckBox))
             {
-                descriptionTextBox.Text = @"Launch Options:
+                descriptionTextBox.Text =
+@"Launch Options:
 
-Adds the following launch options to CSGO:
+Copies the selected profile's CSGO launch options.
+
+Most common launch options are:
 
 -console (Activates console ingame)
--freq XXX (The optimiser will automatically detect your monitors hertz limits and apply the best value)
 -novid (Removes the short video on CSGO startup)
 +exec autoexec.cfg (Executes the configuration file with optimised rates)
 -high (Sets the csgo.exe process to 'high' priority for a small fps boost)";
             }
             else if (sender.Equals(nvidiaProfileCheckBox))
             {
-                descriptionTextBox.Text = @"NVIDIA CSGO Profile:
+                descriptionTextBox.Text =
+@"NVIDIA CSGO Profile:
 
-Uses nvidiaInspector to import a NVIDIA 3D profile that changes the driver settings for csgo.exe only.";
+Uses nvidiaInspector to import the selected profile's NVIDIA 3D profile that changes the driver settings for csgo.exe only.";
             }
             else if (sender.Equals(mouseAccCheckBox))
             {
-                descriptionTextBox.Text = @"Disable Mouse Acceleration:
+                descriptionTextBox.Text =
+@"Disable Mouse Acceleration:
 
 The optimiser will automatically detect your setup and apply the correct 'MarkC No Acceleration' fix to windows registry for a perfect 1-to-1, no acceleration mouse input.
 
-Recommended to also have 'Ingame Mouse Commands' applied as well.
+Recommended to also have 'Disable Ingame Mouse Acceleration' applied as well.
 
 (Credit to MarkC for his work with acceleration fixes)";
-
             }
             else if (sender.Equals(ingameMouseAccCheckBox))
             {
-                descriptionTextBox.Text = @"Ingame Mouse commands:
+                descriptionTextBox.Text =
+@"Disable Ingame Mouse Acceleration:
 
-Adds an IngameMouseAccelOff.cfg with the following commands:
-
+Adds an IngameMouseAccelOff.cfg (executed from autoexec) with the following commands:
 m_forward 1
 m_mousespeed 1
 m_mouseaccel2 0
@@ -289,13 +300,15 @@ m_rawinput 0";
             }
             else if (sender.Equals(capsLockCheckBox))
             {
-                descriptionTextBox.Text = @"Disable Caps Lock for use with 'Push-To-Talk' hotkeys:
+                descriptionTextBox.Text =
+@"Disable Caps Lock for use with 'Push-To-Talk' hotkeys:
 
 Disables the normal Caps Lock function (Key is remapped to F13) so you can use Caps Lock for Push-to-talk without accidently talking in CAPS.";
             }
             else if (sender.Equals(visualThemesCheckBox))
             {
-                descriptionTextBox.Text = @"Deactivate visual themes on csgo.exe:
+                descriptionTextBox.Text =
+@"Deactivate visual themes on csgo.exe:
 
 Deactivates Windows visuals on csgo.exe for a small fps boost.";
             }
