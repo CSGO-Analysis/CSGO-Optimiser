@@ -51,13 +51,14 @@ namespace CSGO_Optimiser.UserControls
                 SteamController.ValidateSteamPath();
                 int changes = 0;
                 bool reboot = false;
+                bool restartSteam = false;
                 // Profile Settings:
                 if (profilesComboBox.SelectedItem != null)
                 {
                     if (backupController.GetBackups().Count <= 0)
                     {
                         if (MessageBox.Show("You do not have any saved backups. Do you want to save your current settings as backup?",
-                                "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                                "Backup", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                         {
                             logTextBox.Text += backupController.SaveBackup();
                         }
@@ -95,7 +96,7 @@ namespace CSGO_Optimiser.UserControls
                                 steamProcess[0].WaitForExit();
                                 logTextBox.Text += optimiseController.SetLaunchOptions(profile);
                                 changes++;
-                                Process.Start(SteamController.GetSteamPath() + "\\Steam.exe");
+                                restartSteam = true;
                             }
                             else
                             {
@@ -142,6 +143,15 @@ namespace CSGO_Optimiser.UserControls
                 if (reboot == true)
                 {
                     logTextBox.Text += "Please reboot to apply the registry changes. \n";
+                    if (MessageBox.Show("Optimisation succesfully finished (" + changes + " changes).\nYou must reboot in order to apply the registry changes. Reboot now?", "Success",
+                        MessageBoxButton.YesNoCancel, MessageBoxImage.Asterisk) == MessageBoxResult.Yes)
+                    {
+                        Process.Start("shutdown", "/r /t 0");
+                    }
+                    else if (restartSteam == true)
+                    {
+                        Process.Start(SteamController.GetSteamPath() + "\\Steam.exe");
+                    }
                 }
                 logTextBox.ScrollToEnd();
             }

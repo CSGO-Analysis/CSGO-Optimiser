@@ -95,18 +95,23 @@ namespace CSGO_Optimiser.UserControls
             {
                 try
                 {
+                    bool restartSteam = false;
                     Process[] steamProcess = Process.GetProcessesByName("Steam");
-                    bool restart = false;
                     if (steamProcess.Length != 0)
                     {
                         steamProcess[0].Kill();
                         steamProcess[0].WaitForExit();
-                        restart = true;
+                        restartSteam = true;
                     }
                     IBackup selectedBackup = (IBackup)backupsListView.SelectedItem;
                     logTextBox.Text += backupController.RestoreBackup(selectedBackup);
                     logTextBox.ScrollToEnd();
-                    if (restart == true)
+                    if (MessageBox.Show("Settings succesfully restored.\nYou must reboot in order to apply the registry changes. Reboot now?", "Success",
+                        MessageBoxButton.YesNoCancel, MessageBoxImage.Asterisk) == MessageBoxResult.Yes)
+                    {
+                        Process.Start("shutdown", "/r /t 0");
+                    }
+                    else if (restartSteam == true)
                     {
                         Process.Start(SteamController.GetSteamPath() + "\\Steam.exe");
                     }
