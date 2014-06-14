@@ -103,7 +103,7 @@ namespace Controller
                                 }
                             }
                             int k = i + 2;
-                            localconfig.Insert(k, "\t\t\t\t\t\t\"LaunchOptions\"\t\"" + profile.LaunchOptions);
+                            localconfig.Insert(k, "\t\t\t\t\t\t\"LaunchOptions\"\t\"" + profile.LaunchOptions + "\"");
                             File.WriteAllLines(dir + @"\config\localconfig.vdf", localconfig);
                             Changes++;
                             return string.Format("Launch options:" + profile.LaunchOptions + " succesfully added. \n");
