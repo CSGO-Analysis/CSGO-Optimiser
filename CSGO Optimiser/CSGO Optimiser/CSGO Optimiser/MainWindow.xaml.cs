@@ -16,19 +16,21 @@ namespace CSGO_Optimiser
         private About about;
         private BackupController backupController;
         private VersionController versionController;
+        private Version curVersion;
 
         public MainWindow()
         {
             InitializeComponent();
+            this.Title = "CSGO Optimiser";
+            curVersion = new Version("0.1");
             backupController = new BackupController();
             versionController = new VersionController();
             optimisation = new Optimisation(backupController);
             backup = new Backup(backupController);
-            about = new About();
+            about = new About(curVersion);
             optimisationUserControl.Content = optimisation;
             backupUserControl.Content = backup;
             aboutUserControl.Content = about;
-            this.Title = "CSGO Optimiser";
             versionCheck();
         }
 
@@ -44,7 +46,6 @@ namespace CSGO_Optimiser
         private void versionCheck()
         {
             Version newVersion = versionController.GetNewestVersion();
-            Version curVersion = new Version("0.1");
             if (curVersion.CompareTo(newVersion) < 0)
             {
                 string title = "New version detected.";

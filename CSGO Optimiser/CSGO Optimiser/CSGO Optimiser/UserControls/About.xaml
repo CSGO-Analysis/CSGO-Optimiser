@@ -6,24 +6,27 @@
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="900">
     <Grid Margin="20,20,1,1">
-        <TextBlock>
-            CSGO Optimiser is a free and completely open sourced Windows application to optimise your Counter-Strike Global Offensive experience.
-        <LineBreak/>
-            Select your favorite player's profile and copy their settings, or create your own profile. All with lots of backup functionality.
-        <LineBreak/><LineBreak/>
-            Developed by:
-         <LineBreak/>
-            Peter "rave" Ipsen
-         <LineBreak/>
-            Michael "bone" Hansen
-         <LineBreak/><LineBreak/>
-            Contact us @ peter@akim.dk
-         <LineBreak/>
-         <Hyperlink NavigateUri="https://github.com/rfirevtre/CSGO-Optimiser" RequestNavigate="Hyperlink_RequestNavigate">
-            https://github.com/rfirevtre/CSGO-Optimiser
-         </Hyperlink>
-         <LineBreak/><LineBreak/>
-            CSGO Optimiser v. 0.1
-        </TextBlock>
+        <StackPanel>
+            <TextBlock>
+                CSGO Optimiser is a free and completely open sourced Windows application to optimise your Counter-Strike Global Offensive experience.
+                <LineBreak/>
+                Select your favorite player's profile and copy their settings, or create your own profile. All with lots of backup functionality.
+                <LineBreak/><LineBreak/>
+                Developed by:
+                <LineBreak/>
+                Peter "rave" Ipsen
+                <LineBreak/>
+                Michael "bone" Hansen
+                <LineBreak/><LineBreak/>
+                Contact us @ peter@akim.dk
+                <LineBreak/>
+                <Hyperlink NavigateUri="https://github.com/rfirevtre/CSGO-Optimiser" RequestNavigate="Hyperlink_RequestNavigate">
+                https://github.com/rfirevtre/CSGO-Optimiser
+                </Hyperlink>
+                <LineBreak/><LineBreak/>
+                CSGO Optimiser v. 
+                <TextBlock x:Name="versionTextBlock"/>
+             </TextBlock>
+        </StackPanel>
     </Grid>
 </UserControl>

@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 using System.Windows.Navigation;
 
 namespace CSGO_Optimiser.UserControls
@@ -8,9 +9,10 @@ namespace CSGO_Optimiser.UserControls
     /// </summary>
     public partial class About : UserControl
     {
-        public About()
+        public About(Version curVersion)
         {
             InitializeComponent();
+            versionTextBlock.Text = curVersion.ToString();
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
