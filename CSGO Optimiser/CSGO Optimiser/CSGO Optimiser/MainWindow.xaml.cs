@@ -18,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
 
 namespace CSGO_Optimiser
 {
@@ -30,11 +31,13 @@ namespace CSGO_Optimiser
         private Backup backup;
         private About about;
         private BackupController backupController;
+        private VersionController versionController;
 
         public MainWindow()
         {
             InitializeComponent();
             backupController = new BackupController();
+            versionController = new VersionController();
             optimisation = new Optimisation(backupController);
             backup = new Backup(backupController);
             about = new About();
@@ -42,6 +45,7 @@ namespace CSGO_Optimiser
             backupUserControl.Content = backup;
             aboutUserControl.Content = about;
             this.Title = "CSGO Optimiser";
+            versionCheck();
         }
 
         private void mainTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -52,5 +56,25 @@ namespace CSGO_Optimiser
                 backup.pathLabel.Content = SteamController.GetSteamPath();
             }
         }
+
+        private void versionCheck()
+        {
+            Version newVersion = versionController.GetNewestVersion();
+            Version curVersion = new Version("0.1");
+            if (curVersion.CompareTo(newVersion) < 0)
+            {
+                string title = "New version detected.";
+                string question = "Download the new version?";
+                if (MessageBoxResult.Yes ==
+                 MessageBox.Show(this, question, title,
+                                 MessageBoxButton.YesNo,
+                                 MessageBoxImage.Question))
+                {
+                    System.Diagnostics.Process.Start("http://peips.dk/CSGO_Optimiser.rar");
+                    this.Close();
+                }
+            }  
+        }
+
     }
 }
