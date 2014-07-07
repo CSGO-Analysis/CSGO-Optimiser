@@ -22,7 +22,7 @@ namespace CSGO_Optimiser
         {
             InitializeComponent();
             this.Title = "CSGO Optimiser";
-            curVersion = new Version("0.1");
+            curVersion = new Version(0,2);
             backupController = new BackupController();
             versionController = new VersionController();
             optimisation = new Optimisation(backupController);
