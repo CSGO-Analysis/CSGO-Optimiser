@@ -5,6 +5,7 @@ namespace Controller
 {
     public class VersionController
     {
+        // Find newest version from ftp and return it
         public Version GetNewestVersion()
         {
             Version newVersion = null;

@@ -11,15 +11,10 @@ namespace Model
         public string VideoSettings { get; set; }
         public string LaunchOptions { get; set; }
         public string NvidiaProfile { get; set; }
-        public bool DisabledMouseAcc { get; set; }
-        public bool DisabledIngameMouseAcc { get; set; }
-        public bool DisabledCapsLock { get; set; }
-        public bool DisabledVisualThemes { get; set; }
         public string FolderPath { get; set; }
 
         public Profile(string name, string config, string crosshair, string autoexec, string videoSettings,
-            string launchOptions, string nvidiaProfile, bool disabledMouseAcc, bool disabledIngameMouseAcc, bool disabledCapsLock, bool disabledVisualThemes,
-            string folderPath)
+            string launchOptions, string nvidiaProfile, string folderPath)
         {
             Name = name;
             Config = config;
@@ -28,10 +23,6 @@ namespace Model
             VideoSettings = videoSettings;
             LaunchOptions = launchOptions;
             NvidiaProfile = nvidiaProfile;
-            DisabledMouseAcc = disabledMouseAcc;
-            DisabledIngameMouseAcc = disabledIngameMouseAcc;
-            DisabledCapsLock = disabledCapsLock;
-            DisabledVisualThemes = disabledVisualThemes;
             FolderPath = folderPath;
         }
 

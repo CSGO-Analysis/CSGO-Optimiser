@@ -26,6 +26,7 @@ namespace Model
         public static string Autoexec { get; private set; }
         public static string Video { get; private set; }
 
+        // Check if csgo is installed
         private static void validateCsgoPath(string path)
         {
             if (!Directory.Exists(path + @"\SteamApps\common\Counter-Strike Global Offensive"))

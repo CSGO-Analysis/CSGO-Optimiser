@@ -11,9 +11,10 @@ namespace Controller
 {
     public class OptimiseController
     {
-        public int Errors = 0;
-        public int Changes = 0;
+        public int Errors = 0; // Used to track errors when optimising
+        public int Changes = 0; // Used to track changes when optimising
 
+        // Copy autoexec.cfg to csgo\cfg folder
         public string CopyAutoexec(IProfile profile)
         {
             File.Copy(profile.FolderPath + profile.Autoexec, SteamPaths.Autoexec, true);
@@ -21,29 +22,16 @@ namespace Controller
             return profile.Autoexec + " succesfully created. \n";
         }
 
+        // Copy config.cfg to csgo\cfg folder.
         public string CopyProfileConfig(IProfile profile)
         {
-            string destCfg = SteamPaths.CfgFolder + profile.Config;
+            string destCfg = SteamPaths.CfgFolder + "config.cfg";
             File.Copy(profile.FolderPath + profile.Config, destCfg, true);
-
-            List<string> autoexec;
-            if (File.Exists(SteamPaths.Autoexec))
-            {
-                autoexec = File.ReadAllLines(SteamPaths.Autoexec).ToList();
-                if (!autoexec.Contains("exec " + profile.Config))
-                {
-                    autoexec.Add("exec " + profile.Config);
-                }
-            }
-            else
-            {
-                autoexec = new List<string>() { "exec " + profile.Config };
-            }
-            File.WriteAllLines(SteamPaths.Autoexec, autoexec);
             Changes++;
             return profile.Config + " succesfully created. \n";
         }
 
+        // Copy profile's crosshair.cfg to csgo\cfg folder, and add line in autoexec.cfg to exec if it exists:
         public string CopyProfileCrosshair(IProfile profile)
         {
             string destCfg = SteamPaths.CfgFolder + profile.Crosshair;
@@ -67,6 +55,7 @@ namespace Controller
             return profile.Crosshair + " succesfully created. \n";
         }
 
+        // Copy video.txt to csgo\cfg folder
         public string CopyVideoConfig(IProfile profile)
         {
             File.Copy(profile.FolderPath + profile.VideoSettings, SteamPaths.Video, true);
@@ -74,9 +63,13 @@ namespace Controller
             return profile.VideoSettings + " succesfully created. \n";
         }
 
+        // Add launch options in all located localconfig.vdfs with csgo installed.
         public string SetLaunchOptions(IProfile profile)
         {
+            // Hz no longer implemented due to issue with multiple monitors. Also not needed because of nvidia settings.
             //uint maxRefreshRate = findMaxRefreshRate();
+
+            bool success = false; // Used to track if launch options were added
 
             string[] dirs = Directory.GetDirectories(SteamPaths.Steam + @"\userdata\");
             foreach (string dir in dirs)
@@ -86,32 +79,44 @@ namespace Controller
                     List<string> localconfig = File.ReadAllLines(dir + @"\config\localconfig.vdf").ToList();
                     for (int i = 0; i < localconfig.Count(); i++)
                     {
+                        // Find settings line for csgo (730):
                         if (localconfig[i] == "\t\t\t\t\t\"730\"")
                         {
                             for (int j = i; j < localconfig.Count(); j++)
                             {
                                 if (localconfig[j] == "\t\t\t\t\t}")
                                 {
-                                    break;
+                                    break; // csgo lines ended
                                 }
                                 else if (localconfig[j].Contains("LaunchOptions"))
                                 {
-                                    localconfig.Remove(localconfig[j]);
+                                    localconfig.Remove(localconfig[j]); // Remove old launch options
                                 }
                             }
+                            // Add launch options line:
                             int k = i + 2;
                             localconfig.Insert(k, "\t\t\t\t\t\t\"LaunchOptions\"\t\"" + profile.LaunchOptions + "\"");
                             File.WriteAllLines(dir + @"\config\localconfig.vdf", localconfig);
-                            Changes++;
-                            return string.Format("Launch options:" + profile.LaunchOptions + " succesfully added. \n");
+                            success = true;
                         }
                     }
                 }
             }
-            Errors++;
-            return "ERROR: No launch options found. \n";
+            // If launch options were added return success message:
+            if (success == true)
+            {
+                Changes++;
+                return string.Format("Launch options:" + profile.LaunchOptions + " succesfully added. \n");
+            }
+            // If no localconfig.vdfs were found with csgo (730) id:
+            else
+            {
+                Errors++;
+                return "ERROR: No launch options found. \n";
+            }
         }
 
+        // Run nvidiaProfile with nvidiaInspector:
         public string SetNvidiaSettings(IProfile profile)
         {
             Process p = new Process();
@@ -127,8 +132,10 @@ namespace Controller
             return "nvidiaInspector finished importing " + profile.NvidiaProfile + ". \n";
         }
         
+        // Disable MouseAcc by adding needed registry keys
         public string DisableMouseAcc()
         {
+            // Find screen dpi in order to install correct key
             int dpi = 0;
             var dpiKey = Registry.CurrentUser.OpenSubKey(@"Control Panel\Desktop");
             if (dpiKey == null)
@@ -166,6 +173,7 @@ namespace Controller
                     mouseKey.SetValue("SmoothMouseYCurve", new byte[] { 00,00,00,00,00,00,00,00,00,00,0x38,00,00,00,00,00,
                         00,00,0x70,00,00,00,00,00,00,00,0xA8,00,00,00,00,00,00,00,0xE0,00,00,00,00,00 }, RegistryValueKind.Binary);
 
+                    // Set SmoothMouseXCurve according to Operating System and ScreenDPI (LogPixels)
                     if (Environment.OSVersion.Version >= new Version(6, 2)) // Windows 8
                     {
                         if (dpiKey.GetValue("LogPixels") == null || (dpiKey.GetValue("LogPixels").ToString() == "96"))
@@ -208,7 +216,7 @@ namespace Controller
                             0x40,0xB8,0x1E,00,00,00,00,00,0x60,0x14,0x2E,00,00,00,00,00,0x80,0x70,0x3D,00,00,00,00,00 }, RegistryValueKind.Binary);
                         }
                     }
-                    else
+                    else // If Windows OS older than 6,1 (Windows 7)
                     {
                         Errors++;
                         return "ERROR: Mouse Acceleration was not properly disabled (OS version not obtained). \n";
@@ -219,6 +227,7 @@ namespace Controller
             return "Mouse Acceleration succesfully disabled (" + dpi + "% monitor size). \n";
         }
 
+        // Copy IngameMouseAccelOff.cfg to csgo\cfg folder and add line in autoexec.cfg to exec.
         public string DisableIngameMouseAcc()
         {
             string ingameAcc = SteamPaths.CfgFolder + "IngameMouseAccelOff.cfg";
@@ -243,6 +252,7 @@ namespace Controller
             return "Ingame Mouse Commands succesfully applied. \n";
         }
 
+        // Disable Caps Lock by adding Scancode Map key.
         public string DisableCapsLock()
         {
             var key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Keyboard Layout", true);
@@ -256,6 +266,7 @@ namespace Controller
             return "CapsLock succesfully disabled. \n";
         }
 
+        // Disable Visual Themes for csgo.exe by adding registry key. Win7 support only! (Setting does not exist in Win8)
         public string DisableVisualThemes()
         {
             var key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", true);
@@ -269,6 +280,7 @@ namespace Controller
             return "Visual themes succesfully disabled for csgo.exe. \n";
         }
 
+        // Find maximum hertz on all monitors connected. Issue: using multiple monitors and playing csgo on a lower hz than 2nd monitor.
         //private uint findMaxRefreshRate()
         //{
         //    var scope = new System.Management.ManagementScope();

@@ -12,6 +12,7 @@ namespace Controller
     {
         private List<IBackup> backups;
         
+        // Return backups. If null run createBackups()
         public List<IBackup> GetBackups()
         {
             if (backups == null)
@@ -22,6 +23,7 @@ namespace Controller
             return backups;
         }
 
+        // Save backup of current settings and registry keys
         public string SaveBackup()
         {
             string errors = "";
@@ -35,6 +37,8 @@ namespace Controller
 
             string folder = "Backups\\" + backup.Id;
             Directory.CreateDirectory(folder);
+
+            // Export registry keys to folder:
             exportKey("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Keyboard Layout",
                 folder + "\\Backup_CapsLock.reg");
             exportKey("HKEY_USERS\\.DEFAULT\\Control Panel\\Mouse", folder + "\\Backup_DefaultMouseKey.reg");
@@ -42,6 +46,7 @@ namespace Controller
             exportKey("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\Layers",
                 folder + "\\Backup_VisualThemes.reg");
             
+            // Copy configs to folder:
             string[] cfgs = new string[] { SteamPaths.CfgFolder + "\\config.cfg",
                 SteamPaths.CfgFolder + "\\video.txt", SteamPaths.Autoexec };
 
@@ -71,10 +76,13 @@ namespace Controller
             File.WriteAllLines(folder + "\\localconfigs.txt", backup.Localconfigs);
 
             File.WriteAllLines(folder + "\\backup.txt", backup.ToStringArray());
+
+            // Add backup list and return success message:
             backups.Add(backup);
             return errors + "Backup ("+backup.Id+") succesfully saved. \n";
         }
 
+        // Delete selected backup
         public string DeleteBackup(IBackup backup)
         {
             Directory.Delete("Backups\\" + backup.Id, true);
@@ -82,6 +90,7 @@ namespace Controller
             return "Backup (" + backup.Id + ") succesfully deleted. \n";
         }
 
+        // Restore settings and registry keys of selected backup
         public string RestoreBackup(IBackup backup)
         {
             SteamController.ValidateSteamPath();
@@ -91,6 +100,7 @@ namespace Controller
             List<string> regFiles = new List<string>() { "Backup_DefaultMouseKey.reg", "Backup_CapsLock.reg",
                 "Backup_MouseKey.reg", "Backup_VisualThemes.reg" };
 
+            // Import registy files:
             foreach (string regFile in regFiles)
             {
                 if (File.Exists(path + regFile))
@@ -104,6 +114,7 @@ namespace Controller
                 }
             }
 
+            // Copy configs to csgo\cfg folder:
             string[] cfgs = new string[] { "config.cfg", "autoexec.cfg", "video.txt" };
             foreach (string cfg in cfgs)
             {
@@ -117,6 +128,7 @@ namespace Controller
                 }
             }
 
+            // Copy localconfig (launchOptions) to steam folder:
             foreach (string localconfig in backup.Localconfigs)
             {
                 if (File.Exists(path + localconfig))
@@ -133,6 +145,7 @@ namespace Controller
             return errors + "Backup (" + backup.Id + ") succesfully restored.\nPlease reboot to apply the registry changes.\n";
         }
 
+        // Create Backup objects from folder, and add to list.
         private void createBackups()
         {
             if (!Directory.Exists("Backups"))
@@ -142,6 +155,7 @@ namespace Controller
             string[] backupDirs = Directory.GetDirectories("Backups\\");
             foreach (string backupDir in backupDirs)
             {
+                // Read backup.txt settings file:
                 string backupPath = backupDir + "\\backup.txt";
                 if (File.Exists(backupPath))
                 {
@@ -162,6 +176,7 @@ namespace Controller
                             backup.Timestamp = timestamp;
                         }
                     }
+                    // Read localconfigs.txt settings file:
                     if (File.Exists(backupDir + "\\localconfigs.txt"))
                     {
                         string[] localconfigs = File.ReadAllLines(backupDir + "\\localconfigs.txt");
@@ -175,6 +190,7 @@ namespace Controller
             }
         }
 
+        // Export registry key
         private void exportKey(string regKey, string savePath)
         {
             string path = "\"" + savePath + "\"";

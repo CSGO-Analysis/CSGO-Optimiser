@@ -10,6 +10,7 @@ namespace Controller
     {
         private List<IProfile> profiles;
 
+        // Return profiles. If null run createProfiles()
         public List<IProfile> GetProfiles()
         {
             if (profiles == null)
@@ -20,6 +21,7 @@ namespace Controller
             return profiles;
         }
 
+        // Find all directories in profiles folder, and read their settings.txt. Add profile to profiles.
         private void createProfiles()
         {
             string[] profileDirs = Directory.GetDirectories(@"Resources\Profiles\");
@@ -29,7 +31,6 @@ namespace Controller
                 if (File.Exists(settingsPath))
                 {
                     string name = "", config = "", crosshair = "", autoexec = "", videoSettings = "", launchOptions = "", nvidiaProfile = "";
-                    bool disabledMouseAcc = false, disabledIngameMouseAcc = false, disabledCapsLock = false, disabledVisualThemes = false;
 
                     string[] settings = File.ReadAllLines(settingsPath);
                     foreach (string line in settings)
@@ -62,29 +63,8 @@ namespace Controller
                         {
                             nvidiaProfile = line.Split('=').Last().Replace(" ", "");
                         }
-                        if (line.Contains("DisabledMouseAcc = "))
-                        {
-                            string mouseAccString = line.Split('=').Last().Replace(" ", "");
-                            bool.TryParse(mouseAccString, out disabledMouseAcc);
-                        }
-                        if (line.Contains("DisabledIngameMouseAcc = "))
-                        {
-                            string ingameMouseAccString = line.Split('=').Last().Replace(" ", "");
-                            bool.TryParse(ingameMouseAccString, out disabledIngameMouseAcc);
-                        }
-                        if (line.Contains("DisabledCapsLock = "))
-                        {
-                            string capsLockString = line.Split('=').Last().Replace(" ", "");
-                            bool.TryParse(capsLockString, out disabledCapsLock);
-                        }
-                        if (line.Contains("DisabledVisualThemes = "))
-                        {
-                            string visualThemesString = line.Split('=').Last().Replace(" ", "");
-                            bool.TryParse(visualThemesString, out disabledVisualThemes);
-                        }
                     }
-                    Profile profile = new Profile(name, config, crosshair, autoexec, videoSettings, launchOptions, nvidiaProfile,
-                        disabledMouseAcc, disabledIngameMouseAcc, disabledCapsLock, disabledVisualThemes, profileDir + "\\");
+                    Profile profile = new Profile(name, config, crosshair, autoexec, videoSettings, launchOptions, nvidiaProfile, profileDir + "\\");
                     profiles.Add(profile);
                 }
             }
