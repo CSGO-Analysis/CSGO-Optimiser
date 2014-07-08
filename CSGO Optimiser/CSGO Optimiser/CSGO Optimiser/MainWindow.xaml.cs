@@ -34,6 +34,7 @@ namespace CSGO_Optimiser
             versionCheck();
         }
 
+        // When tabcontrolChanged set SteamPath in Backup and Optimisation UserControls if it is different from null
         private void mainTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (SteamController.GetSteamPath() != null)

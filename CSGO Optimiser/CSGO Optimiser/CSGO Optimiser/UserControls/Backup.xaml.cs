@@ -84,7 +84,7 @@ namespace CSGO_Optimiser.UserControls
             {
                 try
                 {
-                    bool restartSteam = false;
+                    bool restartSteam = false; // Will be set to true if steam was initially opened
                     Process[] steamProcess = Process.GetProcessesByName("Steam");
                     if (steamProcess.Length != 0)
                     {

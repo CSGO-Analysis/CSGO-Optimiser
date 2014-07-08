@@ -42,14 +42,14 @@ namespace CSGO_Optimiser.UserControls
                 SteamController.ValidateSteamPath();
                 optimiseController.Errors = 0;
                 optimiseController.Changes = 0;
-                bool rebootWindows = false;
-                bool restartSteam = false;
-                string note = "";
+                bool rebootWindows = false; // Will be set to true if registry keys added
+                bool restartSteam = false; // Will be set to true if launch options added
+                string note = ""; // Used to display manual instructions in the final messagebox
 
                 // Profile Settings:
                 if (profilesComboBox.SelectedItem != null)
                 {
-                    if (backupController.GetBackups().Count <= 0)
+                    if (backupController.GetBackups().Count <= 0) // Show messagebox if no backups exists
                     {
                         if (MessageBox.Show("You do not have any saved backups. Do you want to save your current settings as backup?",
                                 "Backup", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
@@ -76,7 +76,7 @@ namespace CSGO_Optimiser.UserControls
                     }
                     if (launchOptionsCheckBox.IsChecked == true)
                     {
-                        Process[] steamProcess = Process.GetProcessesByName("Steam");
+                        Process[] steamProcess = Process.GetProcessesByName("Steam"); // Show messagebox if steam is opened
                         if (steamProcess.Length != 0)
                         {
                             if (MessageBox.Show("Steam must be restarted in order to add launch options. Restart Steam?",
@@ -87,12 +87,12 @@ namespace CSGO_Optimiser.UserControls
                                 logTextBox.Text += optimiseController.SetLaunchOptions(profile);
                                 restartSteam = true;
                             }
-                            else
+                            else // Do not add launchoptions if user clicked no to messagebox
                             {
                                 logTextBox.Text += "ERROR: Launch options was not added (No restart of steam). \n";
                             }
                         }
-                        else
+                        else // Add launch options (steam not open)
                         {
                             logTextBox.Text += optimiseController.SetLaunchOptions(profile);
                         }
@@ -157,7 +157,23 @@ namespace CSGO_Optimiser.UserControls
                 MessageBox.Show(ex.Message);
             }
         }
+        
+        private void browseButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var dialog = new System.Windows.Forms.FolderBrowserDialog();
+                dialog.ShowDialog();
+                SteamController.SetSteamPath(dialog.SelectedPath);
+                pathLabel.Content = SteamController.GetSteamPath();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
+        // Deselect all checkboxes and enable those features that are available
         private void profilesComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             IProfile profile = (IProfile) profilesComboBox.SelectedItem;
@@ -192,11 +208,6 @@ namespace CSGO_Optimiser.UserControls
                 nvidiaProfileCheckBox.IsEnabled = true;
             else
                 nvidiaProfileCheckBox.IsEnabled = false;
-
-            //mouseAccCheckBox.IsChecked = profile.DisabledMouseAcc;
-            //ingameMouseAccCheckBox.IsChecked = profile.DisabledIngameMouseAcc;
-            //capsLockCheckBox.IsChecked = profile.DisabledCapsLock;
-            //visualThemesCheckBox.IsChecked = profile.DisabledVisualThemes;
         }
 
         private void selectAllButton_Click(object sender, RoutedEventArgs e)
@@ -217,7 +228,7 @@ namespace CSGO_Optimiser.UserControls
             }
         }
 
-        // Should probably be moved to Resources..
+        // Should probably be moved somewhere else..
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
             if (sender.Equals(profilesComboBox))
@@ -323,19 +334,5 @@ Deactivates Windows visuals on csgo.exe for a small fps boost.";
             }
         }
 
-        private void browseButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var dialog = new System.Windows.Forms.FolderBrowserDialog();
-                dialog.ShowDialog();
-                SteamController.SetSteamPath(dialog.SelectedPath);
-                pathLabel.Content = SteamController.GetSteamPath();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
     }
 }
