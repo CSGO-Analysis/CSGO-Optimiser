@@ -296,7 +296,7 @@ Uses nvidiaInspector to import the selected profile's NVIDIA 3D profile that cha
 
 The optimiser will automatically detect your setup and apply the correct 'MarkC No Acceleration' fix to windows registry for a perfect 1-to-1, no acceleration mouse input.
 
-Recommended to also have 'Disable Ingame Mouse Acceleration' applied as well.
+Recommended to also have 'Apply ingame acceleration commands' applied as well.
 
 (Credit to MarkC for his work with acceleration fixes)";
             }

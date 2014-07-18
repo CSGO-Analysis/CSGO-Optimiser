@@ -50,13 +50,13 @@ namespace CSGO_Optimiser
             if (curVersion.CompareTo(newVersion) < 0)
             {
                 string title = "New version detected.";
-                string question = "Download the new version?";
+                string question = "Open download page for the new version?";
                 if (MessageBoxResult.Yes ==
                  MessageBox.Show(this, question, title,
                                  MessageBoxButton.YesNo,
                                  MessageBoxImage.Question))
                 {
-                    System.Diagnostics.Process.Start("http://peips.dk/CSGO_Optimiser.rar");
+                    System.Diagnostics.Process.Start("https://sourceforge.net/projects/csgo-optimiser/files/");
                     this.Close();
                 }
             }  

@@ -34,8 +34,8 @@
             <CheckBox x:Name="launchOptionsCheckBox" Content="Launch Options" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left" IsEnabled="False"/>
             <CheckBox x:Name="nvidiaProfileCheckBox" Content="NVIDIA CSGO Profile" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left" IsEnabled="False"/>
             <Label Content="Global optimisation fixes: (All are recommended)" Margin="0,5,0,0"/>
-            <CheckBox x:Name="mouseAccCheckBox" Content="Disable Mouse Acceleration" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
-            <CheckBox x:Name="ingameMouseAccCheckBox" Content="Ingame Mouse Commands" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
+            <CheckBox x:Name="mouseAccCheckBox" Content="Disable Windows Mouse Acceleration" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
+            <CheckBox x:Name="ingameMouseAccCheckBox" Content="Apply ingame acceleration commands (Disables mouse acceleration ingame)" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
             <CheckBox x:Name="capsLockCheckBox" Content="Disable Caps Lock for use with VoIP" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
             <CheckBox x:Name="visualThemesCheckBox" Content="Deactivate visual themes on csgo.exe (Win7 only)" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
             <Label Content="Optional but recommended at least once a month:" Margin="0,5,0,0"/>
