@@ -6,18 +6,30 @@ namespace Model
     public static class SteamPaths
     {
         private static string _steam;
+        private static string _csgo;
 
         public static string Steam
         {
             get { return _steam; }
             set
             {
-                validateCsgoPath(value);
+                validateSteamPath(value);
+                checkIfCsgoIsLocatedWithin(value);
                 _steam = value;
-                CsgoExe = value + @"\SteamApps\common\Counter-Strike Global Offensive\csgo.exe";
-                CfgFolder = value + @"\SteamApps\common\Counter-Strike Global Offensive\csgo\cfg\";
-                Autoexec = value + @"\SteamApps\common\Counter-Strike Global Offensive\csgo\cfg\autoexec.cfg";
-                Video = value + @"\SteamApps\common\Counter-Strike Global Offensive\csgo\cfg\video.txt";
+            }
+        }
+
+        public static string Csgo // This is the "\Counter-Strike Global Offensive\" folder
+        {
+            get { return _csgo;  }
+            set
+            {
+                validateCsgoPath(value);
+                _csgo = value;
+                CsgoExe = value + @"\csgo.exe";
+                CfgFolder = value + @"\csgo\cfg\";
+                Autoexec = value + @"\csgo\cfg\autoexec.cfg";
+                Video = value + @"\csgo\cfg\video.txt";
             }
         }
 
@@ -29,9 +41,26 @@ namespace Model
         // Check if csgo is installed
         private static void validateCsgoPath(string path)
         {
-            if (!Directory.Exists(path + @"\SteamApps\common\Counter-Strike Global Offensive"))
+            if (!File.Exists(path + @"\csgo.exe"))
             {
-                throw new Exception("Counter-Strike Global Offensive folder was not found.");
+                throw new Exception("csgo.exe was not found in: " + path);
+            }
+        }
+
+        private static void validateSteamPath(string path)
+        {
+            if (!Directory.Exists(path + @"\userdata"))
+            {
+                throw new Exception("userdata folder was not found in: " + path);
+            }
+        }
+
+        // Check if csgo is installed in the steamapps folder
+        private static void checkIfCsgoIsLocatedWithin(string path)
+        {
+            if (Directory.Exists(path + @"\SteamApps\common\Counter-Strike Global Offensive"))
+            {
+                Csgo = path + @"\SteamApps\common\Counter-Strike Global Offensive";
             }
         }
     }

@@ -19,10 +19,16 @@
         <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
                 <Label Content="Please locate your \Steam\ folder:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Button x:Name="browseButton" Content="Browse" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80"
-                        Margin="15,2,0,0" Click="browseButton_Click" ToolTip="Locate your Steam folder"/>
+                <Button x:Name="browseSteamButton" Content="Browse" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80"
+                        Margin="15,2,0,0" Click="browseSteamButton_Click" ToolTip="Locate your Steam folder"/>
             </StackPanel>
-            <Label x:Name="pathLabel" Content="" DockPanel.Dock="Bottom" Foreground="#FF1600FF"/>
+            <Label x:Name="steamPathLabel" Content="" DockPanel.Dock="Top" Foreground="#FF1600FF"/>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                <Label Content="Please locate your \Counter-Strike Global Offensive\ folder (directory of csgo.exe):" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Button x:Name="browseCsgoButton" Content="Browse" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80"
+                        Margin="15,2,0,0" Click="browseCsgoButton_Click" ToolTip="Locate your Steam folder"/>
+            </StackPanel>
+            <Label x:Name="csgoPathLabel" Content="" DockPanel.Dock="Top" Foreground="#FF1600FF"/>
         </DockPanel>
         <StackPanel Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Margin="10,10,20,0">
             <TextBlock TextWrapping="Wrap" Width="300">

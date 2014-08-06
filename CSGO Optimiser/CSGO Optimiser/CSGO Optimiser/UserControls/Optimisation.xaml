@@ -17,10 +17,16 @@
         <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
                 <Label Content="Please locate your \Steam\ folder:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Button x:Name="browseButton" Content="Browse" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80"
-                        Margin="15,2,0,0" Click="browseButton_Click" ToolTip="Locate your Steam folder"/>
+                <Button x:Name="browseSteamButton" Content="Browse" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80"
+                        Margin="15,2,0,0" Click="browseSteamButton_Click" ToolTip="Locate your Steam folder"/>
             </StackPanel>
-            <Label x:Name="pathLabel" Content="" DockPanel.Dock="Bottom" Foreground="#FF1600FF"/>
+            <Label x:Name="steamPathLabel" Content="" DockPanel.Dock="Top" Foreground="#FF1600FF"/>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                <Label Content="Please locate your \Counter-Strike Global Offensive\ folder (directory of csgo.exe):" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Button x:Name="browseCsgoButton" Content="Browse" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80"
+                        Margin="15,2,0,0" Click="browseCsgoButton_Click" ToolTip="Locate your Steam folder"/>
+            </StackPanel>
+            <Label x:Name="csgoPathLabel" Content="" DockPanel.Dock="Top" Foreground="#FF1600FF"/>
         </DockPanel>
         <StackPanel x:Name="checkBoxStackPanel" Grid.Row="1" Grid.Column="0">
             <Label Content="Select player profile:" HorizontalAlignment="Left"/>
@@ -38,9 +44,6 @@
             <CheckBox x:Name="ingameMouseAccCheckBox" Content="Apply ingame acceleration commands (Disables mouse acceleration ingame)" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
             <CheckBox x:Name="capsLockCheckBox" Content="Disable Caps Lock for use with VoIP" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
             <CheckBox x:Name="visualThemesCheckBox" Content="Deactivate visual themes on csgo.exe (Win7 only)" Margin="10,3,0,0" MouseMove="OnMouseMove" HorizontalAlignment="Left"/>
-            <Label Content="Optional but recommended at least once a month:" Margin="0,5,0,0"/>
-            <CheckBox Content="Clean registry (CCleaner silent run with presets)" Margin="10,3,0,0" IsEnabled="False" HorizontalAlignment="Left"/>
-            <CheckBox Content="Run Spybot Search and Destroy" Margin="10,3,0,0" IsEnabled="False" HorizontalAlignment="Left"/>
             <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
                 <Button x:Name="selectAllButton" Content="Select All" Width="80" Click="selectAllButton_Click" HorizontalAlignment="Left"
                         Margin="10,0,0,0" ToolTip="Select all available features"/>

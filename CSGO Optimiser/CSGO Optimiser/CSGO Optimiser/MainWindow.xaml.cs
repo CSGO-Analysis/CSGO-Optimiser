@@ -39,8 +39,10 @@ namespace CSGO_Optimiser
         {
             if (SteamController.GetSteamPath() != null)
             {
-                optimisation.pathLabel.Content = SteamController.GetSteamPath();
-                backup.pathLabel.Content = SteamController.GetSteamPath();
+                optimisation.steamPathLabel.Content = SteamController.GetSteamPath();
+                optimisation.csgoPathLabel.Content = SteamController.GetCsgoPath();
+                backup.steamPathLabel.Content = SteamController.GetSteamPath();
+                backup.csgoPathLabel.Content = SteamController.GetSteamPath();
             }
         }
 

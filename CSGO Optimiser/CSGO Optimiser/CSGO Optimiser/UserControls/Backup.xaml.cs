@@ -62,14 +62,34 @@ namespace CSGO_Optimiser.UserControls
             }
         }
 
-        private void browseButton_Click(object sender, RoutedEventArgs e)
+        private void browseSteamButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 var dialog = new System.Windows.Forms.FolderBrowserDialog();
                 dialog.ShowDialog();
                 SteamController.SetSteamPath(dialog.SelectedPath);
-                pathLabel.Content = SteamController.GetSteamPath();
+                steamPathLabel.Content = SteamController.GetSteamPath();
+
+                if (SteamController.GetCsgoPath() != null)
+                {
+                    csgoPathLabel.Content = SteamController.GetCsgoPath();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void browseCsgoButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var dialog = new System.Windows.Forms.FolderBrowserDialog();
+                dialog.ShowDialog();
+                SteamController.SetCsgoPath(dialog.SelectedPath);
+                csgoPathLabel.Content = SteamController.GetCsgoPath();
             }
             catch (Exception ex)
             {
