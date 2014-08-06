@@ -22,7 +22,7 @@ namespace CSGO_Optimiser
         {
             InitializeComponent();
             this.Title = "CSGO Optimiser";
-            curVersion = new Version(0,2);
+            curVersion = new Version(0,3);
             backupController = new BackupController();
             versionController = new VersionController();
             optimisation = new Optimisation(backupController);
@@ -42,7 +42,7 @@ namespace CSGO_Optimiser
                 optimisation.steamPathLabel.Content = SteamController.GetSteamPath();
                 optimisation.csgoPathLabel.Content = SteamController.GetCsgoPath();
                 backup.steamPathLabel.Content = SteamController.GetSteamPath();
-                backup.csgoPathLabel.Content = SteamController.GetSteamPath();
+                backup.csgoPathLabel.Content = SteamController.GetCsgoPath();
             }
         }
 

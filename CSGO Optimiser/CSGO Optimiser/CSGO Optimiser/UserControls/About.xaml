@@ -20,6 +20,10 @@
                 <LineBreak/><LineBreak/>
                 Contact us @ peter@akim.dk
                 <LineBreak/>
+                <Hyperlink NavigateUri="https://sourceforge.net/projects/csgo-optimiser/" RequestNavigate="Hyperlink_RequestNavigate">
+                https://sourceforge.net/projects/csgo-optimiser/
+                </Hyperlink>
+                <LineBreak/>
                 <Hyperlink NavigateUri="https://github.com/rfirevtre/CSGO-Optimiser/wiki" RequestNavigate="Hyperlink_RequestNavigate">
                 https://github.com/rfirevtre/CSGO-Optimiser/wiki
                 </Hyperlink>
