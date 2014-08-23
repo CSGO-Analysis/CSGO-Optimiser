@@ -238,11 +238,21 @@ namespace CSGO_Optimiser.UserControls
                 if (c.GetType() == typeof(CheckBox) && c.IsEnabled == true)
                     ((CheckBox)c).IsChecked = true;
             }
+            foreach (Control c in capsLockStackPanel.Children.OfType<CheckBox>())
+            {
+                if (c.GetType() == typeof(CheckBox) && c.IsEnabled == true)
+                    ((CheckBox)c).IsChecked = true;
+            }
         }
 
         private void deselectAllButton_Click(object sender, RoutedEventArgs e)
         {
             foreach (Control c in checkBoxStackPanel.Children.OfType<CheckBox>())
+            {
+                if (c.GetType() == typeof(CheckBox))
+                    ((CheckBox)c).IsChecked = false;
+            }
+            foreach (Control c in capsLockStackPanel.Children.OfType<CheckBox>())
             {
                 if (c.GetType() == typeof(CheckBox))
                     ((CheckBox)c).IsChecked = false;
@@ -352,6 +362,27 @@ Please note you will probably have to rebind your Push-to-talk key again.";
 @"Deactivate visual themes on csgo.exe:
 
 Deactivates Windows visuals on csgo.exe for a small fps boost.";
+            }
+        }
+
+        private void resetCapsButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("This option will reactivate Caps Lock functionality. Windows must be rebooted in order to apply the change. Continue?",
+                    "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    logTextBox.Text += optimiseController.ReactivateCapsLock();
+                    if (MessageBox.Show("Caps Lock succesfully reactivated. You must reboot in order to apply the registry change. Reboot now?\n", "Success",
+                        MessageBoxButton.YesNoCancel, MessageBoxImage.Asterisk) == MessageBoxResult.Yes)
+                    {
+                        Process.Start("shutdown", "/r /t 0");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\nCaps Lock is possibly already reactivated.");                
             }
         }
 

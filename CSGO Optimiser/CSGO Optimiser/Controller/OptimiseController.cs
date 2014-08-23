@@ -266,6 +266,19 @@ namespace Controller
             return "CapsLock succesfully disabled. \n";
         }
 
+        public string ReactivateCapsLock()
+        {
+            var key = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Keyboard Layout", true);
+            if (key == null)
+            {
+                Errors++;
+                return "ERROR: CapsLock could not be reactivated. It's possibly already deactivated. \n";
+            }
+            key.DeleteValue("Scancode Map");
+            Changes++;
+            return "CapsLock succesfully reactivated. \n";
+        }
+
         // Disable Visual Themes for csgo.exe by adding registry key. Win7 support only! (Setting does not exist in Win8)
         public string DisableVisualThemes()
         {
