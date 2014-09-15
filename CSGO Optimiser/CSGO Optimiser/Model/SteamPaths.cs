@@ -58,7 +58,7 @@ namespace Model
         // Check if csgo is installed in the steamapps folder
         private static void checkIfCsgoIsLocatedWithin(string path)
         {
-            if (Directory.Exists(path + @"\SteamApps\common\Counter-Strike Global Offensive\csgo"))
+            if (File.Exists(path + @"\SteamApps\common\Counter-Strike Global Offensive\csgo.exe"))
             {
                 Csgo = path + @"\SteamApps\common\Counter-Strike Global Offensive";
             }
