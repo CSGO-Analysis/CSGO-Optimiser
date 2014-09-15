@@ -22,7 +22,7 @@ namespace CSGO_Optimiser
         {
             InitializeComponent();
             this.Title = "CSGO Optimiser";
-            curVersion = new Version(0,3);
+            curVersion = new Version(0,3,1);
             backupController = new BackupController();
             versionController = new VersionController();
             optimisation = new Optimisation(backupController);
@@ -58,7 +58,7 @@ namespace CSGO_Optimiser
                                  MessageBoxButton.YesNo,
                                  MessageBoxImage.Question))
                 {
-                    System.Diagnostics.Process.Start("https://sourceforge.net/projects/csgo-optimiser/files/");
+                    System.Diagnostics.Process.Start("https://sourceforge.net/projects/csgo-optimiser/");
                     this.Close();
                 }
             }  
