@@ -39,7 +39,7 @@ namespace Controller
 
         public static void ValidateCsgoPath()
         {
-            if (SteamPaths.Steam == null)
+            if (SteamPaths.Csgo == null)
             {
                 throw new Exception("Please locate your Counter-Strike Global Offensive folder.");
             }
